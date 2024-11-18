@@ -1,9 +1,8 @@
 import { createRef, useRef, useState } from "react";
-import UpdateAvatarModal from "./UpdateAvatarModal.jsx";
+import UpdateAvatarModal from "./Components/ProfileAvatar/UpdateAvatarModal";
 import "./App.css";
 
-const defaultInfo = {
-  // personal info
+const defaultPersonalInfo = {
   firstname: "",
   middlename: "",
   lastname: "",
@@ -13,22 +12,45 @@ const defaultInfo = {
   linkedinprofile: "",
   githubprofile: "",
   personalwebsite: "",
+};
 
-  // education info
+const defaultEducationInfo = {
   collegename: "",
   graduationmonthyear: "",
   major: "",
   degree: "",
+};
 
-  //experience info
-  //first job experience
-  //second job experience
+const defaultExperienceInfo = {
+  // requires 2 experiences
+
+  // 1st experience
+  companyname_req1: "",
+  companylocation_req1: "",
+  employmentposition_req1: "",
+  employmenttype_req1: "",
+  employmentstart_monthyear_req1: "",
+  employmentend_monthyear_req1: "",
+  employmentachievements_req1: "",
+
+  // 2nd experience
+  companyname_req2: "",
+  companylocation_req2: "",
+  employmentposition_req2: "",
+  employmenttype_req2: "",
+  employmentstart_monthyear_req2: "",
+  employmentend_monthyear_req2: "",
+  employmentachievements_req2: "",
+
+  // the rest are optional and can be added via user input
 };
 
 function App() {
   const [count, setCount] = useState(0);
 
-  const [resumeInfo, setResumeInfo] = useState();
+  const [personalInfo, setPersonalInfo] = useState(defaultPersonalInfo);
+  const [educationInfo, setEducationInfo] = useState(defaultEducationInfo);
+  const [experienceInfo, setExperienceInfo] = useState(defaultExperienceInfo);
 
   const avatarUrl = useRef("src/assets/default_pfp.jpg");
   const [avatarModalOpen, setAvatarModalOpen] = useState(false);
