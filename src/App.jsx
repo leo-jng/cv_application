@@ -2,6 +2,7 @@ import { createRef, useRef, useState } from "react";
 import UpdateAvatarModal from "./Components/ProfileAvatar/UpdateAvatarModal";
 import PersonalDetails from "./Components/PersonalDetails";
 import "./App.css";
+import Education from "./Components/Education";
 
 const defaultPersonalInfo = {
   firstname: "",
@@ -79,6 +80,7 @@ function App() {
       )}
 
       <PersonalDetails setPersonalInfo={setPersonalInfo} />
+      <Education setEducationInfo={setEducationInfo} />
 
       {/* <form>
         <fieldset id="personal_details">
