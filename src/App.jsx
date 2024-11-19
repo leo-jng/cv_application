@@ -1,5 +1,6 @@
 import { createRef, useRef, useState } from "react";
 import UpdateAvatarModal from "./Components/ProfileAvatar/UpdateAvatarModal";
+import PersonalDetails from "./Components/PersonalDetails";
 import "./App.css";
 
 const defaultPersonalInfo = {
@@ -76,6 +77,8 @@ function App() {
         />
         // console.log("MODAL OPENS")
       )}
+
+      <PersonalDetails setPersonalInfo={setPersonalInfo} />
 
       {/* <form>
         <fieldset id="personal_details">
