@@ -3,6 +3,7 @@ import UpdateAvatarModal from "./Components/ProfileAvatar/UpdateAvatarModal";
 import PersonalDetails from "./Components/PersonalDetails";
 import "./App.css";
 import Education from "./Components/Education";
+import Experience from "./Components/Experience";
 
 const defaultPersonalInfo = {
   firstname: "",
@@ -27,22 +28,13 @@ const defaultExperienceInfo = {
   // requires 2 experiences
 
   // 1st experience
-  companyname_req1: "",
-  companylocation_req1: "",
-  employmentposition_req1: "",
-  employmenttype_req1: "",
-  employmentstart_monthyear_req1: "",
-  employmentend_monthyear_req1: "",
-  employmentachievements_req1: "",
-
-  // 2nd experience
-  companyname_req2: "",
-  companylocation_req2: "",
-  employmentposition_req2: "",
-  employmenttype_req2: "",
-  employmentstart_monthyear_req2: "",
-  employmentend_monthyear_req2: "",
-  employmentachievements_req2: "",
+  // companyname_req1: "",
+  // companylocation_req1: "",
+  // employmentposition_req1: "",
+  // employmenttype_req1: "",
+  // employmentstart_monthyear_req1: "",
+  // employmentend_monthyear_req1: "",
+  // employmentachievements_req1: "",
 
   // the rest are optional and can be added via user input
 };
@@ -81,6 +73,7 @@ function App() {
 
       <PersonalDetails setPersonalInfo={setPersonalInfo} />
       <Education setEducationInfo={setEducationInfo} />
+      <Experience setExperienceInfo={setExperienceInfo}/>
 
       {/* <form>
         <fieldset id="personal_details">

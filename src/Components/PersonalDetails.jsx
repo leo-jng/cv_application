@@ -21,7 +21,7 @@ export default function PersonalDetails({ setPersonalInfo }) {
     <>
       {/* Player Profile Section */}
       <section>
-        <div className="font-bold">Personal Info</div>
+        <div className="font-bold">Personal Details</div>
         <div className="relative">
           {/* First Name, Middle Name (Optional), Last Name, Suffix/Honorfics (Optional) */}
           <input
