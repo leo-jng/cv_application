@@ -27,7 +27,7 @@ export default function Education({ setEducationInfo }) {
           <input
             type="text"
             placeholder="Field of Study or Major"
-            onChange={(event) => updateProfile(event, "fieldofstudy")}
+            onChange={(event) => updateProfile(event, "major")}
             required
           />
           <input

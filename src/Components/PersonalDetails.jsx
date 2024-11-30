@@ -116,8 +116,8 @@ export default function PersonalDetails({ setPersonalInfo }) {
           />
           <input
             type="text"
-            placeholder="Medium"
-            onChange={(event) => updateProfile(event, "medium")}
+            placeholder="Bluesky"
+            onChange={(event) => updateProfile(event, "bluesky")}
           />
           <input
             type="text"

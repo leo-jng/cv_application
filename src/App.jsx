@@ -10,22 +10,30 @@ const defaultPersonalInfo = {
   middlename: "",
   lastname: "",
   suffix: "",
+  preferredname: "",
   phonenumber: "",
   emailaddress: "",
-  linkedinprofile: "",
-  githubprofile: "",
+  linkedin: "",
   personalwebsite: "",
+  github: "",
+  facebook: "",
+  instagram: "",
+  twitter: "",
+  bluesky: "",
+  other: ""
 };
 
 const defaultEducationInfo = {
-  collegename: "",
-  graduationmonthyear: "",
-  major: "",
   degree: "",
+  major: "",
+  institution: "",
+  graduationmonth: "",
+  graduationyear: "",
+  gpa: "",
 };
 
 const defaultExperienceInfo = {
-  // requires 2 experiences
+  // requires 1 experience minimum
 
   // 1st experience
   // companyname_req1: "",
