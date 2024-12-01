@@ -43,6 +43,19 @@ const defaultExperienceInfo = {
   // employmentstart_monthyear_req1: "",
   // employmentend_monthyear_req1: "",
   // employmentachievements_req1: "",
+  jobposition: "",
+  companyname: "",
+  companylocation: "",
+  employmenttype: "",
+  startdate: "",
+  enddate: "",
+  presentlyworking: false,
+  jobachievement: {
+    point1: "", 
+    point2: "", 
+    point3: "", 
+    point4: ""
+  }
 
   // the rest are optional and can be added via user input
 };
