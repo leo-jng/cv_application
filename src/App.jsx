@@ -80,7 +80,7 @@ function App() {
       )}
 
       <PersonalDetails setPersonalInfo={setPersonalInfo} />
-      <Education setEducationInfo={setEducationInfo} />
+      <Education setEducationInfo={setEducationInfo} o1={educationInfo}/>
       <Experience setExperienceInfo={setExperienceInfo}/>
 
       {/* <form>

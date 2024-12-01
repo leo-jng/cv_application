@@ -43,12 +43,14 @@ export default function Experience({setExperienceInfo}) {
             type="date"
             placeholder="Start Date"
             id="startdate"
+            name="startdate"
           />
           <label for="enddate">End Date: </label>
           <input 
             type="date"
             placeholder="End Date"
             id="enddate"
+            name="enddate"
           />
           <input 
             type="checkbox"

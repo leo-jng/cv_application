@@ -9,21 +9,40 @@
 //                Certifications (Month and Year)
 //                Relevant Coursework
 
-export default function Education({ setEducationInfo }) {
+export default function Education({ setEducationInfo, o1}) { //o1 is just educationinfo object, added for test purposes
   const updateProfile = (e, keyname) => {
     setEducationInfo((prevState) => ({
       ...prevState,
       [keyname]: e.target.value,
     }));
+    console.log(o1);
   };
+
+  const populateYearsOption = function() {
+    let optionArray = [];
+    for (let yearOption = 1900; yearOption <= 2100; yearOption++){
+      optionArray.push(<option key={`${yearOption}`} value={`${yearOption}`}> {yearOption} </option>)
+    }
+    return (
+      <>
+      {optionArray}
+      </>
+    )
+  }
 
   return (
     <>
       <section>
         <div className="font-bold">Education</div>
         <div className="relative">
-          {/* Degree, Field of Study, Institution Name */}
-          <select />
+          {/* Degree, Major, Institution Name */}
+          <select onChange={(event) => updateProfile(event, "degree")} required>
+            <option value="" disabled selected>Select a Degree</option>
+            <option value="associate">Associate</option>
+            <option value="bachelor">Bachelor</option>
+            <option value="master">Master</option>
+            <option value="doctorate">Doctorate</option>
+          </select>
           <input
             type="text"
             placeholder="Field of Study or Major"
@@ -68,19 +87,13 @@ export default function Education({ setEducationInfo }) {
             <option value="" disabled selected>
               Select Year of Graduation
             </option>
-            <option value="2020">2020</option>
-            <option value="2021">2021</option>
-            <option value="2022">2022</option>
-            <option value="2023">2023</option>
-            {/* The rest can wait for now */}
+            {populateYearsOption()}
           </select>
           {/* ------------------------------------------------------------ */}
 
           {/* GPA */}
-          <input type="number" placeholder="GPA" />
+          <input type="number" step=".01" placeholder="GPA (Optional)" onChange={(event) => updateProfile(event, "gpa")}/>
           {/* ------------------------------------------------------------ */}
-
-          {/* The rest can wait, because they can be added as much as they want */}
         </div>
       </section>
     </>
