@@ -50,12 +50,17 @@ const defaultExperienceInfo = {
   startdate: "",
   enddate: "",
   presentlyworking: false,
-  jobachievement: {
-    point1: "", 
-    point2: "", 
-    point3: "", 
-    point4: ""
-  }
+  // jobachievement: {
+  //   point1: "", 
+  //   point2: "", 
+  //   point3: "", 
+  //   point4: ""
+  // }
+  jobachievement_no1: "",
+  jobachievement_no2: "",
+  jobachievement_no3: "",
+  jobachievement_no4: "",
+  // I should probably denest this, there is no point in it being nested, and the less nesting there is the better.
 
   // the rest are optional and can be added via user input
 };

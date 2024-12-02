@@ -75,8 +75,28 @@ export default function Experience({setExperienceInfo}) {
           />
           <label for="workpresentcheck">Presently Working</label>
           <br/>
-
           <textarea 
+            type="text"
+            placeholder="Describe the Situation/Task, Action, and Result"
+            onChange={(event) => updateProfile(event, "jobachievement_no1")}
+          />
+          <textarea 
+            type="text"
+            placeholder="Describe the Situation/Task, Action, and Result"
+            onChange={(event) => updateProfile(event, "jobachievement_no2")}
+          />
+          <textarea 
+            type="text"
+            placeholder="Describe the Situation/Task, Action, and Result"
+            onChange={(event) => updateProfile(event, "jobachievement_no3")}
+          />
+          <textarea 
+            type="text"
+            placeholder="Describe the Situation/Task, Action, and Result"
+            onChange={(event) => updateProfile(event, "jobachievement_no4")}
+          />
+
+          {/* <textarea 
             type="text"
             placeholder="Describe the Situation/Task, Action, and Result"
             onChange={(event) => updateJobAchievement(event, "point1")}
@@ -95,7 +115,7 @@ export default function Experience({setExperienceInfo}) {
             type="text"
             placeholder="Describe the Situation/Task, Action, and Result"
             onChange={(event) => updateJobAchievement(event, "point4")}
-          />
+          /> */}
         </fieldset>
       </form>
     </>
