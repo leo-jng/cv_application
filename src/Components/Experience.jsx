@@ -79,23 +79,35 @@ export default function Experience({setExperienceInfo}) {
           />
           <label htmlFor="workpresentcheck">Presently Working</label>
           <br/>
+
+          <label htmlFor="achievementtext1">Achievement 1</label>
           <textarea 
             type="text"
+            id="achievementtext1"
             placeholder="Describe the Situation/Task, Action, and Result"
             onChange={(event) => updateProfile(event, "jobachievement_no1")}
           />
+          <br/>
+          <label htmlFor="achievementtext2">Achievement 2</label>
           <textarea 
             type="text"
+            id="achievementtext2"
             placeholder="Describe the Situation/Task, Action, and Result"
             onChange={(event) => updateProfile(event, "jobachievement_no2")}
           />
+          <br/>
+          <label htmlFor="achievementtext3">Achievement 3</label>
           <textarea 
             type="text"
+            id="achievementtext3"
             placeholder="Describe the Situation/Task, Action, and Result"
             onChange={(event) => updateProfile(event, "jobachievement_no3")}
           />
+          <br/>
+          <label htmlFor="achievementtext4">Achievement 4</label>
           <textarea 
             type="text"
+            id="achievementtext4"
             placeholder="Describe the Situation/Task, Action, and Result"
             onChange={(event) => updateProfile(event, "jobachievement_no4")}
           />
