@@ -4,13 +4,12 @@
 //                Input in STAR (SITUATION, TASK, ACTION, RESULT) for each job
 
 // Feature to implement later: add and delete experiences
-export default function Experience({setExperienceInfo, o1}) {
+export default function Experience({setExperienceInfo}) {
   const updateProfile = (e, keyname) => {
     setExperienceInfo((prevState) => ({
       ...prevState,
       [keyname]: e.target.value,
     }));
-    // console.log(o1)
   };
 
   const updateJobAchievement = (e, pointname) => {

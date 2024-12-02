@@ -9,13 +9,12 @@
 //                Certifications (Month and Year)
 //                Relevant Coursework
 
-export default function Education({ setEducationInfo, o1}) { //o1 is just educationinfo object, added for test purposes
+export default function Education({ setEducationInfo }) { //o1 is just educationinfo object, added for test purposes
   const updateProfile = (e, keyname) => {
     setEducationInfo((prevState) => ({
       ...prevState,
       [keyname]: e.target.value,
     }));
-    // console.log(o1);
   };
 
   const populateYearsOption = function() {
