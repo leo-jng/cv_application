@@ -4,12 +4,13 @@
 //                Input in STAR (SITUATION, TASK, ACTION, RESULT) for each job
 
 // Feature to implement later: add and delete experiences
-export default function Experience({setExperienceInfo}) {
+export default function Experience({setExperienceInfo, o1}) {
   const updateProfile = (e, keyname) => {
     setExperienceInfo((prevState) => ({
       ...prevState,
       [keyname]: e.target.value,
     }));
+    // console.log(o1)
   };
 
   const updateJobAchievement = (e, pointname) => {
@@ -27,7 +28,7 @@ export default function Experience({setExperienceInfo}) {
       <form>
         <div className="font-bold">Experience</div>
         <fieldset id="experience">
-          <legend> Experience</legend>
+          {/* <legend for="experience"> Experience</legend> */}
           {/* Require at least one job experience */}
           <input
             type="text"
@@ -44,8 +45,8 @@ export default function Experience({setExperienceInfo}) {
             placeholder="Company Location"
             onChange={(event) => updateProfile(event, "companylocation")}
           />
-          <select onChange={(event) => updateProfile(event, "employmenttype")}>
-            <option value="" disabled selected>Employment Type</option>
+          <select defaultValue={""} onChange={(event) => updateProfile(event, "employmenttype")}>
+            <option value="" disabled >Employment Type</option>
             <option value="fulltime">Full-Time</option>
             <option value="parttime">Part-Time</option>
             <option value="internship">Internship</option>
@@ -53,7 +54,7 @@ export default function Experience({setExperienceInfo}) {
           </select>
           <br />
 
-          <label for="startdate">Start Date: </label>
+          <label htmlFor="startdate">Start Date: </label>
           <input 
             type="date"
             placeholder="Start Date"
@@ -61,7 +62,7 @@ export default function Experience({setExperienceInfo}) {
             name="startdate"
             onChange={(event) => updateProfile(event, "startdate")}
           />
-          <label for="enddate">End Date: </label>
+          <label htmlFor="enddate">End Date: </label>
           <input 
             type="date"
             placeholder="End Date"
@@ -71,9 +72,13 @@ export default function Experience({setExperienceInfo}) {
           />
           <input 
             type="checkbox"
+            value="workpresent"
             id="workpresentcheck"
+            name="workpresentcheck"
+            onChange={(event) => updateProfile(event, "enddate")}
+
           />
-          <label for="workpresentcheck">Presently Working</label>
+          <label htmlFor="workpresentcheck">Presently Working</label>
           <br/>
           <textarea 
             type="text"

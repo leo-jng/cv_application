@@ -49,7 +49,7 @@ const defaultExperienceInfo = {
   employmenttype: "",
   startdate: "",
   enddate: "",
-  presentlyworking: false,
+  // presentlyworking: false,
   // jobachievement: {
   //   point1: "", 
   //   point2: "", 
@@ -99,7 +99,13 @@ function App() {
 
       <PersonalDetails setPersonalInfo={setPersonalInfo} />
       <Education setEducationInfo={setEducationInfo} o1={educationInfo}/>
-      <Experience setExperienceInfo={setExperienceInfo}/>
+      <Experience setExperienceInfo={setExperienceInfo} o1={experienceInfo}/>
+      {console.log(
+        "all objects",
+        personalInfo,
+        educationInfo,
+        experienceInfo
+      )}
 
       {/* <form>
         <fieldset id="personal_details">

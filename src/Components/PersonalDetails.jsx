@@ -41,8 +41,8 @@ export default function PersonalDetails({ setPersonalInfo }) {
             onChange={(event) => updateProfile(event, "lastname")}
             required
           />
-          <select onChange={(event) => updateProfile(event, "suffix")}>
-            <option value="" disabled selected>
+          <select defaultValue={""} onChange={(event) => updateProfile(event, "suffix")}>
+            <option value="" disabled>
               Select Suffix/Honorifics
             </option>
             <option value="jr">Jr.</option>

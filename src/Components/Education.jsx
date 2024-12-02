@@ -15,7 +15,7 @@ export default function Education({ setEducationInfo, o1}) { //o1 is just educat
       ...prevState,
       [keyname]: e.target.value,
     }));
-    console.log(o1);
+    // console.log(o1);
   };
 
   const populateYearsOption = function() {
@@ -36,8 +36,8 @@ export default function Education({ setEducationInfo, o1}) { //o1 is just educat
         <div className="font-bold">Education</div>
         <div className="relative">
           {/* Degree, Major, Institution Name */}
-          <select onChange={(event) => updateProfile(event, "degree")} required>
-            <option value="" disabled selected>Select a Degree</option>
+          <select defaultValue={""} onChange={(event) => updateProfile(event, "degree")} required>
+            <option value="" disabled >Select a Degree</option>
             <option value="associate">Associate</option>
             <option value="bachelor">Bachelor</option>
             <option value="master">Master</option>
@@ -60,10 +60,11 @@ export default function Education({ setEducationInfo, o1}) { //o1 is just educat
           {/* Graduation Month and Year */}
           <select
             id="Month"
+            defaultValue={""}
             onChange={(event) => updateProfile(event, "graduationmonth")}
             required
           >
-            <option value="" disabled selected>
+            <option value="" disabled>
               Select Month of Graduation
             </option>
             <option value="Jan">January</option>
@@ -81,10 +82,11 @@ export default function Education({ setEducationInfo, o1}) { //o1 is just educat
           </select>
           <select
             id="Year"
+            defaultValue={""}
             onChange={(event) => updateProfile(event, "graduationyear")}
             required
           >
-            <option value="" disabled selected>
+            <option value="" disabled>
               Select Year of Graduation
             </option>
             {populateYearsOption()}
