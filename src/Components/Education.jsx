@@ -31,7 +31,7 @@ export default function Education({ setEducationInfo }) { //o1 is just education
 
   return (
     <>
-      <section>
+      <section className="bg-gray-800 border w-1/2">
         <div className="font-bold">Education</div>
         <div className="relative">
           {/* Degree, Major, Institution Name */}
