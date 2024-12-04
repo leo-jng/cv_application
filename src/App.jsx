@@ -4,6 +4,7 @@ import PersonalDetails from "./Components/PersonalDetails";
 import "./App.css";
 import Education from "./Components/Education";
 import Experience from "./Components/Experience";
+import BasicTemplate from "./Components/ResumeTemplates/BasicTemplate";
 
 const defaultPersonalInfo = {
   firstname: "",
@@ -59,6 +60,8 @@ function App() {
   const avatarUrl = useRef("src/assets/default_pfp.jpg");
   const [avatarModalOpen, setAvatarModalOpen] = useState(false);
 
+  const [genResume, setGenResume] = useState(false);
+
   const updateAvatar = (imgSrc) => {
     avatarUrl.current = imgSrc;
   };
@@ -83,6 +86,10 @@ function App() {
 
       <PersonalDetails setPersonalInfo={setPersonalInfo} />
       <Education setEducationInfo={setEducationInfo} o1={educationInfo}/>
+      {/* For experience components, I can simply create a new component right here for every different experience.
+      Every new component generated will generate a new key-value pair of key: defaultExperienceInfo.
+      Deleting the Component will delete it from the key and the value object from the state Object. */}
+
       <Experience setExperienceInfo={setExperienceInfo} o1={experienceInfo}/>
       {console.log(
         "all objects",
@@ -90,8 +97,28 @@ function App() {
         educationInfo,
         experienceInfo
       )}
-      <button>Build Resume</button>
+      {/* I should put the save and edit button into each section component instead for higher 
+      customization capability.
+      Having a save all at once and edit all at once buttons helps save efficiently from having to
+      to save in object in real time.
+      */}
+      {/* task: implement these 2 buttons into the 3 components.
+      Use boolean states to indicate save status.
+      On save, save inputs and lock the inputs.
+      On edits, unlock inputs to edit and generate cancel edit button.
+              revert back to saved inputs on cancal and lock input.*/}
+      <button>Save Info</button> 
+      <button>Edit Info</button>
 
+      {/* Once all save status are confirmed true, I can generate a list of resumes from all the resume templates 
+      I've made in the ResumeTemplate directory. */}
+      <button onClick={() => setGenResume(!genResume)}>Generate Resumes</button>
+
+      {genResume && <BasicTemplate currentAvatarUrl={avatarUrl.current} personaInfo={personalInfo} educationInfo={educationInfo} experienceInfo={experienceInfo} />}
+        {/* Instead of rendering a resume that in a very clunky way, it would be more organic to make them drag and drop.
+        I will use kanvajs library to drag copies of the saved component into the canvas. 
+        The copies are able to be deleted.
+        */}
       {/* <form>
         <fieldset id="personal_details">
           <legend> Personal Details </legend>
