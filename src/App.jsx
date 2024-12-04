@@ -50,25 +50,50 @@ const defaultExperienceInfo = {
   // the rest are optional and can be added via user input
 };
 
+const defaultExperienceInfoList = {
+  "Exp_base1" : {...defaultEducationInfo}
+}
+
 function App() {
   const [count, setCount] = useState(0);
 
   const [personalInfo, setPersonalInfo] = useState(defaultPersonalInfo);
   const [educationInfo, setEducationInfo] = useState(defaultEducationInfo);
-  const [experienceInfo, setExperienceInfo] = useState(defaultExperienceInfo);
+  const [experienceInfo, setExperienceInfo] = useState(defaultExperienceInfo); // set to remove
+  const [experienceInfoList, setExperienceInfoList] = useState(defaultExperienceInfoList)
+
 
   const avatarUrl = useRef("src/assets/default_pfp.jpg");
   const [avatarModalOpen, setAvatarModalOpen] = useState(false);
 
-  const [genResume, setGenResume] = useState(false);
+  // const [genResume, setGenResume] = useState(false);
 
   const updateAvatar = (imgSrc) => {
     avatarUrl.current = imgSrc;
   };
+
+  const generateRandomKey = () => {
+    let resultString = "";
+    const alphabets = "abcdefghijklmnopqrstuvwxyz1234567890"
+    for (let i = 0; i <= 15; i++) {
+      resultString+= alphabets[Math.floor(Math.random() * alphabets.length)]
+    }
+    return "Exp_" + resultString;
+  };
+
+  const addNewExperience = () => {
+    const newKey = generateRandomKey();
+    setExperienceInfoList((prevState) => ({
+      ...prevState,
+      [newKey]: { ... defaultEducationInfo}
+    }))
+  }
+
   return (
     <>
       <div className="relative">
-        <img
+      <div className="font-bold">Profile Image</div>
+      <img
           src={avatarUrl.current}
           alt="Profile Avatar"
           className="w-[150px] h-[150px] rounded-full border-2 border-red-400"
@@ -90,12 +115,16 @@ function App() {
       Every new component generated will generate a new key-value pair of key: defaultExperienceInfo.
       Deleting the Component will delete it from the key and the value object from the state Object. */}
 
-      <Experience setExperienceInfo={setExperienceInfo} o1={experienceInfo}/>
+      <button onClick={() => addNewExperience()}>Add New Experience</button>
+      {Object.keys(experienceInfoList).map((ExpKey) => {
+        return <Experience ExpKey={ExpKey} setExperienceInfoList={setExperienceInfoList}/>
+      })}
+      {/* <Experience setExperienceInfo={setExperienceInfo} o1={experienceInfo}/> */}
       {console.log(
         "all objects",
         personalInfo,
         educationInfo,
-        experienceInfo
+        experienceInfoList
       )}
       {/* I should put the save and edit button into each section component instead for higher 
       customization capability.
@@ -107,14 +136,14 @@ function App() {
       On save, save inputs and lock the inputs.
       On edits, unlock inputs to edit and generate cancel edit button.
               revert back to saved inputs on cancal and lock input.*/}
-      <button>Save Info</button> 
-      <button>Edit Info</button>
+      {/* <button>Save Info</button> 
+      <button>Edit Info</button> */}
 
       {/* Once all save status are confirmed true, I can generate a list of resumes from all the resume templates 
       I've made in the ResumeTemplate directory. */}
-      <button onClick={() => setGenResume(!genResume)}>Generate Resumes</button>
+      {/* <button onClick={() => setGenResume(!genResume)}>Generate Resumes</button> */}
 
-      {genResume && <BasicTemplate currentAvatarUrl={avatarUrl.current} personaInfo={personalInfo} educationInfo={educationInfo} experienceInfo={experienceInfo} />}
+      {/* {genResume && <BasicTemplate currentAvatarUrl={avatarUrl.current} personaInfo={personalInfo} educationInfo={educationInfo} experienceInfo={experienceInfo} />} */}
         {/* Instead of rendering a resume that in a very clunky way, it would be more organic to make them drag and drop.
         I will use kanvajs library to drag copies of the saved component into the canvas. 
         The copies are able to be deleted.
