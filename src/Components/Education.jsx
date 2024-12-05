@@ -29,13 +29,31 @@ export default function Education({ setEducationInfo }) { //o1 is just education
     )
   }
 
+  const saveEducationInfo = (e) => {
+    e.preventDefault();
+    console.log("education info saved");
+  }
+
+  const editEducationInfo = () => {
+    // Do something to allow editing and cancel editing.
+    console.log("edit button clicked")
+    // Current idea is to use a boolean value to dictate edicability of form inputs.
+    // Each input would checkin with a global boolean value to see if they can be changed.
+    // Cancelling edit should revert to previous saved input
+  }
+
   return (
     <>
       <section className="bg-gray-800 border w-1/2">
+      <form onSubmit={(e) => saveEducationInfo(e)} id="educationform">
         <div className="font-bold">Education</div>
         <div className="relative">
           {/* Degree, Major, Institution Name */}
-          <select defaultValue={""} onChange={(event) => updateProfile(event, "degree")} required>
+          <select 
+          defaultValue={""} 
+          // onChange={(event) => updateProfile(event, "degree")} 
+          required
+          >
             <option value="" disabled >Select a Degree</option>
             <option value="associate">Associate</option>
             <option value="bachelor">Bachelor</option>
@@ -45,13 +63,13 @@ export default function Education({ setEducationInfo }) { //o1 is just education
           <input
             type="text"
             placeholder="Field of Study or Major"
-            onChange={(event) => updateProfile(event, "major")}
+            // onChange={(event) => updateProfile(event, "major")}
             required
           />
           <input
             type="text"
             placeholder="Institution Name"
-            onChange={(event) => updateProfile(event, "institution")}
+            // onChange={(event) => updateProfile(event, "institution")}
             required
           />
           {/* ------------------------------------------------------------ */}
@@ -82,22 +100,29 @@ export default function Education({ setEducationInfo }) { //o1 is just education
           <select
             id="Year"
             defaultValue={""}
-            onChange={(event) => updateProfile(event, "graduationyear")}
+            // onChange={(event) => updateProfile(event, "graduationyear")}
             required
           >
-            <option value="" disabled>
-              Select Year of Graduation
-            </option>
+            <option value="" disabled> Select Year of Graduation </option>
             {populateYearsOption()}
           </select>
           {/* ------------------------------------------------------------ */}
 
           {/* GPA */}
-          <input type="number" step=".01" placeholder="GPA (Optional)" onChange={(event) => updateProfile(event, "gpa")}/>
+          <input 
+            type="number" 
+            step=".01" 
+            placeholder="GPA (Optional)" 
+            // onChange={(event) => updateProfile(event, "gpa")}
+          />
           {/* ------------------------------------------------------------ */}
         </div>
-        <button>Save</button>
-        <button>Edit</button>
+        <button type="submit" form="educationform">Save</button>
+        <button type="button" onClick={editEducationInfo}>Edit</button>
+        {/* don't use onClick={editEducationInfo()}, the () makes it execute immediately onload instead of running specificly via onclick*/}
+        {/* edit button has to be de-tached from the form itself or the submit button won't work bc the onClick overrices it. */}
+        {/* edit button would be greyed out until save is pressed. */}
+        </form>
       </section>
     </>
   );

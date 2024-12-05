@@ -28,7 +28,7 @@ export default function Experience({ ExpKey, setExperienceInfoList}) {
   return (
     <>
     <section className="bg-gray-800 border w-1/2">
-      <form >
+      <form id={"experienceinfoform_"+ExpKey}>
         <div className="font-bold">Experience</div>
         <fieldset id="experience">
           {/* <legend for="experience"> Experience</legend> */}

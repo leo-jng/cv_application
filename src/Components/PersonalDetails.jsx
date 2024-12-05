@@ -17,10 +17,17 @@ export default function PersonalDetails({ setPersonalInfo }) {
     }));
   };
 
+  const saveProfileInfo = (e) => {
+    e.preventDefault();
+    console.log("personal info saved")
+  }
+
   return (
     <>
       {/* Player Profile Section */}
       <section className="bg-gray-800 border w-1/2">
+      {/* use onSubmit for save and regular onClick for edit. Onsubmit will only trigger when required areas are filled. */}
+        <form onSubmit={(e) => saveProfileInfo(e)} id="personalinfoform"> 
         <div className="font-bold">Personal Details</div>
         <div className="relative">
           {/* First Name, Middle Name (Optional), Last Name, Suffix/Honorfics (Optional) */}
@@ -125,8 +132,10 @@ export default function PersonalDetails({ setPersonalInfo }) {
             onChange={(event) => updateProfile(event, "other")}
           />
         </div>
-        <button>Save</button>
-        <button>Edit</button>
+        <button type="submit" form="personalinfoform">Save</button>
+        <button type="button">Edit</button>
+        {/* edit button would be greyed out until save is pressed. */}
+        </form>
       </section>
     </>
   );
