@@ -96,6 +96,8 @@ export default function Education({ setEducationInfo }) { //o1 is just education
           <input type="number" step=".01" placeholder="GPA (Optional)" onChange={(event) => updateProfile(event, "gpa")}/>
           {/* ------------------------------------------------------------ */}
         </div>
+        <button>Save</button>
+        <button>Edit</button>
       </section>
     </>
   );

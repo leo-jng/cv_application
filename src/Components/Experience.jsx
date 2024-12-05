@@ -138,6 +138,8 @@ export default function Experience({ ExpKey, setExperienceInfoList}) {
           /> */}
         </fieldset>
       </form>
+      <button>Save</button>
+      <button>Edit</button>
       </section>
     </>
   );

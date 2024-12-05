@@ -125,6 +125,8 @@ export default function PersonalDetails({ setPersonalInfo }) {
             onChange={(event) => updateProfile(event, "other")}
           />
         </div>
+        <button>Save</button>
+        <button>Edit</button>
       </section>
     </>
   );
