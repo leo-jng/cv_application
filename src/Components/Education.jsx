@@ -118,9 +118,7 @@ export default function Education({ ComponentEditStatus, setEducationInfo }) { /
             // onChange={(event) => updateProfile(event, "graduationmonth")}
             required
           >
-            <option value="" disabled>
-              Select Month of Graduation
-            </option>
+            <option value="" disabled>Select Month of Graduation</option>
             <option value="Jan">January</option>
             <option value="Feb">February</option>
             <option value="Mar">March</option>
@@ -158,9 +156,17 @@ export default function Education({ ComponentEditStatus, setEducationInfo }) { /
 
           {/* ------------------------------------------------------------ */}
         </fieldset>
-        <button type="submit" form="educationform">Save</button>
+        <button 
+          type="submit" 
+          form="educationform"
+          className={ComponentEditStatus == true ? "bg-green-700" : "bg-slate-900 text-slate-500 hover:border-slate-900"}
+          disabled={ComponentEditStatus == true ? false : true}
+        >
+          Save
+        </button>
         <button type="button" 
           onClick={editEducationInfo}
+          className={ComponentEditStatus == true ? "bg-slate-900  text-slate-500 hover:border-slate-900" : "bg-green-700"}
           disabled={ComponentEditStatus == true ? true : false}
         > Edit
         </button>
