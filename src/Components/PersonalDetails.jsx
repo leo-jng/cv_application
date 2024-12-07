@@ -34,7 +34,7 @@ export default function PersonalDetails({ setPersonalInfo }) {
           <input
             type="text"
             placeholder="First Name"
-            onChange={(event) => updateProfile(event, "firstname")}
+            // onChange={(event) => updateProfile(event, "firstname")}
             required
           />
           <input

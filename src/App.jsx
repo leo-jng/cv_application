@@ -21,7 +21,8 @@ const defaultPersonalInfo = {
   instagram: "",
   twitter: "",
   bluesky: "",
-  other: ""
+  other: "",
+  editstatus: true,
 };
 
 const defaultEducationInfo = {
@@ -31,6 +32,7 @@ const defaultEducationInfo = {
   graduationmonth: "",
   graduationyear: "",
   gpa: "",
+  editstatus: true,
 };
 
 const defaultExperienceInfo = {
@@ -46,7 +48,7 @@ const defaultExperienceInfo = {
   jobachievement_no2: "",
   jobachievement_no3: "",
   jobachievement_no4: "",
-
+  editstatus: true
   // the rest are optional and can be added via user input
 };
 
@@ -59,7 +61,7 @@ function App() {
 
   const [personalInfo, setPersonalInfo] = useState(defaultPersonalInfo);
   const [educationInfo, setEducationInfo] = useState(defaultEducationInfo);
-  const [experienceInfo, setExperienceInfo] = useState(defaultExperienceInfo); // set to remove
+  // const [experienceInfo, setExperienceInfo] = useState(defaultExperienceInfo); // set to remove
   const [experienceInfoList, setExperienceInfoList] = useState(defaultExperienceInfoList)
 
 
@@ -78,7 +80,7 @@ function App() {
     for (let i = 0; i <= 15; i++) {
       resultString+= alphabets[Math.floor(Math.random() * alphabets.length)]
     }
-    return "Exp_" + resultString;
+    return "Exp_" + resultString; // experience key will in the format of Exp_<randomString>
   };
 
   const addNewExperience = () => {
@@ -110,7 +112,7 @@ function App() {
       )}
 
       <PersonalDetails setPersonalInfo={setPersonalInfo} />
-      <Education setEducationInfo={setEducationInfo} o1={educationInfo}/>
+      <Education ComponentEditStatus={educationInfo.editstatus} setEducationInfo={setEducationInfo} o1={educationInfo}/>
       {/* For experience components, I can simply create a new component right here for every different experience.
       Every new component generated will generate a new key-value pair of key: defaultExperienceInfo.
       Deleting the Component will delete it from the key and the value object from the state Object. */}

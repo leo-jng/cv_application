@@ -9,13 +9,13 @@
 //                Certifications (Month and Year)
 //                Relevant Coursework
 
-export default function Education({ setEducationInfo }) { //o1 is just educationinfo object, added for test purposes
-  const updateProfile = (e, keyname) => {
-    setEducationInfo((prevState) => ({
-      ...prevState,
-      [keyname]: e.target.value,
-    }));
-  };
+export default function Education({ ComponentEditStatus, setEducationInfo }) { //o1 is just educationinfo object, added for test purposes
+  // const updateProfile = (e, keyname) => {
+  //   setEducationInfo((prevState) => ({
+  //     ...prevState,
+  //     [keyname]: e.target.value,
+  //   }));
+  // };
 
   const populateYearsOption = function() {
     let optionArray = [];
@@ -24,6 +24,7 @@ export default function Education({ setEducationInfo }) { //o1 is just education
     }
     return (
       <>
+      <option value="" disabled> Select Year of Graduation </option>
       {optionArray}
       </>
     )
@@ -31,9 +32,9 @@ export default function Education({ setEducationInfo }) { //o1 is just education
 
   const saveEducationInfo = (e) => {
     e.preventDefault();
-    console.log("education info saved");
     // Clicking this button should run through the form and save all the inputs into state object;
     console.log(
+      "education info saved",
       e.target[0].value, // degree
       e.target[1].value, // major
       e.target[2].value, // college
@@ -50,7 +51,12 @@ export default function Education({ setEducationInfo }) { //o1 is just education
       ["graduationmonth"]: e.target[3].value,
       ["graduationyear"]: e.target[4].value,
       ["gpa"]: e.target[5].value,
+      ["editstatus"]: false, // this will indicate that the current componet is saved, and no further editing is allowed
     }));
+
+    // after saving, the component will be completely greyed out
+
+
   }
 
   const editEducationInfo = () => {
@@ -59,6 +65,7 @@ export default function Education({ setEducationInfo }) { //o1 is just education
     // Current idea is to use a boolean value to dictate edicability of form inputs.
     // Each input would checkin with a global boolean value to see if they can be changed.
     // Cancelling edit should revert to previous saved input
+    // edit should check if the inputs are on default before. 
   }
 
   return (
@@ -66,12 +73,16 @@ export default function Education({ setEducationInfo }) { //o1 is just education
       <section className="bg-gray-800 border w-1/2">
       <form onSubmit={(e) => saveEducationInfo(e)} id="educationform">
         <div className="font-bold">Education</div>
-        <div className="relative">
+        <fieldset 
+          className="relative" 
+          disabled={ComponentEditStatus == true ? false : true} // disables form inputs if editstatus is false, enables if editstatus is true
+        >
           {/* Degree, Major, Institution Name */}
           <select 
-          defaultValue={""} 
+            defaultValue={""} 
           // onChange={(event) => updateProfile(event, "degree")} 
-          required
+            // disabled={ComponentEditStatus}
+            required
           >
             <option value="" disabled >Select a Degree</option>
             <option value="associate">Associate</option>
@@ -126,7 +137,7 @@ export default function Education({ setEducationInfo }) { //o1 is just education
             // onChange={(event) => updateProfile(event, "graduationyear")}
             required
           >
-            <option value="" disabled> Select Year of Graduation </option>
+            {/* <option value="" disabled> Select Year of Graduation </option> */}
             {populateYearsOption()}
           </select>
 
@@ -142,7 +153,7 @@ export default function Education({ setEducationInfo }) { //o1 is just education
           />
 
           {/* ------------------------------------------------------------ */}
-        </div>
+        </fieldset>
         <button type="submit" form="educationform">Save</button>
         <button type="button" onClick={editEducationInfo}>Edit</button>
         {/* don't use onClick={editEducationInfo()}, the () makes it execute immediately onload instead of running specificly via onclick*/}
