@@ -61,7 +61,11 @@ export default function Education({ ComponentEditStatus, setEducationInfo }) { /
 
   const editEducationInfo = () => {
     // Do something to allow editing and cancel editing.
-    console.log("edit button clicked")
+    console.log("edit button clicked!", "editstatus set to: ", !ComponentEditStatus)
+    setEducationInfo((prevState) => ({
+      ...prevState,
+      ["editstatus"]: (!ComponentEditStatus), // this will indicate that the current componet is saved, and no further editing is allowed
+    }));
     // Current idea is to use a boolean value to dictate edicability of form inputs.
     // Each input would checkin with a global boolean value to see if they can be changed.
     // Cancelling edit should revert to previous saved input
@@ -155,7 +159,11 @@ export default function Education({ ComponentEditStatus, setEducationInfo }) { /
           {/* ------------------------------------------------------------ */}
         </fieldset>
         <button type="submit" form="educationform">Save</button>
-        <button type="button" onClick={editEducationInfo}>Edit</button>
+        <button type="button" 
+          onClick={editEducationInfo}
+          disabled={ComponentEditStatus == true ? true : false}
+        > Edit
+        </button>
         {/* don't use onClick={editEducationInfo()}, the () makes it execute immediately onload instead of running specificly via onclick*/}
         {/* edit button has to be de-tached from the form itself or the submit button won't work bc the onClick overrices it. */}
         {/* edit button would be greyed out until save is pressed. */}
