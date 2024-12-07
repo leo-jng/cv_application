@@ -32,6 +32,25 @@ export default function Education({ setEducationInfo }) { //o1 is just education
   const saveEducationInfo = (e) => {
     e.preventDefault();
     console.log("education info saved");
+    // Clicking this button should run through the form and save all the inputs into state object;
+    console.log(
+      e.target[0].value, // degree
+      e.target[1].value, // major
+      e.target[2].value, // college
+      e.target[3].value, // grad month
+      e.target[4].value, // grad year
+      e.target[5].value  // gpa
+    ); 
+
+    setEducationInfo((prevState) => ({
+      ...prevState,
+      ["degree"]: e.target[0].value,
+      ["major"]: e.target[1].value,
+      ["institution"]: e.target[2].value,
+      ["graduationmonth"]: e.target[3].value,
+      ["graduationyear"]: e.target[4].value,
+      ["gpa"]: e.target[5].value,
+    }));
   }
 
   const editEducationInfo = () => {
@@ -60,25 +79,28 @@ export default function Education({ setEducationInfo }) { //o1 is just education
             <option value="master">Master</option>
             <option value="doctorate">Doctorate</option>
           </select>
+
           <input
             type="text"
             placeholder="Field of Study or Major"
             // onChange={(event) => updateProfile(event, "major")}
             required
           />
+
           <input
             type="text"
             placeholder="Institution Name"
             // onChange={(event) => updateProfile(event, "institution")}
             required
           />
+
           {/* ------------------------------------------------------------ */}
 
           {/* Graduation Month and Year */}
           <select
             id="Month"
             defaultValue={""}
-            onChange={(event) => updateProfile(event, "graduationmonth")}
+            // onChange={(event) => updateProfile(event, "graduationmonth")}
             required
           >
             <option value="" disabled>
@@ -97,6 +119,7 @@ export default function Education({ setEducationInfo }) { //o1 is just education
             <option value="Nov">November</option>
             <option value="Dec">December</option>
           </select>
+
           <select
             id="Year"
             defaultValue={""}
@@ -106,15 +129,18 @@ export default function Education({ setEducationInfo }) { //o1 is just education
             <option value="" disabled> Select Year of Graduation </option>
             {populateYearsOption()}
           </select>
+
           {/* ------------------------------------------------------------ */}
 
           {/* GPA */}
+
           <input 
             type="number" 
             step=".01" 
             placeholder="GPA (Optional)" 
             // onChange={(event) => updateProfile(event, "gpa")}
           />
+
           {/* ------------------------------------------------------------ */}
         </div>
         <button type="submit" form="educationform">Save</button>
