@@ -4,17 +4,61 @@
 //                Input in STAR (SITUATION, TASK, ACTION, RESULT) for each job
 
 // Feature to implement later: add and delete experiences
-export default function Experience({ ExpKey, setExperienceInfoList}) {
-  const updateProfile = (e, keyname) => {
+export default function Experience({ ExpKey, ComponentEditStatus, setExperienceInfoList}) {
+  // const updateProfile = (e, keyname) => {
+  //   setExperienceInfoList((prevState) => ({
+  //     ...prevState,
+  //     [ExpKey]: {
+  //       ...prevState[ExpKey],
+  //       [keyname]: e.target.value,
+  //     },
+  //   }));
+  // };
+
+  const saveExperienceInfoList = (e) => {
+    e.preventDefault();
+    console.log("current experience component saved", 
+      e.target[1].value,
+      e.target[2].value,
+      e.target[3].value,
+      e.target[4].value,
+      e.target[5].value,
+      e.target[6].value,
+      e.target[7].value, ":", e.target[7].checked,
+      e.target[8].value,
+      e.target[9].value,
+      e.target[10].value,
+    );
     setExperienceInfoList((prevState) => ({
       ...prevState,
       [ExpKey]: {
-        ...prevState[ExpKey],
-        [keyname]: e.target.value,
-      },
-    }));
-  };
+        ["jobposition"]: e.target[1].value,
+        ["companyname"]: e.target[2].value,
+        ["companylocation"]: e.target[3].value,
+        ["employmenttype"]: e.target[4].value,
+        ["startdate"]: e.target[5].value,
+        // e.target[7] is the checkbox indicating whether or not the current work is current job
+        ["enddate"]: (e.target[7].checked == true ? "workpresent" : e.target[6].value),
+        // ["workpresentcheck"]: e.target[7].value,
+        ["jobachievement_no1"]: e.target[8].value,
+        ["jobachievement_no2"]: e.target[9].value,
+        ["jobachievement_no3"]: e.target[10].value,
+        ["jobachievement_no4"]: e.target[11].value,
+        ["editstatus"]: false
+      }
+    }))
+  }
 
+  const editExperienceInfoList = () => {
+    console.log("edit button clicked!", "editstatus for experienne info ", ExpKey ,"set to: ", !ComponentEditStatus)
+    setExperienceInfoList((prevState) => ({
+      ...prevState,
+      [ExpKey] : {
+        ...prevState[ExpKey],
+        ["editstatus"]: (!ComponentEditStatus), // this will indicate that the current componet is saved, and no further editing is allowed
+      }
+    }));
+  }
   // const updateJobAchievement = (e, pointname) => {
   //   setExperienceInfo((prevState) => ({
   //     ...prevState,
@@ -28,27 +72,31 @@ export default function Experience({ ExpKey, setExperienceInfoList}) {
   return (
     <>
     <section className="bg-gray-800 border w-1/2">
-      <form id={"experienceinfoform_"+ExpKey}>
+      <form onSubmit={(e) => saveExperienceInfoList(e)} id={"experienceinfoform_"+ExpKey} >
         <div className="font-bold">Experience</div>
-        <fieldset id="experience">
+        <fieldset id="experience"
+          disabled={ComponentEditStatus == true ? false : true} // disables form inputs if editstatus is false, enables if editstatus is true
+        >
           {/* <legend for="experience"> Experience</legend> */}
           {/* Require at least one job experience */}
           <input
             type="text"
             placeholder="Job Position"
-            onChange={(event) => updateProfile(event, "jobposition")}
+            // onChange={(event) => updateProfile(event, "jobposition")}
           />
           <input 
             type="text"
             placeholder="Company Name"
-            onChange={(event) => updateProfile(event, "companyname")}
+            // onChange={(event) => updateProfile(event, "companyname")}
           />
           <input 
             type="text"
             placeholder="Company Location"
-            onChange={(event) => updateProfile(event, "companylocation")}
+            // onChange={(event) => updateProfile(event, "companylocation")}
           />
-          <select defaultValue={""} onChange={(event) => updateProfile(event, "employmenttype")}>
+          <select defaultValue={""} 
+          // onChange={(event) => updateProfile(event, "employmenttype")}
+          >
             <option value="" disabled >Employment Type</option>
             <option value="fulltime">Full-Time</option>
             <option value="parttime">Part-Time</option>
@@ -63,7 +111,7 @@ export default function Experience({ ExpKey, setExperienceInfoList}) {
             placeholder="Start Date"
             id="startdate"
             name="startdate"
-            onChange={(event) => updateProfile(event, "startdate")}
+            // onChange={(event) => updateProfile(event, "startdate")}
           />
           <label htmlFor="enddate">End Date: </label>
           <input 
@@ -71,14 +119,14 @@ export default function Experience({ ExpKey, setExperienceInfoList}) {
             placeholder="End Date"
             id="enddate"
             name="enddate"
-            onChange={(event) => updateProfile(event, "enddate")}
+            // onChange={(event) => updateProfile(event, "enddate")}
           />
           <input 
             type="checkbox"
             value="workpresent"
             id="workpresentcheck"
             name="workpresentcheck"
-            onChange={(event) => updateProfile(event, "enddate")}
+            // onChange={(event) => updateProfile(event, "enddate")}
 
           />
           <label htmlFor="workpresentcheck">Presently Working</label>
@@ -89,7 +137,7 @@ export default function Experience({ ExpKey, setExperienceInfoList}) {
             type="text"
             id="achievementtext1"
             placeholder="Describe the Situation/Task, Action, and Result"
-            onChange={(event) => updateProfile(event, "jobachievement_no1")}
+            // onChange={(event) => updateProfile(event, "jobachievement_no1")}
           />
           <br/>
           <label htmlFor="achievementtext2">Achievement 2</label>
@@ -97,7 +145,7 @@ export default function Experience({ ExpKey, setExperienceInfoList}) {
             type="text"
             id="achievementtext2"
             placeholder="Describe the Situation/Task, Action, and Result"
-            onChange={(event) => updateProfile(event, "jobachievement_no2")}
+            // onChange={(event) => updateProfile(event, "jobachievement_no2")}
           />
           <br/>
           <label htmlFor="achievementtext3">Achievement 3</label>
@@ -105,7 +153,7 @@ export default function Experience({ ExpKey, setExperienceInfoList}) {
             type="text"
             id="achievementtext3"
             placeholder="Describe the Situation/Task, Action, and Result"
-            onChange={(event) => updateProfile(event, "jobachievement_no3")}
+            // onChange={(event) => updateProfile(event, "jobachievement_no3")}
           />
           <br/>
           <label htmlFor="achievementtext4">Achievement 4</label>
@@ -113,7 +161,7 @@ export default function Experience({ ExpKey, setExperienceInfoList}) {
             type="text"
             id="achievementtext4"
             placeholder="Describe the Situation/Task, Action, and Result"
-            onChange={(event) => updateProfile(event, "jobachievement_no4")}
+            // onChange={(event) => updateProfile(event, "jobachievement_no4")}
           />
 
           {/* <textarea 
@@ -138,8 +186,21 @@ export default function Experience({ ExpKey, setExperienceInfoList}) {
           /> */}
         </fieldset>
       </form>
-      <button>Save</button>
-      <button>Edit</button>
+      <button
+        type="submit"
+        form={"experienceinfoform_"+ExpKey}
+        className={ComponentEditStatus == true ? "bg-green-700" : "bg-slate-900 text-slate-500 hover:border-slate-900"}
+        disabled={ComponentEditStatus == true ? false : true}
+      >
+        Save
+      </button>
+      <button type="button"
+        onClick={editExperienceInfoList}
+        className={ComponentEditStatus == true ? "bg-slate-900  text-slate-500 hover:border-slate-900" : "bg-green-700"}
+        disabled={ComponentEditStatus == true ? true : false}
+      >
+        Edit
+      </button>
       </section>
     </>
   );

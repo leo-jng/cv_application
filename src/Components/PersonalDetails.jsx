@@ -10,12 +10,12 @@
 export default function PersonalDetails({ ComponentEditStatus, setPersonalInfo }) {
   // updateProfile will take the input event and a specified keyname
   // to update the value held in a keyname in the PersonalInfo state object
-  const updateProfile = (e, keyname) => {
-    setPersonalInfo((prevState) => ({
-      ...prevState,
-      [keyname]: e.target.value,
-    }));
-  };
+  // const updateProfile = (e, keyname) => {
+  //   setPersonalInfo((prevState) => ({
+  //     ...prevState,
+  //     [keyname]: e.target.value,
+  //   }));
+  // };
 
   const saveProfileInfo = (e) => {
     e.preventDefault();
