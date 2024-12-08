@@ -35,22 +35,23 @@ export default function Education({ ComponentEditStatus, setEducationInfo }) { /
     // Clicking this button should run through the form and save all the inputs into state object;
     console.log(
       "education info saved",
-      e.target[0].value, // degree
-      e.target[1].value, // major
-      e.target[2].value, // college
-      e.target[3].value, // grad month
-      e.target[4].value, // grad year
-      e.target[5].value  // gpa
+      e.target[1].value, // degree
+      e.target[2].value, // major
+      e.target[3].value, // college
+      e.target[4].value, // grad month
+      e.target[5].value, // grad year
+      e.target[6].value  // gpa
     ); 
 
     setEducationInfo((prevState) => ({
       ...prevState,
-      ["degree"]: e.target[0].value,
-      ["major"]: e.target[1].value,
-      ["institution"]: e.target[2].value,
-      ["graduationmonth"]: e.target[3].value,
-      ["graduationyear"]: e.target[4].value,
-      ["gpa"]: e.target[5].value,
+      // e.target[0] of the form is fieldset, so first input actually start at 1
+      ["degree"]: e.target[1].value,
+      ["major"]: e.target[2].value,
+      ["institution"]: e.target[3].value,
+      ["graduationmonth"]: e.target[4].value,
+      ["graduationyear"]: e.target[5].value,
+      ["gpa"]: e.target[6].value,
       ["editstatus"]: false, // this will indicate that the current componet is saved, and no further editing is allowed
     }));
 
@@ -61,7 +62,7 @@ export default function Education({ ComponentEditStatus, setEducationInfo }) { /
 
   const editEducationInfo = () => {
     // Do something to allow editing and cancel editing.
-    console.log("edit button clicked!", "editstatus set to: ", !ComponentEditStatus)
+    console.log("edit button clicked!", "editstatus for education set to: ", !ComponentEditStatus)
     setEducationInfo((prevState) => ({
       ...prevState,
       ["editstatus"]: (!ComponentEditStatus), // this will indicate that the current componet is saved, and no further editing is allowed
