@@ -119,7 +119,9 @@ function App() {
 
       <button onClick={() => addNewExperience()}>Add New Experience</button>
       {Object.keys(experienceInfoList).map((ExpKey) => {
-        return <Experience ExpKey={ExpKey} ComponentEditStatus={experienceInfoList[ExpKey].editstatus} setExperienceInfoList={setExperienceInfoList}/>
+        return <Experience ExpKey={ExpKey} ComponentEditStatus={experienceInfoList[ExpKey].editstatus} experienceInfoList={experienceInfoList} setExperienceInfoList={setExperienceInfoList} 
+        // presentlyWorking={false}
+        />
       })}
       {/* <Experience setExperienceInfo={setExperienceInfo} o1={experienceInfo}/> */}
       {console.log(

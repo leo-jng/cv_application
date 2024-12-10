@@ -4,7 +4,9 @@
 //                Input in STAR (SITUATION, TASK, ACTION, RESULT) for each job
 
 // Feature to implement later: add and delete experiences
-export default function Experience({ ExpKey, ComponentEditStatus, setExperienceInfoList}) {
+export default function Experience({ ExpKey, ComponentEditStatus, experienceInfoList, setExperienceInfoList, 
+  // presentlyWorking
+}) {
   // const updateProfile = (e, keyname) => {
   //   setExperienceInfoList((prevState) => ({
   //     ...prevState,
@@ -59,6 +61,18 @@ export default function Experience({ ExpKey, ComponentEditStatus, setExperienceI
       }
     }));
   }
+
+  const deleteFromExperienceInfoList = () => {
+    console.log("delete button clicked for ", ExpKey);
+    let copyState = {...experienceInfoList};
+    delete copyState[ExpKey];
+    setExperienceInfoList(copyState)
+  }
+    
+  // const checkPresentlyWorking = () => {
+  //   this.props.presentlyWorking = !this.props.presentlyWorking;
+  //   console.log("checkpresentlyworking clicked", this.props.presentlyWorking)
+  // }
   // const updateJobAchievement = (e, pointname) => {
   //   setExperienceInfo((prevState) => ({
   //     ...prevState,
@@ -200,6 +214,11 @@ export default function Experience({ ExpKey, ComponentEditStatus, setExperienceI
         disabled={ComponentEditStatus == true ? true : false}
       >
         Edit
+      </button>
+      <button
+        onClick={deleteFromExperienceInfoList}
+      >
+        Delete
       </button>
       </section>
     </>
