@@ -93,6 +93,8 @@ function App() {
 
   return (
     <>
+    <section> 
+      <h1> Creation Panel</h1>
       <div className="relative">
       <div className="font-bold">Profile Image</div>
       <img
@@ -206,6 +208,13 @@ function App() {
           <br />
         </fieldset>
       </form> */}
+      </section>
+      <secton>
+        <h1>Render Panel</h1>
+      </secton>
+      <secton>
+        <h1>Canvas Panel</h1>
+      </secton>
     </>
   );
 }
