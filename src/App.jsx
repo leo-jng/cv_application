@@ -4,7 +4,9 @@ import PersonalDetails from "./Components/PersonalDetails";
 import "./App.css";
 import Education from "./Components/Education";
 import Experience from "./Components/Experience";
+import { Stage, Layer, Rect, Text, Group } from "react-konva";
 import BasicTemplate from "./Components/ResumeTemplates/BasicTemplate";
+import PersonalDetailsComponent from "./Components/CanvasComponents/PersonalDetailsComponent";
 
 const defaultPersonalInfo = {
   firstname: "",
@@ -36,8 +38,6 @@ const defaultEducationInfo = {
 };
 
 const defaultExperienceInfo = {
-  // requires 1 experience minimum
-
   jobposition: "",
   companyname: "",
   companylocation: "",
@@ -49,21 +49,74 @@ const defaultExperienceInfo = {
   jobachievement_no3: "",
   jobachievement_no4: "",
   editstatus: true
-  // the rest are optional and can be added via user input
 };
 
 const defaultExperienceInfoList = {
   "Exp_base1" : {...defaultEducationInfo}
 }
 
+const defaultPersonalDetailsComponent = {
+  componenttype: "personaldetails",
+  isDragging: false,
+  x: 20,
+  y: 20,
+  firstname: "",
+  middlename: "",
+  lastname: "",
+  suffix: "",
+  preferredname: "",
+  phonenumber: "",
+  emailaddress: "",
+  linkedin: "",
+  personalwebsite: "",
+  github: "",
+  facebook: "",
+  instagram: "",
+  twitter: "",
+  bluesky: "",
+  other: "",
+}
+
+const defaultEducationComponent = {
+  componenttype: "education",
+  isDragging: false,
+  x: 20,
+  y: 20,
+  degree: "",
+  major: "",
+  institution: "",
+  graduationmonth: "",
+  graduationyear: "",
+  gpa: "",
+};
+
+const defaultExperienceComponent = {
+  componenttype: "experience",
+  isDragging: false,
+  x: 20,
+  y: 20,
+  jobposition: "",
+  companyname: "",
+  companylocation: "",
+  employmenttype: "",
+  startdate: "",
+  enddate: "",
+  jobachievement_no1: "",
+  jobachievement_no2: "",
+  jobachievement_no3: "",
+  jobachievement_no4: "",
+};
+
 function App() {
   // const [count, setCount] = useState(0);
 
   const [personalInfo, setPersonalInfo] = useState(defaultPersonalInfo);
   const [educationInfo, setEducationInfo] = useState(defaultEducationInfo);
-  // const [experienceInfo, setExperienceInfo] = useState(defaultExperienceInfo); // set to remove
   const [experienceInfoList, setExperienceInfoList] = useState(defaultExperienceInfoList)
 
+  // use empty object, but it will hold nested objects just like experienceInfoList
+  // it will hold ondrag boolean, x coordinate, and y coordinate
+  const [onCanvasComponents, setOnConvasComponents] = useState({isDragging: false, x:50, y:50}); 
 
   const avatarUrl = useRef("src/assets/default_pfp.jpg");
   const [avatarModalOpen, setAvatarModalOpen] = useState(false);
@@ -154,66 +207,20 @@ function App() {
         I will use kanvajs library to drag copies of the saved component into the canvas. 
         The copies are able to be deleted.
         */}
-      {/* <form>
-        <fieldset id="personal_details">
-          <legend> Personal Details </legend>
-          <label for="first_name">First name:</label> <br />
-          <input
-            type="text"
-            id="first_name"
-            name="first_name"
-            placeholder="John"
-          />{" "}
-          <br />
-          <label for="last_name">Last name:</label> <br />
-          <input
-            type="text"
-            id="last_name"
-            name="last_name"
-            placeholder="Doe"
-          />{" "}
-          <br />
-          <label for="phone_number">Phone Number:</label> <br />
-          <input
-            type="tel"
-            id="phone_number"
-            name="phone_number"
-            pattern="[0-9]{3}-[0-9]{2}-[0-9]{3}"
-            placeholder="000-000-0000"
-          ></input>{" "}
-          <br />
-          <label for="email_address">Email:</label> <br />
-          <input
-            type="email"
-            id="email_address"
-            name="email_address"
-          ></input>{" "}
-          <br />
-          <label for="linkedin_profile">Linkedin:</label> <br />
-          <input type="url" id="linkedin_url" name="linkedin_url"></input>{" "}
-          <br />
-          <label for="personal_github">Github:</label> <br />
-          <input
-            type="url"
-            id="personal_github"
-            name="personal_github"
-          ></input>{" "}
-          <br />
-          <label for="personal_website">Your Website:</label> <br />
-          <input
-            type="url"
-            id="personal_website"
-            name="personal_website"
-          ></input>{" "}
-          <br />
-        </fieldset>
-      </form> */}
+  
       </section>
       <secton>
         <h1>Render Panel</h1>
       </secton>
       <secton>
         <h1>Canvas Panel</h1>
+        <Stage width={768} height={1024}>
+          <Layer>
+            <Rect fill="white" width={768} height={1024} />
+
+            <PersonalDetailsComponent onCanvasComponents={onCanvasComponents} setOnConvasComponents={setOnConvasComponents}/>
+          </Layer>
+        </Stage>
       </secton>
     </>
   );
