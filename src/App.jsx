@@ -1,5 +1,5 @@
 import { createRef, useRef, useState } from "react";
-import UpdateAvatarModal from "./Components/ProfileAvatar/UpdateAvatarModal";
+//import UpdateAvatarModal from "./Components/ProfileAvatar/UpdateAvatarModal";
 import PersonalDetails from "./Components/PersonalDetails";
 import "./App.css";
 import Education from "./Components/Education";
@@ -8,6 +8,7 @@ import { Stage, Layer, Rect, Text, Group } from "react-konva";
 import PersonalDetailsComponent from "./Components/CanvasComponents/PersonalDetailsComponent";
 import EducationComponent from "./Components/CanvasComponents/EducationComponent";
 import ExperienceComponent from "./Components/CanvasComponents/ExperienceComponent";
+import ProfileAvatar from "./Components/ProfileAvatar/ProfileAvatar";
 
 const defaultPersonalInfo = {
   firstname: "",
@@ -172,14 +173,9 @@ function App() {
   const [onCanvasComponents, setOnConvasComponents] = useState(testOnCanvasComponents); 
 
   // avatarUrl is defaulted to a image if no image is selected
-  const avatarUrl = useRef("src/assets/default_pfp.jpg");
+  const avatarUrl = useRef("src/assets/default_pfpv2.jpg");
   // boolean state that keeps track of whether or not the profile image modal is open
   const [avatarModalOpen, setAvatarModalOpen] = useState(false);
-
-  // updates the profile picture with the new edited image
-  const updateAvatar = (imgSrc) => {
-    avatarUrl.current = imgSrc;
-  };
 
   // generates a random key for state objects in experience and oncanvascomponents
   const generateRandomKey = () => {
@@ -205,25 +201,8 @@ function App() {
     <>
     <section> 
       <h1> Creation Panel</h1>
-      <div className="relative">
-      <div className="font-bold">Profile Image</div>
-      <img
-          src={avatarUrl.current}
-          alt="Profile Avatar"
-          className="w-[150px] h-[150px] rounded-full border-2 border-red-400"
-          onClick={() => setAvatarModalOpen(true)}
-        />
-      </div>
 
-      {/* opens profile picture modal when image is clicked */}
-      {avatarModalOpen && (
-        // UpdateAvatarModal -> ImageCropper -> CropImage
-        <UpdateAvatarModal
-          updateAvatar={updateAvatar}
-          closeModal={() => setAvatarModalOpen(false)}
-        />
-        // console.log("MODAL OPENS")
-      )}
+      <ProfileAvatar avatarUrl={avatarUrl} avatarModalOpen={avatarModalOpen} setAvatarModalOpen={setAvatarModalOpen}/>
 
       <PersonalDetails ComponentEditStatus={personalInfo.editstatus} setPersonalInfo={setPersonalInfo} />
       <Education ComponentEditStatus={educationInfo.editstatus} setEducationInfo={setEducationInfo} o1={educationInfo}/>

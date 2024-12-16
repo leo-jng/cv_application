@@ -8,9 +8,13 @@ const MIN_DIMENSION = 150;
 const ImageCropper = ({ closeModal, updateAvatar }) => {
   // const imgRef = useRef(null);
   // const previewCanvasRef = useRef(null);
+
+  // stores the currently selected image
   const [imgSrc, setImgSrc] = useState("");
+  // stores error if selected image does not meet requirement
   const [error, setError] = useState("");
 
+  // stores image edit data
   const [crop, setCrop] = useState({ x: 0, y: 0 });
   const [rotation, setRotation] = useState(0);
   const [zoom, setZoom] = useState(1);
