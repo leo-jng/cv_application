@@ -1,6 +1,6 @@
 import { Group, Rect, Text } from "react-konva";
 
-export default function ExperienceComponent({CompKey, onCanvasComponents, setOnConvasComponents}) {
+export default function EducationComponent({CompKey, onCanvasComponents, setOnConvasComponents}) {
     return (
         <>
             <Group
@@ -36,43 +36,18 @@ export default function ExperienceComponent({CompKey, onCanvasComponents, setOnC
               height={60} 
             />
             <Text 
-              text={onCanvasComponents[CompKey].jobposition}
+              text={onCanvasComponents[CompKey].degree + " " + onCanvasComponents[CompKey].major}
               fill={onCanvasComponents[CompKey].isDragging ? "green" : "black"}
             />
             <Text 
-              text={onCanvasComponents[CompKey].companyname + ", " + onCanvasComponents[CompKey].companylocation}
+              text={onCanvasComponents[CompKey].institution}
               fill={onCanvasComponents[CompKey].isDragging ? "green" : "black"}
               offsetY={-10}
             />
             <Text 
-                text={ onCanvasComponents[CompKey].employmenttype}
+                text={"Graduated in " + onCanvasComponents[CompKey].graduationmonth + " " + onCanvasComponents[CompKey].graduationyear}
                 fill={onCanvasComponents[CompKey].isDragging ? "green" : "black"}
                 offsetY={-20}
-            />
-            <Text 
-                text={onCanvasComponents[CompKey].startdate + " to " + onCanvasComponents[CompKey].enddate}
-                fill={onCanvasComponents[CompKey].isDragging ? "green" : "black"}
-                offsetY={-30}
-            />
-            <Text 
-                text={onCanvasComponents[CompKey].jobachievement_no1}
-                fill={onCanvasComponents[CompKey].isDragging ? "green" : "black"}
-                offsetY={-40}
-            />
-            <Text 
-                text={onCanvasComponents[CompKey].jobachievement_no2}
-                fill={onCanvasComponents[CompKey].isDragging ? "green" : "black"}
-                offsetY={-50}
-            />
-            <Text 
-                text={onCanvasComponents[CompKey].jobachievement_no3}
-                fill={onCanvasComponents[CompKey].isDragging ? "green" : "black"}
-                offsetY={-60}
-            />
-            <Text 
-                text={onCanvasComponents[CompKey].jobachievement_no4}
-                fill={onCanvasComponents[CompKey].isDragging ? "green" : "black"}
-                offsetY={-70}
             />
             </Group>
         </>

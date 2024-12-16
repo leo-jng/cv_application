@@ -7,6 +7,8 @@ import Experience from "./Components/Experience";
 import { Stage, Layer, Rect, Text, Group } from "react-konva";
 import BasicTemplate from "./Components/ResumeTemplates/BasicTemplate";
 import PersonalDetailsComponent from "./Components/CanvasComponents/PersonalDetailsComponent";
+import EducationComponent from "./Components/CanvasComponents/EducationComponent";
+import ExperienceComponent from "./Components/CanvasComponents/ExperienceComponent";
 
 const defaultPersonalInfo = {
   firstname: "",
@@ -107,6 +109,58 @@ const defaultExperienceComponent = {
   jobachievement_no4: "",
 };
 
+const testOnCanvasComponents = {
+  "test1": {
+    componenttype: "personaldetails",
+    isDragging: false,
+    x: 20,
+    y: 20,
+    firstname: "John",
+    middlename: "",
+    lastname: "Doe",
+    suffix: "",
+    preferredname: "John",
+    phonenumber: "0000000000",
+    emailaddress: "john@doe.com",
+    linkedin: "linkedin.com",
+    personalwebsite: "johndoe.com",
+    github: "github.com",
+    facebook: "",
+    instagram: "",
+    twitter: "",
+    bluesky: "",
+    other: "",
+  },
+  "test2" : {
+    componenttype: "education",
+    isDragging: false,
+    x: 20,
+    y: 20,
+    degree: "Bachelors",
+    major: "Computer Science",
+    institution: "Massechusetts Institute of Technology",
+    graduationmonth: "Some Month",
+    graduationyear: "Some Year",
+    gpa: "",
+  },
+  "test3" : {
+    componenttype: "experience",
+    isDragging: false,
+    x: 20,
+    y: 20,
+    jobposition: "Software Engineer",
+    companyname: "Apple",
+    companylocation: "San Francisco",
+    employmenttype: "Full-Time",
+    startdate: "00-00-0000",
+    enddate: "12-12-2000  ",
+    jobachievement_no1: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+    jobachievement_no2: "Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
+    jobachievement_no3: "Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.",
+    jobachievement_no4: "Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+  }
+}
+
 function App() {
   // const [count, setCount] = useState(0);
 
@@ -116,7 +170,8 @@ function App() {
 
   // use empty object, but it will hold nested objects just like experienceInfoList
   // it will hold ondrag boolean, x coordinate, and y coordinate
-  const [onCanvasComponents, setOnConvasComponents] = useState({isDragging: false, x:50, y:50}); 
+  const [onCanvasComponents, setOnConvasComponents] = useState(testOnCanvasComponents); 
+
 
   const avatarUrl = useRef("src/assets/default_pfp.jpg");
   const [avatarModalOpen, setAvatarModalOpen] = useState(false);
@@ -209,19 +264,31 @@ function App() {
         */}
   
       </section>
-      <secton>
+      <section>
         <h1>Render Panel</h1>
-      </secton>
-      <secton>
+      </section>
+      <section>
         <h1>Canvas Panel</h1>
         <Stage width={768} height={1024}>
           <Layer>
             <Rect fill="white" width={768} height={1024} />
 
-            <PersonalDetailsComponent onCanvasComponents={onCanvasComponents} setOnConvasComponents={setOnConvasComponents}/>
+            {/* Renders components based on what is stored in the onCanvasComponenet state object, including their positions */}
+            {Object.keys(onCanvasComponents).map((keyName) => {
+              if (onCanvasComponents[keyName].componenttype == "personaldetails") {
+                return <PersonalDetailsComponent CompKey={keyName} onCanvasComponents={onCanvasComponents} setOnConvasComponents={setOnConvasComponents}/>
+              } 
+              if (onCanvasComponents[keyName].componenttype == "education") {
+                return <EducationComponent CompKey={keyName} onCanvasComponents={onCanvasComponents} setOnConvasComponents={setOnConvasComponents}/>
+              }
+              if (onCanvasComponents[keyName].componenttype == "experience") {
+                return <ExperienceComponent CompKey={keyName} onCanvasComponents={onCanvasComponents} setOnConvasComponents={setOnConvasComponents}/>
+              }
+            })}
+            {/* <PersonalDetailsComponent onCanvasComponents={onCanvasComponents} setOnConvasComponents={setOnConvasComponents}/> */}
           </Layer>
         </Stage>
-      </secton>
+      </section>
     </>
   );
 }
