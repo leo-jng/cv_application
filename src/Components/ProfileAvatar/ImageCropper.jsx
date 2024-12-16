@@ -15,12 +15,14 @@ const ImageCropper = ({ closeModal, updateAvatar }) => {
   const [rotation, setRotation] = useState(0);
   const [zoom, setZoom] = useState(1);
   const [croppedAreaPixels, setCroppedAreaPixels] = useState(null);
-  const [croppedImage, setCroppedImage] = useState(null);
+  // const [croppedImage, setCroppedImage] = useState(null);
 
   const onCropComplete = (croppedArea, croppedAreaPixels) => {
+    // can switch between croppedArea and croppedAreaPixel for testing purposes
     setCroppedAreaPixels(croppedAreaPixels);
   };
 
+  // opens file manager to select image file and set image source state
   const onSelectFile = (e) => {
     const file = e.target.files?.[0];
     if (!file) return;
@@ -55,8 +57,10 @@ const ImageCropper = ({ closeModal, updateAvatar }) => {
         rotation
       );
       console.log("done cropping", { currCroppedImage });
-      setCroppedImage(currCroppedImage);
+      // setCroppedImage(currCroppedImage);
+      // when image is successfully cropped, use updateAvatar to update avatarUrl reference in app.jsx
       updateAvatar(currCroppedImage);
+      // close model afterwards
       closeModal();
     } catch (e) {
       console.error(e);
@@ -70,11 +74,14 @@ const ImageCropper = ({ closeModal, updateAvatar }) => {
         <input
           type="file"
           accept="image/*"
+          // run onSelectFile when choose profile photo is clicked, it will open file manager for file selection
           onChange={onSelectFile}
           className="block w-full text-sm text-slate-500 file:mr-4 file:py-1 file:px-2 file:rounded-full file:border-0 file:text-xs file:bg-gray-700 file:text-sky-300 hover:file:bg-gray-600"
         />
       </label>
+      {/* if any errors exist, it will show up here, and image editor will not trigger bc imgSrc is set to "" when errors exists. */}
       {error && <p className="text-red-400 text-xs">{error}</p>}
+      {/* if image is successfully selected, open cropper */}
       {imgSrc && (
         <div className="flex flex-col items-center">
           <div className="relative w-full h-[500px] bg-black">

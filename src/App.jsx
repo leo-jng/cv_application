@@ -5,7 +5,6 @@ import "./App.css";
 import Education from "./Components/Education";
 import Experience from "./Components/Experience";
 import { Stage, Layer, Rect, Text, Group } from "react-konva";
-import BasicTemplate from "./Components/ResumeTemplates/BasicTemplate";
 import PersonalDetailsComponent from "./Components/CanvasComponents/PersonalDetailsComponent";
 import EducationComponent from "./Components/CanvasComponents/EducationComponent";
 import ExperienceComponent from "./Components/CanvasComponents/ExperienceComponent";
@@ -162,8 +161,8 @@ const testOnCanvasComponents = {
 }
 
 function App() {
-  // const [count, setCount] = useState(0);
 
+  // these are the states for the input components
   const [personalInfo, setPersonalInfo] = useState(defaultPersonalInfo);
   const [educationInfo, setEducationInfo] = useState(defaultEducationInfo);
   const [experienceInfoList, setExperienceInfoList] = useState(defaultExperienceInfoList)
@@ -172,16 +171,17 @@ function App() {
   // it will hold ondrag boolean, x coordinate, and y coordinate
   const [onCanvasComponents, setOnConvasComponents] = useState(testOnCanvasComponents); 
 
-
+  // avatarUrl is defaulted to a image if no image is selected
   const avatarUrl = useRef("src/assets/default_pfp.jpg");
+  // boolean state that keeps track of whether or not the profile image modal is open
   const [avatarModalOpen, setAvatarModalOpen] = useState(false);
 
-  // const [genResume, setGenResume] = useState(false);
-
+  // updates the profile picture with the new edited image
   const updateAvatar = (imgSrc) => {
     avatarUrl.current = imgSrc;
   };
 
+  // generates a random key for state objects in experience and oncanvascomponents
   const generateRandomKey = () => {
     let resultString = "";
     const alphabets = "abcdefghijklmnopqrstuvwxyz1234567890"
@@ -191,6 +191,8 @@ function App() {
     return "Exp_" + resultString; // experience key will in the format of Exp_<randomString>
   };
 
+  // addes a new experience key-value pair to experience state object everytime
+  // the add new experience button is clicked.
   const addNewExperience = () => {
     const newKey = generateRandomKey();
     setExperienceInfoList((prevState) => ({
@@ -213,7 +215,9 @@ function App() {
         />
       </div>
 
+      {/* opens profile picture modal when image is clicked */}
       {avatarModalOpen && (
+        // UpdateAvatarModal -> ImageCropper -> CropImage
         <UpdateAvatarModal
           updateAvatar={updateAvatar}
           closeModal={() => setAvatarModalOpen(false)}

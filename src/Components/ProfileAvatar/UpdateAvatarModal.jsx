@@ -22,7 +22,8 @@ const UpdateAvatarModal = ({ updateAvatar, closeModal }) => {
                                 text-gray-400 hover:bg-gray-700 focus: outline-none absolute top-2 right-2"
                 onClick={closeModal}
               >
-                <span className="sr-only">Close menu</span>X
+                <span className="sr-only">Close menu</span>
+                x
               </button>
 
               <ImageCropper
