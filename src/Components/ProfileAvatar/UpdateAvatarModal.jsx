@@ -8,14 +8,19 @@ const UpdateAvatarModal = ({ updateAvatar, closeModal }) => {
       role="dialog"
       area-modal="true"
     >
-      <div className="fixed inset-0 bg-gray-900 bg-opacity-75 transition-all backdrop-blur-sm"></div>
+      {/* backdrop color */}
+      <div className="fixed inset-0 bg-red-900 bg-opacity-75 transition-all backdrop-blur-sm"></div>
+
       <div className="fixed inset-0 z-10 w-screen overflow-y-auto">
         <div className="flex min-h-full justify-center px-2 py-12 text-center ">
+          {/* modal color */}
           <div
             className="relative w-[95%] sm:w-[80%] min-h-[60vh] rounted-2x1 bg-slate-100
                     text-state-100 text-left shadow-xl transition-all"
           >
-            <div className="px-5 py-4">
+            {/* internal feature container */}
+            <div className="px-5 py-4 bg-red-500">
+              {/* exit button */}
               <button
                 type="button"
                 className="rounded-md p-1 inline-flex items-center justify-center

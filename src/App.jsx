@@ -163,6 +163,21 @@ const testOnCanvasComponents = {
 
 function App() {
 
+  // avatarUrl is defaulted to a image if no image is selected
+  const avatarUrl = useRef("src/assets/default_pfpv2.jpg");
+  // boolean state that keeps track of whether or not the profile image modal is open
+  const [avatarModalOpen, setAvatarModalOpen] = useState(false);
+
+  // const [testSourceImageState, setTestSourceImageState] = useState("src/assets/default_pfpv2.jpg")
+  const [imgSrc, setImgSrc] = useState("src/assets/default_pfpv2.jpg");
+  const [error, setError] = useState("");
+  // stores image edit data, it is required that they be in separate states bc of the attributes that cropper component takes
+  const [crop, setCrop] = useState({ x: 0, y: 0 });
+  const [rotation, setRotation] = useState(0);
+  const [zoom, setZoom] = useState(1);
+  const [croppedAreaPixels, setCroppedAreaPixels] = useState(null);
+  const [croppedImage, setCroppedImage] = useState(null);
+
   // these are the states for the input components
   const [personalInfo, setPersonalInfo] = useState(defaultPersonalInfo);
   const [educationInfo, setEducationInfo] = useState(defaultEducationInfo);
@@ -171,11 +186,6 @@ function App() {
   // use empty object, but it will hold nested objects just like experienceInfoList
   // it will hold ondrag boolean, x coordinate, and y coordinate
   const [onCanvasComponents, setOnConvasComponents] = useState(testOnCanvasComponents); 
-
-  // avatarUrl is defaulted to a image if no image is selected
-  const avatarUrl = useRef("src/assets/default_pfpv2.jpg");
-  // boolean state that keeps track of whether or not the profile image modal is open
-  const [avatarModalOpen, setAvatarModalOpen] = useState(false);
 
   // generates a random key for state objects in experience and oncanvascomponents
   const generateRandomKey = () => {
@@ -202,7 +212,19 @@ function App() {
     <section> 
       <h1> Creation Panel</h1>
 
-      <ProfileAvatar avatarUrl={avatarUrl} avatarModalOpen={avatarModalOpen} setAvatarModalOpen={setAvatarModalOpen}/>
+      <ProfileAvatar 
+        avatarUrl={avatarUrl} 
+        avatarModalOpen={avatarModalOpen} 
+        setAvatarModalOpen={setAvatarModalOpen}
+        // testSourceImageState={testSourceImageState} 
+        imgSrc={imgSrc} setImgSrc={setImgSrc}
+        error={error} setError={setError}
+        crop={crop} setCrop={setCrop}
+        rotation={rotation} setRotation={setRotation}
+        zoom={zoom} setZoom={setZoom}
+        croppedAreaPixels={croppedAreaPixels} setCroppedAreaPixels={setCroppedAreaPixels}
+        croppedImage={croppedImage} setCroppedImage={setCroppedImage}
+      />
 
       <PersonalDetails ComponentEditStatus={personalInfo.editstatus} setPersonalInfo={setPersonalInfo} />
       <Education ComponentEditStatus={educationInfo.editstatus} setEducationInfo={setEducationInfo} o1={educationInfo}/>

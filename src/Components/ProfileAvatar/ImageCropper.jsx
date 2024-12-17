@@ -14,7 +14,7 @@ const ImageCropper = ({ closeModal, updateAvatar }) => {
   // stores error if selected image does not meet requirement
   const [error, setError] = useState("");
 
-  // stores image edit data
+  // stores image edit data, it is required that they be in separate states bc of the attributes that cropper component takes
   const [crop, setCrop] = useState({ x: 0, y: 0 });
   const [rotation, setRotation] = useState(0);
   const [zoom, setZoom] = useState(1);
