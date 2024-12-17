@@ -5,6 +5,7 @@ import "./App.css";
 import Education from "./Components/Education";
 import Experience from "./Components/Experience";
 import { Stage, Layer, Rect, Text, Group } from "react-konva";
+import ProfileAvatarComponent from "./Components/CanvasComponents/ProfileAvatarComponent";
 import PersonalDetailsComponent from "./Components/CanvasComponents/PersonalDetailsComponent";
 import EducationComponent from "./Components/CanvasComponents/EducationComponent";
 import ExperienceComponent from "./Components/CanvasComponents/ExperienceComponent";
@@ -224,6 +225,7 @@ function App() {
         zoom={zoom} setZoom={setZoom}
         croppedAreaPixels={croppedAreaPixels} setCroppedAreaPixels={setCroppedAreaPixels}
         croppedImage={croppedImage} setCroppedImage={setCroppedImage}
+        setOnConvasComponents={setOnConvasComponents} generateRandomKey={generateRandomKey}
       />
 
       <PersonalDetails ComponentEditStatus={personalInfo.editstatus} setPersonalInfo={setPersonalInfo} />
@@ -243,7 +245,8 @@ function App() {
         "all objects",
         personalInfo,
         educationInfo,
-        experienceInfoList
+        experienceInfoList,
+        onCanvasComponents
       )}
       {/* I should put the save and edit button into each section component instead for higher 
       customization capability.
@@ -280,6 +283,9 @@ function App() {
 
             {/* Renders components based on what is stored in the onCanvasComponenet state object, including their positions */}
             {Object.keys(onCanvasComponents).map((keyName) => {
+              if (onCanvasComponents[keyName].componenttype == "profileavatar") {
+                return <ProfileAvatarComponent CompKey={keyName} onCanvasComponents={onCanvasComponents} setOnConvasComponents={setOnConvasComponents} />
+              }
               if (onCanvasComponents[keyName].componenttype == "personaldetails") {
                 return <PersonalDetailsComponent CompKey={keyName} onCanvasComponents={onCanvasComponents} setOnConvasComponents={setOnConvasComponents}/>
               } 

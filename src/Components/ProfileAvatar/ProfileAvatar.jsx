@@ -13,13 +13,35 @@ export default function ProfileAvatar({ testSourceImageState,
     zoom, setZoom,
     croppedAreaPixels, setCroppedAreaPixels,
     croppedImage, setCroppedImage,
-    avatarUrl,
-    avatarModalOpen, setAvatarModalOpen 
+    // avatarUrl,
+    avatarModalOpen, setAvatarModalOpen, 
+    setOnConvasComponents, generateRandomKey
 }) {
     // updates the profile picture with the new edited image
     // const updateAvatar = (imgSrc) => {
     //     avatarUrl.current = imgSrc;
     // };
+    
+    // adds the image to onCanvasComponentState
+    const addImageToCanvas = () => {
+        if (croppedImage == null ) {
+            console.log("No Profile Image Added")
+            return;
+        }
+        const CompKey = generateRandomKey();
+        console.log("current image", croppedImage)
+        setOnConvasComponents((prevState) => ({
+            ...prevState,
+            [CompKey]: {
+                componenttype: "profileavatar",
+                isDragging: false,
+                x: 20,
+                y: 20,
+                // image: (croppedImage == null ? imgSrc : croppedImage)
+                image: croppedImage
+            }
+        }))
+    }
     
     return (
         <>
@@ -35,6 +57,9 @@ export default function ProfileAvatar({ testSourceImageState,
                 // once onclick is clicked, the modal state will update
                 onClick={() => setAvatarModalOpen(true)}
             />
+            <button
+                onClick={addImageToCanvas}
+            >Render on Canvas</button>
         </div>
 
         {/* opens profile picture modal when image is clicked */}
@@ -175,7 +200,7 @@ const ImageCropper = ({
         croppedAreaPixels,
         rotation
       );
-      console.log("done cropping", { currCroppedImage });
+      console.log("done cropping, current cropped image:", currCroppedImage);
       // when image is successfully cropped, use setCroppedImage to set to current cropped image
       // and the app will rerender and use the croppedimage bc croppedimage's state is no longer null.
       setCroppedImage(currCroppedImage);
