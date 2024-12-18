@@ -29,6 +29,8 @@ export default function ProfileAvatar({ testSourceImageState,
             return;
         }
         const CompKey = generateRandomKey();
+        const imageData = new window.Image();
+        imageData.src = croppedImage;
         console.log("current image", croppedImage)
         setOnConvasComponents((prevState) => ({
             ...prevState,
@@ -38,7 +40,7 @@ export default function ProfileAvatar({ testSourceImageState,
                 x: 20,
                 y: 20,
                 // image: (croppedImage == null ? imgSrc : croppedImage)
-                image: croppedImage
+                image: imageData
             }
         }))
     }
@@ -226,7 +228,9 @@ const ImageCropper = ({
       {/* if any errors exist, it will show up here*/}
       {error && <p className="text-red-400 text-xs">{error}</p>}
       {/* if image is successfully selected, open cropper */}
-      {/* {imgSrc && ( // we no longer have to consider if imgSrc is empty so we can remove this conditional */} 
+      {/* {imgSrc && ( // we no longer have to consider if imgSrc is empty so we can remove this conditional // no, I can use it if I don't want the default image
+      // the user has to provide a image of their own! */} 
+      {imgSrc != "src/assets/default_pfpv2.jpg" && (
         <div className="flex flex-col items-center">
           <div className="relative w-full h-[500px] bg-black">
             <Cropper
@@ -296,7 +300,7 @@ const ImageCropper = ({
             </button>
           </div>
         </div>
-      {/* )} */}
+      )}
     </>
   );
 };

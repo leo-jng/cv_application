@@ -164,8 +164,8 @@ const testOnCanvasComponents = {
 
 function App() {
 
-  // avatarUrl is defaulted to a image if no image is selected
-  const avatarUrl = useRef("src/assets/default_pfpv2.jpg");
+  // avatarUrl is defaulted to a image if no image is selected // no longer used
+  // const avatarUrl = useRef("src/assets/default_pfpv2.jpg");
   // boolean state that keeps track of whether or not the profile image modal is open
   const [avatarModalOpen, setAvatarModalOpen] = useState(false);
 
@@ -214,7 +214,7 @@ function App() {
       <h1> Creation Panel</h1>
 
       <ProfileAvatar 
-        avatarUrl={avatarUrl} 
+        // avatarUrl={avatarUrl} 
         avatarModalOpen={avatarModalOpen} 
         setAvatarModalOpen={setAvatarModalOpen}
         // testSourceImageState={testSourceImageState} 
