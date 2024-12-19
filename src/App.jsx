@@ -228,7 +228,9 @@ function App() {
         setOnConvasComponents={setOnConvasComponents} generateRandomKey={generateRandomKey}
       />
 
-      <PersonalDetails ComponentEditStatus={personalInfo.editstatus} setPersonalInfo={setPersonalInfo} />
+      <PersonalDetails ComponentEditStatus={personalInfo.editstatus} personalInfo={personalInfo} setPersonalInfo={setPersonalInfo} 
+      setOnConvasComponents={setOnConvasComponents} generateRandomKey={generateRandomKey}
+      />
       <Education ComponentEditStatus={educationInfo.editstatus} setEducationInfo={setEducationInfo} o1={educationInfo}/>
       {/* For experience components, I can simply create a new component right here for every different experience.
       Every new component generated will generate a new key-value pair of key: defaultExperienceInfo.

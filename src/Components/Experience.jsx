@@ -64,6 +64,8 @@ export default function Experience({ ExpKey, ComponentEditStatus, experienceInfo
 
   const deleteFromExperienceInfoList = () => {
     console.log("delete button clicked for ", ExpKey);
+    // the spread operator creates shallow copies,
+    // so when the delete happens, it still directly changes the nested objects within the state object
     let copyState = {...experienceInfoList};
     delete copyState[ExpKey];
     setExperienceInfoList(copyState)

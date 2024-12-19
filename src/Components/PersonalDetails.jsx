@@ -7,7 +7,7 @@
 //                Linkedin, Personal Website
 //                Social Media Links
 
-export default function PersonalDetails({ ComponentEditStatus, setPersonalInfo }) {
+export default function PersonalDetails({ ComponentEditStatus, personalInfo, setPersonalInfo, setOnConvasComponents, generateRandomKey }) {
   // updateProfile will take the input event and a specified keyname
   // to update the value held in a keyname in the PersonalInfo state object
   // const updateProfile = (e, keyname) => {
@@ -57,6 +57,31 @@ export default function PersonalDetails({ ComponentEditStatus, setPersonalInfo }
       ...prevState,
       ["editstatus"]: (!ComponentEditStatus), // this will indicate that the current componet is saved, and no further editing is allowed
     }));
+  }
+
+  const addComponentToCanvas = () => {
+    // I simply have to grab the data saved into the input component state. I don't have to read from
+    // the event. I don't have to check for default empty input bc the render button is empty by default,
+    // and it requires input to save.
+    // e.preventDefault();
+    console.log("add personal detail component to canvas!")
+    const CompKey = generateRandomKey();
+    const CopyPersonalInfo = {...personalInfo}
+    setOnConvasComponents((prevState) => ({
+      ...prevState,
+      [CompKey] : {
+        componenttype: "personaldetails",
+        isDragging: false,
+        x: 20,
+        y: 20,
+        firstname: CopyPersonalInfo["firstname"],
+        lastname: CopyPersonalInfo["lastname"],
+        phonenumber: CopyPersonalInfo["phonenumber"],
+        emailaddress: CopyPersonalInfo["emailaddress"],
+        linkedin: CopyPersonalInfo["linkedin"],
+        personalwebsite: CopyPersonalInfo["personalwebsite"]
+      }
+    }))
   }
 
   return (
@@ -180,8 +205,15 @@ export default function PersonalDetails({ ComponentEditStatus, setPersonalInfo }
         <button type="button"
           onClick={editPersonalInfo}
           className={ComponentEditStatus == true ? "bg-slate-900  text-slate-500 hover:border-slate-900" : "bg-green-700"}
-          disabled={ComponentEditStatus == true ? true : false}>Edit</button>
+          disabled={ComponentEditStatus == true ? true : false}
+        >Edit</button>
         {/* edit button would be greyed out until save is pressed. */}
+        <button type="button"
+          onClick={addComponentToCanvas}
+          className={ComponentEditStatus == true ? "bg-slate-900  text-slate-500 hover:border-slate-900" : "bg-green-700"}
+          disabled={ComponentEditStatus == true ? true : false}
+        >Render</button>
+        {/* Render button takes in the updated personalInfo state object and pushes a cloned copy values into onCanvasComponent state object */}
         </form>
       </section>
     </>
