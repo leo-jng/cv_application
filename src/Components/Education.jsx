@@ -9,7 +9,9 @@
 //                Certifications (Month and Year)
 //                Relevant Coursework
 
-export default function Education({ ComponentEditStatus, setEducationInfo }) { //o1 is just educationinfo object, added for test purposes
+export default function Education({ ComponentEditStatus, setEducationInfo, 
+  setOnCanvasComponent, generateRandomKey
+}) { //o1 is just educationinfo object, added for test purposes
   // const updateProfile = (e, keyname) => {
   //   setEducationInfo((prevState) => ({
   //     ...prevState,
@@ -71,6 +73,11 @@ export default function Education({ ComponentEditStatus, setEducationInfo }) { /
     // Each input would checkin with a global boolean value to see if they can be changed.
     // Cancelling edit should revert to previous saved input
     // edit should check if the inputs are on default before. 
+  }
+
+  const addComponentToCanvas = () => {
+    console.log("add education component to canvas");
+    // const 
   }
 
   return (

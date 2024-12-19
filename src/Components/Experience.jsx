@@ -6,6 +6,7 @@
 // Feature to implement later: add and delete experiences
 export default function Experience({ ExpKey, ComponentEditStatus, experienceInfoList, setExperienceInfoList, 
   // presentlyWorking
+  setOnCanvasComponent, generateRandomKey
 }) {
   // const updateProfile = (e, keyname) => {
   //   setExperienceInfoList((prevState) => ({
