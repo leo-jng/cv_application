@@ -13,8 +13,8 @@ export default function ProfileAvatar({ testSourceImageState,
     zoom, setZoom,
     croppedAreaPixels, setCroppedAreaPixels,
     croppedImage, setCroppedImage,
-    // avatarUrl,
     avatarModalOpen, setAvatarModalOpen, 
+    onCanvasComponents,
     setOnConvasComponents, generateRandomKey
 }) {
 
@@ -25,7 +25,7 @@ export default function ProfileAvatar({ testSourceImageState,
             console.log("No Profile Image Added")
             return;
         }
-        const CompKey = generateRandomKey();
+        const CompKey = generateRandomKey(onCanvasComponents);
         const imageData = new window.Image();
         imageData.src = croppedImage;
         console.log("current image", croppedImage)

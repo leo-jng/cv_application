@@ -7,7 +7,7 @@
 //                Linkedin, Personal Website
 //                Social Media Links
 
-export default function PersonalDetails({ ComponentEditStatus, personalInfo, setPersonalInfo, setOnConvasComponents, generateRandomKey }) {
+export default function PersonalDetails({ ComponentEditStatus, personalInfo, setPersonalInfo, onCanvasComponents, setOnConvasComponents, generateRandomKey }) {
 
   const saveProfileInfo = (e) => {
     e.preventDefault();
@@ -57,7 +57,7 @@ export default function PersonalDetails({ ComponentEditStatus, personalInfo, set
     // and it requires input to save.
     // e.preventDefault();
     console.log("add personal detail component to canvas!")
-    const CompKey = generateRandomKey();
+    const CompKey = generateRandomKey(onCanvasComponents);
     const CopyPersonalInfo = {...personalInfo}
     setOnConvasComponents((prevState) => ({
       ...prevState,

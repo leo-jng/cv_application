@@ -5,18 +5,8 @@
 
 // Feature to implement later: add and delete experiences
 export default function Experience({ ExpKey, ComponentEditStatus, experienceInfoList, setExperienceInfoList, 
-  // presentlyWorking
-  setOnConvasComponents, generateRandomKey
+    onCanvasComponents, setOnConvasComponents, generateRandomKey
 }) {
-  // const updateProfile = (e, keyname) => {
-  //   setExperienceInfoList((prevState) => ({
-  //     ...prevState,
-  //     [ExpKey]: {
-  //       ...prevState[ExpKey],
-  //       [keyname]: e.target.value,
-  //     },
-  //   }));
-  // };
 
   const saveExperienceInfoList = (e) => {
     e.preventDefault();
@@ -88,7 +78,7 @@ export default function Experience({ ExpKey, ComponentEditStatus, experienceInfo
 
   const addComponentToCanvas = () => {
     console.log("add experience component ", ExpKey, " to canvas");
-    const CompKey = generateRandomKey();
+    const CompKey = generateRandomKey(onCanvasComponents);
     const CopyExperience = {...experienceInfoList[ExpKey]};
     setOnConvasComponents((prevState) => ({
       ...prevState,

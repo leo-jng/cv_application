@@ -189,24 +189,29 @@ function App() {
   const [onCanvasComponents, setOnConvasComponents] = useState(testOnCanvasComponents); 
 
   // generates a random key for state objects in experience and oncanvascomponents
-  const generateRandomKey = () => {
-    let resultString = "";
+  const generateRandomKey = (currentStateObject) => {
+    console.log("currentStateObject", currentStateObject)
+    let resultString = "Exp_";
     const alphabets = "abcdefghijklmnopqrstuvwxyz1234567890"
     for (let i = 0; i <= 15; i++) {
       resultString+= alphabets[Math.floor(Math.random() * alphabets.length)]
     }
     // have to check if the key already exists in the respective state object
     // the two state objects that will use this is the experiencelist state and onCanvasComponent state
-    return "Exp_" + resultString; // experience key will in the format of Exp_<randomString>
+    if (resultString in currentStateObject) { // if key already exists, call function again to generate another one
+      resultString = generateRandomKey(currentStateObject);
+    }
+    return resultString;
+    // return "Exp_" + resultString; // experience key will in the format of Exp_<randomString>
   };
 
   // addes a new experience key-value pair to experience state object everytime
   // the add new experience button is clicked.
   const addNewExperience = () => {
-    const newKey = generateRandomKey();
+    const newExpKey = generateRandomKey(experienceInfoList);
     setExperienceInfoList((prevState) => ({
       ...prevState,
-      [newKey]: { ... defaultEducationInfo}
+      [newExpKey]: { ... defaultEducationInfo}
     }))
   }
 
@@ -216,10 +221,8 @@ function App() {
       <h1> Creation Panel</h1>
 
       <ProfileAvatar 
-        // avatarUrl={avatarUrl} 
         avatarModalOpen={avatarModalOpen} 
         setAvatarModalOpen={setAvatarModalOpen}
-        // testSourceImageState={testSourceImageState} 
         imgSrc={imgSrc} setImgSrc={setImgSrc}
         error={error} setError={setError}
         crop={crop} setCrop={setCrop}
@@ -227,14 +230,22 @@ function App() {
         zoom={zoom} setZoom={setZoom}
         croppedAreaPixels={croppedAreaPixels} setCroppedAreaPixels={setCroppedAreaPixels}
         croppedImage={croppedImage} setCroppedImage={setCroppedImage}
-        setOnConvasComponents={setOnConvasComponents} generateRandomKey={generateRandomKey}
+        onCanvasComponents={onCanvasComponents} setOnConvasComponents={setOnConvasComponents} 
+        generateRandomKey={generateRandomKey}
       />
 
-      <PersonalDetails ComponentEditStatus={personalInfo.editstatus} personalInfo={personalInfo} setPersonalInfo={setPersonalInfo} 
-      setOnConvasComponents={setOnConvasComponents} generateRandomKey={generateRandomKey}
+      <PersonalDetails 
+        ComponentEditStatus={personalInfo.editstatus}
+        personalInfo={personalInfo} setPersonalInfo={setPersonalInfo} 
+        onCanvasComponents={onCanvasComponents} setOnConvasComponents={setOnConvasComponents} 
+        generateRandomKey={generateRandomKey}
       />
-      <Education ComponentEditStatus={educationInfo.editstatus} setEducationInfo={setEducationInfo} educationInfo={educationInfo}
-        setOnConvasComponents={setOnConvasComponents} generateRandomKey={generateRandomKey}
+
+      <Education 
+        ComponentEditStatus={educationInfo.editstatus} 
+        educationInfo={educationInfo} setEducationInfo={setEducationInfo}
+        onCanvasComponents={onCanvasComponents} setOnConvasComponents={setOnConvasComponents} 
+        generateRandomKey={generateRandomKey}
       />
       {/* For experience components, I can simply create a new component right here for every different experience.
       Every new component generated will generate a new key-value pair of key: defaultExperienceInfo.
@@ -242,12 +253,15 @@ function App() {
 
       <button onClick={() => addNewExperience()}>Add New Experience</button>
       {Object.keys(experienceInfoList).map((ExpKey) => {
-        return <Experience ExpKey={ExpKey} ComponentEditStatus={experienceInfoList[ExpKey].editstatus} experienceInfoList={experienceInfoList} setExperienceInfoList={setExperienceInfoList} 
-        // presentlyWorking={false}
-        setOnConvasComponents={setOnConvasComponents} generateRandomKey={generateRandomKey}
-        />
+        return <Experience 
+                  ExpKey={ExpKey} 
+                  ComponentEditStatus={experienceInfoList[ExpKey].editstatus} 
+                  experienceInfoList={experienceInfoList} setExperienceInfoList={setExperienceInfoList} 
+                  onCanvasComponents={onCanvasComponents} setOnConvasComponents={setOnConvasComponents} 
+                  generateRandomKey={generateRandomKey}
+                />
       })}
-      {/* <Experience setExperienceInfo={setExperienceInfo} o1={experienceInfo}/> */}
+
       {console.log(
         "all objects \n",
         "personalInfo:", personalInfo, "\n",
@@ -279,9 +293,7 @@ function App() {
         */}
   
       </section>
-      <section>
-        <h1>Render Panel</h1>
-      </section>
+
       <section>
         <h1>Canvas Panel</h1>
         <Stage width={768} height={1024}>
@@ -289,18 +301,18 @@ function App() {
             <Rect fill="white" width={768} height={1024} />
 
             {/* Renders components based on what is stored in the onCanvasComponenet state object, including their positions */}
-            {Object.keys(onCanvasComponents).map((keyName) => {
-              if (onCanvasComponents[keyName].componenttype == "profileavatar") {
-                return <ProfileAvatarComponent CompKey={keyName} onCanvasComponents={onCanvasComponents} setOnConvasComponents={setOnConvasComponents} />
+            {Object.keys(onCanvasComponents).map((CompKey) => {
+              if (onCanvasComponents[CompKey].componenttype == "profileavatar") {
+                return <ProfileAvatarComponent CompKey={CompKey} onCanvasComponents={onCanvasComponents} setOnConvasComponents={setOnConvasComponents} />
               }
-              if (onCanvasComponents[keyName].componenttype == "personaldetails") {
-                return <PersonalDetailsComponent CompKey={keyName} onCanvasComponents={onCanvasComponents} setOnConvasComponents={setOnConvasComponents}/>
+              if (onCanvasComponents[CompKey].componenttype == "personaldetails") {
+                return <PersonalDetailsComponent CompKey={CompKey} onCanvasComponents={onCanvasComponents} setOnConvasComponents={setOnConvasComponents}/>
               } 
-              if (onCanvasComponents[keyName].componenttype == "education") {
-                return <EducationComponent CompKey={keyName} onCanvasComponents={onCanvasComponents} setOnConvasComponents={setOnConvasComponents}/>
+              if (onCanvasComponents[CompKey].componenttype == "education") {
+                return <EducationComponent CompKey={CompKey} onCanvasComponents={onCanvasComponents} setOnConvasComponents={setOnConvasComponents}/>
               }
-              if (onCanvasComponents[keyName].componenttype == "experience") {
-                return <ExperienceComponent CompKey={keyName} onCanvasComponents={onCanvasComponents} setOnConvasComponents={setOnConvasComponents}/>
+              if (onCanvasComponents[CompKey].componenttype == "experience") {
+                return <ExperienceComponent CompKey={CompKey} onCanvasComponents={onCanvasComponents} setOnConvasComponents={setOnConvasComponents}/>
               }
             })}
           </Layer>

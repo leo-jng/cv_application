@@ -10,7 +10,7 @@
 //                Relevant Coursework
 
 export default function Education({ ComponentEditStatus, setEducationInfo, educationInfo,
-  setOnConvasComponents, generateRandomKey
+  onCanvasComponents, setOnConvasComponents, generateRandomKey
 }) { 
 
   const populateYearsOption = function() {
@@ -69,7 +69,7 @@ export default function Education({ ComponentEditStatus, setEducationInfo, educa
 
   const addComponentToCanvas = () => {
     console.log("add education component to canvas");
-    const CompKey = generateRandomKey();
+    const CompKey = generateRandomKey(onCanvasComponents);
     const CopyEducation = {...educationInfo};
     setOnConvasComponents((prevState) => ({
       ...prevState,
@@ -164,7 +164,7 @@ export default function Education({ ComponentEditStatus, setEducationInfo, educa
 
           {/* ------------------------------------------------------------ */}
         </fieldset>
-        
+
         <button 
           type="submit" 
           form="educationform"
