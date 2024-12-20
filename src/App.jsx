@@ -275,6 +275,15 @@ function App() {
 
       <section className="float-right ">
         <h1>Canvas Panel</h1>
+        <div id="utilitybar">
+          <button>Erase</button>
+          <button>Scale</button>
+          <button>Background1</button>
+          <button>Background2</button>
+          <button>Background3</button>
+          <button>Save as PDF</button>
+        </div>
+
         <Stage width={768} height={1024}>
           <Layer>
             <Rect fill="white" width={768} height={1024} />
