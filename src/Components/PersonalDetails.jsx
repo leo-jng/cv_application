@@ -8,14 +8,6 @@
 //                Social Media Links
 
 export default function PersonalDetails({ ComponentEditStatus, personalInfo, setPersonalInfo, setOnConvasComponents, generateRandomKey }) {
-  // updateProfile will take the input event and a specified keyname
-  // to update the value held in a keyname in the PersonalInfo state object
-  // const updateProfile = (e, keyname) => {
-  //   setPersonalInfo((prevState) => ({
-  //     ...prevState,
-  //     [keyname]: e.target.value,
-  //   }));
-  // };
 
   const saveProfileInfo = (e) => {
     e.preventDefault();
@@ -98,22 +90,18 @@ export default function PersonalDetails({ ComponentEditStatus, personalInfo, set
           <input
             type="text"
             placeholder="First Name"
-            // onChange={(event) => updateProfile(event, "firstname")}
             required
           />
           <input
             type="text"
             placeholder="Middle Name"
-            // onChange={(event) => updateProfile(event, "middlename")}
           />
           <input
             type="text"
             placeholder="Last Name"
-            // onChange={(event) => updateProfile(event, "lastname")}
             required
           />
           <select defaultValue={""} 
-          // onChange={(event) => updateProfile(event, "suffix")}
           >
             <option value="" disabled>
               Select Suffix/Honorifics
@@ -136,13 +124,11 @@ export default function PersonalDetails({ ComponentEditStatus, personalInfo, set
           <input
             type="tel"
             placeholder="0123456789"
-            // onChange={(event) => updateProfile(event, "phonenumber")}
             required
           />
           <input
             type="email"
             placeholder="example@example.com"
-            // onChange={(event) => updateProfile(event, "emailaddress")}
             required
           />
           <br />
@@ -156,12 +142,10 @@ export default function PersonalDetails({ ComponentEditStatus, personalInfo, set
           <input
             type="text"
             placeholder="Linkedin"
-            // onChange={(event) => updateProfile(event, "linkedin")}
           />
           <input
             type="text"
             placeholder="Personal Website"
-            // onChange={(event) => updateProfile(event, "personalwebsite")}
           />
           <br />
           {/* ------------------------------------------------------- */}
@@ -170,44 +154,40 @@ export default function PersonalDetails({ ComponentEditStatus, personalInfo, set
           <input
             type="text"
             placeholder="Github"
-            // onChange={(event) => updateProfile(event, "github")}
           />
           <input
             type="text"
             placeholder="Facebook"
-            // onChange={(event) => updateProfile(event, "facebook")}
           />
           <input
             type="text"
             placeholder="Instagram"
-            // onChange={(event) => updateProfile(event, "instagram")}
           />
           <input
             type="text"
             placeholder="X (Formerly Twitter)"
-            // onChange={(event) => updateProfile(event, "twitter")}
           />
           <input
             type="text"
             placeholder="Bluesky"
-            // onChange={(event) => updateProfile(event, "bluesky")}
           />
           <input
             type="text"
             placeholder="Others"
-            // onChange={(event) => updateProfile(event, "other")}
           />
         </fieldset>
         <button type="submit" form="personalinfoform"
           className={ComponentEditStatus == true ? "bg-green-700" : "bg-slate-900 text-slate-500 hover:border-slate-900"}
           disabled={ComponentEditStatus == true ? false : true}
         >Save</button>
+
         <button type="button"
           onClick={editPersonalInfo}
           className={ComponentEditStatus == true ? "bg-slate-900  text-slate-500 hover:border-slate-900" : "bg-green-700"}
           disabled={ComponentEditStatus == true ? true : false}
         >Edit</button>
         {/* edit button would be greyed out until save is pressed. */}
+        
         <button type="button"
           onClick={addComponentToCanvas}
           className={ComponentEditStatus == true ? "bg-slate-900  text-slate-500 hover:border-slate-900" : "bg-green-700"}

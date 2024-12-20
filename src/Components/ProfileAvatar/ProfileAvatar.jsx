@@ -17,10 +17,7 @@ export default function ProfileAvatar({ testSourceImageState,
     avatarModalOpen, setAvatarModalOpen, 
     setOnConvasComponents, generateRandomKey
 }) {
-    // updates the profile picture with the new edited image
-    // const updateAvatar = (imgSrc) => {
-    //     avatarUrl.current = imgSrc;
-    // };
+
     
     // adds the image to onCanvasComponentState
     const addImageToCanvas = () => {

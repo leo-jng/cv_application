@@ -195,6 +195,8 @@ function App() {
     for (let i = 0; i <= 15; i++) {
       resultString+= alphabets[Math.floor(Math.random() * alphabets.length)]
     }
+    // have to check if the key already exists in the respective state object
+    // the two state objects that will use this is the experiencelist state and onCanvasComponent state
     return "Exp_" + resultString; // experience key will in the format of Exp_<randomString>
   };
 
@@ -247,11 +249,11 @@ function App() {
       })}
       {/* <Experience setExperienceInfo={setExperienceInfo} o1={experienceInfo}/> */}
       {console.log(
-        "all objects",
-        personalInfo,
-        educationInfo,
-        experienceInfoList,
-        onCanvasComponents
+        "all objects \n",
+        "personalInfo:", personalInfo, "\n",
+        "educationInfo:", educationInfo, "\n",
+        "experienceInfoList:", experienceInfoList, "\n",
+        "onCanvasComponents:", onCanvasComponents
       )}
       {/* I should put the save and edit button into each section component instead for higher 
       customization capability.
@@ -301,7 +303,6 @@ function App() {
                 return <ExperienceComponent CompKey={keyName} onCanvasComponents={onCanvasComponents} setOnConvasComponents={setOnConvasComponents}/>
               }
             })}
-            {/* <PersonalDetailsComponent onCanvasComponents={onCanvasComponents} setOnConvasComponents={setOnConvasComponents}/> */}
           </Layer>
         </Stage>
       </section>

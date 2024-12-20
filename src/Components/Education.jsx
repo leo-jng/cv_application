@@ -11,13 +11,7 @@
 
 export default function Education({ ComponentEditStatus, setEducationInfo, educationInfo,
   setOnConvasComponents, generateRandomKey
-}) { //o1 is just educationinfo object, added for test purposes
-  // const updateProfile = (e, keyname) => {
-  //   setEducationInfo((prevState) => ({
-  //     ...prevState,
-  //     [keyname]: e.target.value,
-  //   }));
-  // };
+}) { 
 
   const populateYearsOption = function() {
     let optionArray = [];
@@ -58,8 +52,6 @@ export default function Education({ ComponentEditStatus, setEducationInfo, educa
     }));
 
     // after saving, the component will be completely greyed out
-
-
   }
 
   const editEducationInfo = () => {
@@ -108,8 +100,6 @@ export default function Education({ ComponentEditStatus, setEducationInfo, educa
           {/* Degree, Major, Institution Name */}
           <select 
             defaultValue={""} 
-          // onChange={(event) => updateProfile(event, "degree")} 
-            // disabled={ComponentEditStatus}
             required
           >
             <option value="" disabled >Select a Degree</option>
@@ -122,14 +112,12 @@ export default function Education({ ComponentEditStatus, setEducationInfo, educa
           <input
             type="text"
             placeholder="Field of Study or Major"
-            // onChange={(event) => updateProfile(event, "major")}
             required
           />
 
           <input
             type="text"
             placeholder="Institution Name"
-            // onChange={(event) => updateProfile(event, "institution")}
             required
           />
 
@@ -139,7 +127,6 @@ export default function Education({ ComponentEditStatus, setEducationInfo, educa
           <select
             id="Month"
             defaultValue={""}
-            // onChange={(event) => updateProfile(event, "graduationmonth")}
             required
           >
             <option value="" disabled>Select Month of Graduation</option>
@@ -160,10 +147,8 @@ export default function Education({ ComponentEditStatus, setEducationInfo, educa
           <select
             id="Year"
             defaultValue={""}
-            // onChange={(event) => updateProfile(event, "graduationyear")}
             required
           >
-            {/* <option value="" disabled> Select Year of Graduation </option> */}
             {populateYearsOption()}
           </select>
 
@@ -175,11 +160,11 @@ export default function Education({ ComponentEditStatus, setEducationInfo, educa
             type="number" 
             step=".01" 
             placeholder="GPA (Optional)" 
-            // onChange={(event) => updateProfile(event, "gpa")}
           />
 
           {/* ------------------------------------------------------------ */}
         </fieldset>
+        
         <button 
           type="submit" 
           form="educationform"
@@ -189,14 +174,14 @@ export default function Education({ ComponentEditStatus, setEducationInfo, educa
           Save
         </button>
         <button type="button" 
+          //don't use onClick={editEducationInfo()}, the () makes it execute immediately onload instead of running specificly via onclick
+          //edit button has to be de-tached from the form itself or the submit button won't work bc the onClick overrices it.
+          //edit button would be greyed out until save is pressed.
           onClick={editEducationInfo}
           className={ComponentEditStatus == true ? "bg-slate-900  text-slate-500 hover:border-slate-900" : "bg-green-700"}
           disabled={ComponentEditStatus == true ? true : false}
         > Edit
         </button>
-        {/* don't use onClick={editEducationInfo()}, the () makes it execute immediately onload instead of running specificly via onclick*/}
-        {/* edit button has to be de-tached from the form itself or the submit button won't work bc the onClick overrices it. */}
-        {/* edit button would be greyed out until save is pressed. */}
         <button type="button"
           onClick={addComponentToCanvas}
           className={ComponentEditStatus == true ? "bg-slate-900  text-slate-500 hover:border-slate-900" : "bg-green-700"}

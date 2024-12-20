@@ -124,20 +124,16 @@ export default function Experience({ ExpKey, ComponentEditStatus, experienceInfo
           <input
             type="text"
             placeholder="Job Position"
-            // onChange={(event) => updateProfile(event, "jobposition")}
           />
           <input 
             type="text"
             placeholder="Company Name"
-            // onChange={(event) => updateProfile(event, "companyname")}
           />
           <input 
             type="text"
             placeholder="Company Location"
-            // onChange={(event) => updateProfile(event, "companylocation")}
           />
           <select defaultValue={""} 
-          // onChange={(event) => updateProfile(event, "employmenttype")}
           >
             <option value="" disabled >Employment Type</option>
             <option value="fulltime">Full-Time</option>
@@ -153,7 +149,6 @@ export default function Experience({ ExpKey, ComponentEditStatus, experienceInfo
             placeholder="Start Date"
             id="startdate"
             name="startdate"
-            // onChange={(event) => updateProfile(event, "startdate")}
           />
           <label htmlFor="enddate">End Date: </label>
           <input 
@@ -161,14 +156,12 @@ export default function Experience({ ExpKey, ComponentEditStatus, experienceInfo
             placeholder="End Date"
             id="enddate"
             name="enddate"
-            // onChange={(event) => updateProfile(event, "enddate")}
           />
           <input 
             type="checkbox"
             value="workpresent"
             id="workpresentcheck"
             name="workpresentcheck"
-            // onChange={(event) => updateProfile(event, "enddate")}
 
           />
           <label htmlFor="workpresentcheck">Presently Working</label>
@@ -179,7 +172,6 @@ export default function Experience({ ExpKey, ComponentEditStatus, experienceInfo
             type="text"
             id="achievementtext1"
             placeholder="Describe the Situation/Task, Action, and Result"
-            // onChange={(event) => updateProfile(event, "jobachievement_no1")}
           />
           <br/>
           <label htmlFor="achievementtext2">Achievement 2</label>
@@ -187,7 +179,6 @@ export default function Experience({ ExpKey, ComponentEditStatus, experienceInfo
             type="text"
             id="achievementtext2"
             placeholder="Describe the Situation/Task, Action, and Result"
-            // onChange={(event) => updateProfile(event, "jobachievement_no2")}
           />
           <br/>
           <label htmlFor="achievementtext3">Achievement 3</label>
@@ -195,7 +186,6 @@ export default function Experience({ ExpKey, ComponentEditStatus, experienceInfo
             type="text"
             id="achievementtext3"
             placeholder="Describe the Situation/Task, Action, and Result"
-            // onChange={(event) => updateProfile(event, "jobachievement_no3")}
           />
           <br/>
           <label htmlFor="achievementtext4">Achievement 4</label>
@@ -203,29 +193,7 @@ export default function Experience({ ExpKey, ComponentEditStatus, experienceInfo
             type="text"
             id="achievementtext4"
             placeholder="Describe the Situation/Task, Action, and Result"
-            // onChange={(event) => updateProfile(event, "jobachievement_no4")}
           />
-
-          {/* <textarea 
-            type="text"
-            placeholder="Describe the Situation/Task, Action, and Result"
-            onChange={(event) => updateJobAchievement(event, "point1")}
-          />
-          <textarea 
-            type="text"
-            placeholder="Describe the Situation/Task, Action, and Result"
-            onChange={(event) => updateJobAchievement(event, "point2")}
-          />
-          <textarea 
-            type="text"
-            placeholder="Describe the Situation/Task, Action, and Result"
-            onChange={(event) => updateJobAchievement(event, "point3")}
-          />
-          <textarea 
-            type="text"
-            placeholder="Describe the Situation/Task, Action, and Result"
-            onChange={(event) => updateJobAchievement(event, "point4")}
-          /> */}
         </fieldset>
       </form>
       <button
@@ -233,27 +201,23 @@ export default function Experience({ ExpKey, ComponentEditStatus, experienceInfo
         form={"experienceinfoform_"+ExpKey}
         className={ComponentEditStatus == true ? "bg-green-700" : "bg-slate-900 text-slate-500 hover:border-slate-900"}
         disabled={ComponentEditStatus == true ? false : true}
-      >
-        Save
-      </button>
+      >Save</button>
+
       <button type="button"
         onClick={editExperienceInfoList}
         className={ComponentEditStatus == true ? "bg-slate-900  text-slate-500 hover:border-slate-900" : "bg-green-700"}
         disabled={ComponentEditStatus == true ? true : false}
-      >
-        Edit
-      </button>
+      >Edit</button>
+
       <button
         onClick={deleteFromExperienceInfoList}
-      >
-        Delete
-      </button>
+      >Delete</button>
 
       <button type="button"
-          onClick={addComponentToCanvas}
-          className={ComponentEditStatus == true ? "bg-slate-900  text-slate-500 hover:border-slate-900" : "bg-green-700"}
-          disabled={ComponentEditStatus == true ? true : false}
-        >Render</button>
+        onClick={addComponentToCanvas}
+        className={ComponentEditStatus == true ? "bg-slate-900  text-slate-500 hover:border-slate-900" : "bg-green-700"}
+        disabled={ComponentEditStatus == true ? true : false}
+      >Render</button>
       </section>
     </>
   );
