@@ -103,7 +103,7 @@ export default function Experience({ ExpKey, ComponentEditStatus, experienceInfo
 
   return (
     <>
-    <section className="bg-gray-800 border w-1/2">
+    <section className="bg-gray-800 border w-2/3">
       <form onSubmit={(e) => saveExperienceInfoList(e)} id={"experienceinfoform_"+ExpKey} >
         <div className="font-bold">Experience</div>
         <fieldset id="experience"

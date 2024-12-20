@@ -79,7 +79,7 @@ export default function PersonalDetails({ ComponentEditStatus, personalInfo, set
   return (
     <>
       {/* Player Profile Section */}
-      <section className="bg-gray-800 border w-1/2">
+      <section className="bg-gray-800 border w-2/3">
       {/* use onSubmit for save and regular onClick for edit. Onsubmit will only trigger when required areas are filled. */}
         <form onSubmit={(e) => saveProfileInfo(e)} id="personalinfoform"> 
         <div className="font-bold">Personal Details</div>

@@ -217,7 +217,8 @@ function App() {
 
   return (
     <>
-    <section> 
+    <div className="flow-root">
+    <section className={"float-left w-[650px] max-h-screen overflow-y-auto " + (avatarModalOpen == true ? "no-scrollbar" : "")}> 
       <h1> Creation Panel</h1>
 
       <ProfileAvatar 
@@ -269,32 +270,10 @@ function App() {
         "experienceInfoList:", experienceInfoList, "\n",
         "onCanvasComponents:", onCanvasComponents
       )}
-      {/* I should put the save and edit button into each section component instead for higher 
-      customization capability.
-      Having a save all at once and edit all at once buttons helps save efficiently from having to
-      to save in object in real time.
-      */}
-      {/* task: implement these 2 buttons into the 3 components.
-      Use boolean states to indicate save status.
-      On save, save inputs and lock the inputs.
-      On edits, unlock inputs to edit and generate cancel edit button.
-              revert back to saved inputs on cancal and lock input.*/}
-      {/* <button>Save Info</button> 
-      <button>Edit Info</button> */}
-
-      {/* Once all save status are confirmed true, I can generate a list of resumes from all the resume templates 
-      I've made in the ResumeTemplate directory. */}
-      {/* <button onClick={() => setGenResume(!genResume)}>Generate Resumes</button> */}
-
-      {/* {genResume && <BasicTemplate currentAvatarUrl={avatarUrl.current} personaInfo={personalInfo} educationInfo={educationInfo} experienceInfo={experienceInfo} />} */}
-        {/* Instead of rendering a resume that in a very clunky way, it would be more organic to make them drag and drop.
-        I will use kanvajs library to drag copies of the saved component into the canvas. 
-        The copies are able to be deleted.
-        */}
   
       </section>
 
-      <section>
+      <section className="float-right ">
         <h1>Canvas Panel</h1>
         <Stage width={768} height={1024}>
           <Layer>
@@ -318,6 +297,7 @@ function App() {
           </Layer>
         </Stage>
       </section>
+      </div>
     </>
   );
 }

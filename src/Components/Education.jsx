@@ -90,7 +90,7 @@ export default function Education({ ComponentEditStatus, setEducationInfo, educa
 
   return (
     <>
-      <section className="bg-gray-800 border w-1/2">
+      <section className="bg-gray-800 border w-2/3">
       <form onSubmit={(e) => saveEducationInfo(e)} id="educationform">
         <div className="font-bold">Education</div>
         <fieldset 
