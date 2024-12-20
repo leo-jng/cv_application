@@ -6,7 +6,7 @@
 // Feature to implement later: add and delete experiences
 export default function Experience({ ExpKey, ComponentEditStatus, experienceInfoList, setExperienceInfoList, 
   // presentlyWorking
-  setOnCanvasComponent, generateRandomKey
+  setOnConvasComponents, generateRandomKey
 }) {
   // const updateProfile = (e, keyname) => {
   //   setExperienceInfoList((prevState) => ({
@@ -85,6 +85,31 @@ export default function Experience({ ExpKey, ComponentEditStatus, experienceInfo
   //     }
   //   }))
   // }
+
+  const addComponentToCanvas = () => {
+    console.log("add experience component ", ExpKey, " to canvas");
+    const CompKey = generateRandomKey();
+    const CopyExperience = {...experienceInfoList[ExpKey]};
+    setOnConvasComponents((prevState) => ({
+      ...prevState,
+      [CompKey]: {
+        componenttype: "experience",
+        isDragging: false,
+        x: 20,
+        y: 20,
+        jobposition: CopyExperience["jobposition"],
+        companyname: CopyExperience["companyname"],
+        companylocation: CopyExperience["companylocation"],
+        employmenttype: CopyExperience["employmenttype"],
+        startdate: CopyExperience["startdate"],
+        enddate: CopyExperience["enddate"],
+        jobachievement_no1: CopyExperience["jobachievement_no1"],
+        jobachievement_no2: CopyExperience["jobachievement_no2"],
+        jobachievement_no3: CopyExperience["jobachievement_no3"],
+        jobachievement_no4: CopyExperience["jobachievement_no4"],
+      }
+    }))
+  }
 
   return (
     <>
@@ -223,6 +248,12 @@ export default function Experience({ ExpKey, ComponentEditStatus, experienceInfo
       >
         Delete
       </button>
+
+      <button type="button"
+          onClick={addComponentToCanvas}
+          className={ComponentEditStatus == true ? "bg-slate-900  text-slate-500 hover:border-slate-900" : "bg-green-700"}
+          disabled={ComponentEditStatus == true ? true : false}
+        >Render</button>
       </section>
     </>
   );
