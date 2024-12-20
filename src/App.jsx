@@ -231,7 +231,7 @@ function App() {
       <PersonalDetails ComponentEditStatus={personalInfo.editstatus} personalInfo={personalInfo} setPersonalInfo={setPersonalInfo} 
       setOnConvasComponents={setOnConvasComponents} generateRandomKey={generateRandomKey}
       />
-      <Education ComponentEditStatus={educationInfo.editstatus} setEducationInfo={setEducationInfo} o1={educationInfo}
+      <Education ComponentEditStatus={educationInfo.editstatus} setEducationInfo={setEducationInfo} educationInfo={educationInfo}
         setOnConvasComponents={setOnConvasComponents} generateRandomKey={generateRandomKey}
       />
       {/* For experience components, I can simply create a new component right here for every different experience.
@@ -242,6 +242,7 @@ function App() {
       {Object.keys(experienceInfoList).map((ExpKey) => {
         return <Experience ExpKey={ExpKey} ComponentEditStatus={experienceInfoList[ExpKey].editstatus} experienceInfoList={experienceInfoList} setExperienceInfoList={setExperienceInfoList} 
         // presentlyWorking={false}
+        setOnConvasComponents={setOnConvasComponents} generateRandomKey={generateRandomKey}
         />
       })}
       {/* <Experience setExperienceInfo={setExperienceInfo} o1={experienceInfo}/> */}

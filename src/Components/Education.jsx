@@ -9,8 +9,8 @@
 //                Certifications (Month and Year)
 //                Relevant Coursework
 
-export default function Education({ ComponentEditStatus, setEducationInfo, 
-  setOnCanvasComponent, generateRandomKey
+export default function Education({ ComponentEditStatus, setEducationInfo, educationInfo,
+  setOnConvasComponents, generateRandomKey
 }) { //o1 is just educationinfo object, added for test purposes
   // const updateProfile = (e, keyname) => {
   //   setEducationInfo((prevState) => ({
@@ -77,7 +77,23 @@ export default function Education({ ComponentEditStatus, setEducationInfo,
 
   const addComponentToCanvas = () => {
     console.log("add education component to canvas");
-    // const 
+    const CompKey = generateRandomKey();
+    const CopyEducation = {...educationInfo};
+    setOnConvasComponents((prevState) => ({
+      ...prevState,
+      [CompKey] : {
+        componenttype: "education",
+        isDragging: false,
+        x: 20,
+        y: 20,
+        degree: CopyEducation["degree"],
+        major: CopyEducation["major"],
+        institution: CopyEducation["institution"],
+        graduationmonth: CopyEducation["graduationmonth"],
+        graduationyear: CopyEducation["graduationyear"],
+        gpa: CopyEducation["gpa"],
+      } 
+    }))
   }
 
   return (
@@ -181,6 +197,11 @@ export default function Education({ ComponentEditStatus, setEducationInfo,
         {/* don't use onClick={editEducationInfo()}, the () makes it execute immediately onload instead of running specificly via onclick*/}
         {/* edit button has to be de-tached from the form itself or the submit button won't work bc the onClick overrices it. */}
         {/* edit button would be greyed out until save is pressed. */}
+        <button type="button"
+          onClick={addComponentToCanvas}
+          className={ComponentEditStatus == true ? "bg-slate-900  text-slate-500 hover:border-slate-900" : "bg-green-700"}
+          disabled={ComponentEditStatus == true ? true : false}
+        >Render</button>
         </form>
       </section>
     </>
