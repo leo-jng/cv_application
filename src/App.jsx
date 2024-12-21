@@ -281,14 +281,19 @@ function App() {
         "personalInfo:", personalInfo, "\n",
         "educationInfo:", educationInfo, "\n",
         "experienceInfoList:", experienceInfoList, "\n",
-        "onCanvasComponents:", onCanvasComponents
+        "onCanvasComponents:", onCanvasComponents,
+        "selectedCanvasComponent:", selectedCanvasComponent
       )}
   
       </section>
 
       <section className="float-right ">
         <h1>Canvas Panel</h1>
-        <CanvasUtility isSelected={selectedCanvasComponent !== null}/>
+        <CanvasUtility 
+          isSelected={selectedCanvasComponent !== null}
+          selectedCanvasComponent={selectedCanvasComponent} setSelectedCanvasComponent={setSelectedCanvasComponent}
+          onCanvasComponents={onCanvasComponents} setOnConvasComponents={setOnConvasComponents}
+        />
 
         <div id="canvas" className="bg-white h-[1024px] w-[768px]">
           <Stage 
