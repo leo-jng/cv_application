@@ -7,19 +7,15 @@ export default function ProfileAvatarComponent({ CompKey, isSelected, setSelecte
         setSelectedCanvasComponent(CompKey)
     }
 
-    // const [image] = useImage
-    const deleteFromOnCanvasComponents = () => {
-        let copyState = {...onCanvasComponents};
-        delete copyState[CompKey];
-        setOnConvasComponents(copyState);
-    }
+    // this function is no longer used, it is replaced by a similar function in CanvasUtility
+    // const deleteFromOnCanvasComponents = () => {
+    //     let copyState = {...onCanvasComponents};
+    //     delete copyState[CompKey];
+    //     setOnConvasComponents(copyState);
+    // }
     return (
         <>
             <Group
-                // clipFunc={(ctx) => {
-                //     // based on:  https://stackoverflow.com/questions/66632666/circular-cropping-of-image-in-konvajs
-                //     ctx.arc(75, 75, 75, 0, Math.PI * 2, false);
-                // }}
                 onClick={selectCurrentComponent}
                 onTap={selectCurrentComponent}
                 

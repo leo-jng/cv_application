@@ -1,3 +1,5 @@
+// currently unused
+
 import { useRef, useState } from "react";
 import { Box, Stack, Slider } from "@mui/material";
 import getCroppedImg from "./cropimage";

@@ -1,3 +1,5 @@
+// currently unused
+
 import ImageCropper from "./ImageCropper";
 
 const UpdateAvatarModal = ({ updateAvatar, closeModal }) => {

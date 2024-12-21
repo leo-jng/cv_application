@@ -191,6 +191,8 @@ function App() {
   const [onCanvasComponents, setOnConvasComponents] = useState(testOnCanvasComponents); 
   //when a onCanvasComponent is clicked, update this state to hold the key of the clicked onCanvasComponent
   const [selectedCanvasComponent, setSelectedCanvasComponent] = useState(null); 
+  //when a onCanvasComponent is clicked, and the scale button is clicked, toggle scale switch state
+  const [scaleToggle, setScaleToggle] = useState(false); // set to false by default
 
   // generates a random key for state objects in experience and oncanvascomponents
   const generateRandomKey = (currentStateObject) => {
@@ -223,8 +225,9 @@ function App() {
   const deselectOnCanvasComponent = (e) => {
     const clickedOnEmpty = e.target === e.target.getStage();
     if (clickedOnEmpty) {
-      setSelectedCanvasComponent(null);
+      setSelectedCanvasComponent(null); // set select to null
       console.log("Component has been deselected");
+      setScaleToggle(false); // scale toggle will also be set to null
     }
   }
 
@@ -291,6 +294,7 @@ function App() {
         <h1>Canvas Panel</h1>
         <CanvasUtility 
           isSelected={selectedCanvasComponent !== null}
+          scaleToggle={scaleToggle} setScaleToggle={setScaleToggle}
           selectedCanvasComponent={selectedCanvasComponent} setSelectedCanvasComponent={setSelectedCanvasComponent}
           onCanvasComponents={onCanvasComponents} setOnConvasComponents={setOnConvasComponents}
         />
@@ -314,6 +318,7 @@ function App() {
               }
               if (onCanvasComponents[CompKey].componenttype == "personaldetails") {
                 return <PersonalDetailsComponent CompKey={CompKey} 
+                scaleToggle={scaleToggle}
                 isSelected={selectedCanvasComponent === CompKey} setSelectedCanvasComponent={setSelectedCanvasComponent}
                 onCanvasComponents={onCanvasComponents} setOnConvasComponents={setOnConvasComponents}
                 />

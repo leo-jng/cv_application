@@ -1,20 +1,28 @@
-import { Group, Rect, Text } from "react-konva";
-export default function PersonalDetailsComponent({ CompKey, isSelected, setSelectedCanvasComponent, onCanvasComponents, setOnConvasComponents }) {
+import { useEffect } from "react";
+import { Group, Rect, Text, Transformer } from "react-konva";
+export default function PersonalDetailsComponent({ CompKey, scaleToggle, isSelected, setSelectedCanvasComponent, onCanvasComponents, setOnConvasComponents }) {
   
   
   const onCanvasName = (onCanvasComponents[CompKey].firstname + " " + 
     (onCanvasComponents[CompKey].preferredname != "" ? "(" + onCanvasComponents[CompKey].preferredname + ") " : "") +
     (onCanvasComponents[CompKey].middlename != "" ? onCanvasComponents[CompKey].middlename + " ": "") +
     onCanvasComponents[CompKey].lastname);
-
   const onCanvasSuffix = (onCanvasComponents[CompKey].suffix != "" ? " " + onCanvasComponents[CompKey] : "")
-
   const onCanvasPhoneNumber = ("(" + onCanvasComponents[CompKey].phonenumber.substring(0, 3) + ")" + "-" + onCanvasComponents[CompKey].phonenumber.substring(3, 6) + "-" + onCanvasComponents[CompKey].phonenumber.substring(6))
   
   const selectCurrentComponent = () => {
     console.log("this component is now selected")
     setSelectedCanvasComponent(CompKey)
   }
+
+  const enableTransform = isSelected == true && scaleToggle == true;
+
+  // const trRef = useRef();
+  // useEffect(() => {
+  //   if (scaleToggle) {
+  //     trRef.current;
+  //   }
+  // })
   return (
         <>
           <Group
@@ -116,6 +124,9 @@ export default function PersonalDetailsComponent({ CompKey, isSelected, setSelec
               offsetY={-100}
             />
           </Group>
+          {/* {enableTransform && (
+            <Transformer />
+          )} */}
         </>
     )
 }
