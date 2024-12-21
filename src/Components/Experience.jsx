@@ -62,20 +62,7 @@ export default function Experience({ ExpKey, ComponentEditStatus, experienceInfo
     delete copyState[ExpKey];
     setExperienceInfoList(copyState)
   }
-    
-  // const checkPresentlyWorking = () => {
-  //   this.props.presentlyWorking = !this.props.presentlyWorking;
-  //   console.log("checkpresentlyworking clicked", this.props.presentlyWorking)
-  // }
-  // const updateJobAchievement = (e, pointname) => {
-  //   setExperienceInfo((prevState) => ({
-  //     ...prevState,
-  //     jobachievement : {
-  //       ...prevState.jobachievement,
-  //       [pointname]: e.target.value,
-  //     }
-  //   }))
-  // }
+  
 
   const addComponentToCanvas = () => {
     console.log("add experience component ", ExpKey, " to canvas");

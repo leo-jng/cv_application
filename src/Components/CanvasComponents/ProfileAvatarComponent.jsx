@@ -31,15 +31,15 @@ export default function ProfileAvatarComponent({ CompKey, onCanvasComponents, se
                     setOnConvasComponents((prevState) => ({
                        ...prevState,
                        [CompKey]: {
-                           ...prevState[CompKey],                               isDragging: false,
-                            x: e.target.x(),
-                           y: e.target.y()  
+                        ...prevState[CompKey],                               
+                        isDragging: false,
+                        x: e.target.x(),
+                        y: e.target.y()  
                         }
                     }));
                 }}
                draggable
             >
- 
                 <Image
                 image={onCanvasComponents[CompKey].image}
                 width={150}

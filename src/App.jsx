@@ -58,6 +58,7 @@ const defaultExperienceInfoList = {
   "Exp_base1" : {...defaultEducationInfo}
 }
 
+// not used; mainly added for visual purposes
 const defaultPersonalDetailsComponent = {
   componenttype: "personaldetails",
   isDragging: false,
@@ -80,6 +81,7 @@ const defaultPersonalDetailsComponent = {
   other: "",
 }
 
+// not used; mainly added for visual purposes
 const defaultEducationComponent = {
   componenttype: "education",
   isDragging: false,
@@ -93,6 +95,7 @@ const defaultEducationComponent = {
   gpa: "",
 };
 
+// not used; mainly added for visual purposes
 const defaultExperienceComponent = {
   componenttype: "experience",
   isDragging: false,
@@ -117,20 +120,20 @@ const testOnCanvasComponents = {
     x: 20,
     y: 20,
     firstname: "John",
-    middlename: "",
+    middlename: "Smith",
     lastname: "Doe",
     suffix: "",
     preferredname: "John",
-    phonenumber: "0000000000",
+    phonenumber: "0123456789",
     emailaddress: "john@doe.com",
     linkedin: "linkedin.com",
     personalwebsite: "johndoe.com",
     github: "github.com",
-    facebook: "",
-    instagram: "",
-    twitter: "",
-    bluesky: "",
-    other: "",
+    facebook: "facebook.com",
+    instagram: "instagram.com",
+    twitter: "twitter.com",
+    bluesky: "bluesky.com",
+    other: "othersite.com",
   },
   "test2" : {
     componenttype: "education",

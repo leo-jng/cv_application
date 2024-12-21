@@ -71,7 +71,13 @@ export default function PersonalDetails({ ComponentEditStatus, personalInfo, set
         phonenumber: CopyPersonalInfo["phonenumber"],
         emailaddress: CopyPersonalInfo["emailaddress"],
         linkedin: CopyPersonalInfo["linkedin"],
-        personalwebsite: CopyPersonalInfo["personalwebsite"]
+        personalwebsite: CopyPersonalInfo["personalwebsite"],
+        github: CopyPersonalInfo["github"],
+        facebook: CopyPersonalInfo["facebook"],
+        instagram: CopyPersonalInfo["instagram"],
+        twitter: CopyPersonalInfo["twitter"],
+        bluesky: CopyPersonalInfo["bluesky"],
+        other: CopyPersonalInfo["other"]
       }
     }))
   }
