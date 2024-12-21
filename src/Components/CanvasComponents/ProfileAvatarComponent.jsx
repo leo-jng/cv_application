@@ -1,7 +1,12 @@
 import { Group, Image, Rect } from "react-konva"
 // import useImage from 
-export default function ProfileAvatarComponent({ CompKey, onCanvasComponents, setOnConvasComponents}) {
+export default function ProfileAvatarComponent({ CompKey, isSelected, setSelectedCanvasComponent, onCanvasComponents, setOnConvasComponents}) {
     
+    const selectCurrentComponent = () => {
+        console.log("this component is now selected")
+        setSelectedCanvasComponent(CompKey)
+    }
+
     // const [image] = useImage
     const deleteFromOnCanvasComponents = () => {
         let copyState = {...onCanvasComponents};
@@ -11,13 +16,16 @@ export default function ProfileAvatarComponent({ CompKey, onCanvasComponents, se
     return (
         <>
             <Group
-                clipFunc={(ctx) => {
-                    // based on:  https://stackoverflow.com/questions/66632666/circular-cropping-of-image-in-konvajs
-                    ctx.arc(75, 75, 75, 0, Math.PI * 2, false);
-                }}
+                // clipFunc={(ctx) => {
+                //     // based on:  https://stackoverflow.com/questions/66632666/circular-cropping-of-image-in-konvajs
+                //     ctx.arc(75, 75, 75, 0, Math.PI * 2, false);
+                // }}
+                onClick={selectCurrentComponent}
+                onTap={selectCurrentComponent}
+                
                 x={onCanvasComponents[CompKey].x}
                 y={onCanvasComponents[CompKey].y}
-                onDragStart={(e) => {
+                onDragStart={() => {
                     console.log("dragging image")
                     setOnConvasComponents((prevState) => ({
                         ...prevState,
@@ -38,14 +46,30 @@ export default function ProfileAvatarComponent({ CompKey, onCanvasComponents, se
                         }
                     }));
                 }}
-               draggable
+                draggable={isSelected ? true : false}
             >
-                <Image
-                image={onCanvasComponents[CompKey].image}
-                width={150}
-                height={150}
-                // style={}
+                <Rect 
+                    // fill="gray"
+                    // this is the select border
+                    stroke={isSelected ? "green": ""} 
+                    width={150} 
+                    height={150} 
                 />
+
+                <Group
+                    clipFunc={(ctx) => {
+                        // based on:  https://stackoverflow.com/questions/66632666/circular-cropping-of-image-in-konvajs
+                        ctx.arc(75, 75, 75, 0, Math.PI * 2, false);
+                    }}
+                >
+                    <Image
+                        image={onCanvasComponents[CompKey].image}
+                        width={150}
+                        height={150}
+                    // style={}
+                    /> 
+                </Group>
+
             </Group>
 
         </>

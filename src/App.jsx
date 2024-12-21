@@ -10,6 +10,7 @@ import PersonalDetailsComponent from "./Components/CanvasComponents/PersonalDeta
 import EducationComponent from "./Components/CanvasComponents/EducationComponent";
 import ExperienceComponent from "./Components/CanvasComponents/ExperienceComponent";
 import ProfileAvatar from "./Components/ProfileAvatar/ProfileAvatar";
+import CanvasUtility from "./Components/CanvasUtility/CanvasUtility";
 
 const defaultPersonalInfo = {
   firstname: "",
@@ -112,7 +113,7 @@ const defaultExperienceComponent = {
   jobachievement_no3: "",
   jobachievement_no4: "",
 };
-
+// this is solely used for testing purposes, remove and replace with empty {} in production
 const testOnCanvasComponents = {
   "test1": {
     componenttype: "personaldetails",
@@ -167,8 +168,6 @@ const testOnCanvasComponents = {
 
 function App() {
 
-  // avatarUrl is defaulted to a image if no image is selected // no longer used
-  // const avatarUrl = useRef("src/assets/default_pfpv2.jpg");
   // boolean state that keeps track of whether or not the profile image modal is open
   const [avatarModalOpen, setAvatarModalOpen] = useState(false);
 
@@ -190,6 +189,8 @@ function App() {
   // use empty object, but it will hold nested objects just like experienceInfoList
   // it will hold ondrag boolean, x coordinate, and y coordinate
   const [onCanvasComponents, setOnConvasComponents] = useState(testOnCanvasComponents); 
+  //when a onCanvasComponent is clicked, update this state to hold the key of the clicked onCanvasComponent
+  const [selectedCanvasComponent, setSelectedCanvasComponent] = useState(null); 
 
   // generates a random key for state objects in experience and oncanvascomponents
   const generateRandomKey = (currentStateObject) => {
@@ -205,7 +206,6 @@ function App() {
       resultString = generateRandomKey(currentStateObject);
     }
     return resultString;
-    // return "Exp_" + resultString; // experience key will in the format of Exp_<randomString>
   };
 
   // addes a new experience key-value pair to experience state object everytime
@@ -216,6 +216,16 @@ function App() {
       ...prevState,
       [newExpKey]: { ... defaultEducationInfo}
     }))
+  }
+
+  // deselecting onCanvasComponent function based on react konva documentation
+  // Source: https://konvajs.org/docs/react/Transformer.html
+  const deselectOnCanvasComponent = (e) => {
+    const clickedOnEmpty = e.target === e.target.getStage();
+    if (clickedOnEmpty) {
+      setSelectedCanvasComponent(null);
+      console.log("Component has been deselected");
+    }
   }
 
   return (
@@ -278,36 +288,48 @@ function App() {
 
       <section className="float-right ">
         <h1>Canvas Panel</h1>
-        <div id="utilitybar">
-          <button>Erase</button>
-          <button>Scale</button>
-          <button>Background1</button>
-          <button>Background2</button>
-          <button>Background3</button>
-          <button>Save as PDF</button>
-        </div>
+        <CanvasUtility isSelected={selectedCanvasComponent !== null}/>
 
-        <Stage width={768} height={1024}>
+        <div id="canvas" className="bg-white h-[1024px] w-[768px]">
+          <Stage 
+          width={768}
+          height={1024}
+          // deselecting onCanvasComponent function based on react konva documentation
+          onMouseDown={deselectOnCanvasComponent}
+          onTouchStart={deselectOnCanvasComponent}
+        >
           <Layer>
-            <Rect fill="white" width={768} height={1024} />
-
             {/* Renders components based on what is stored in the onCanvasComponenet state object, including their positions */}
             {Object.keys(onCanvasComponents).map((CompKey) => {
               if (onCanvasComponents[CompKey].componenttype == "profileavatar") {
-                return <ProfileAvatarComponent CompKey={CompKey} onCanvasComponents={onCanvasComponents} setOnConvasComponents={setOnConvasComponents} />
+                return <ProfileAvatarComponent CompKey={CompKey} 
+                isSelected={selectedCanvasComponent === CompKey} setSelectedCanvasComponent={setSelectedCanvasComponent}
+                onCanvasComponents={onCanvasComponents} setOnConvasComponents={setOnConvasComponents} 
+                />
               }
               if (onCanvasComponents[CompKey].componenttype == "personaldetails") {
-                return <PersonalDetailsComponent CompKey={CompKey} onCanvasComponents={onCanvasComponents} setOnConvasComponents={setOnConvasComponents}/>
+                return <PersonalDetailsComponent CompKey={CompKey} 
+                isSelected={selectedCanvasComponent === CompKey} setSelectedCanvasComponent={setSelectedCanvasComponent}
+                onCanvasComponents={onCanvasComponents} setOnConvasComponents={setOnConvasComponents}
+                />
               } 
               if (onCanvasComponents[CompKey].componenttype == "education") {
-                return <EducationComponent CompKey={CompKey} onCanvasComponents={onCanvasComponents} setOnConvasComponents={setOnConvasComponents}/>
+                return <EducationComponent CompKey={CompKey} 
+                isSelected={selectedCanvasComponent === CompKey} setSelectedCanvasComponent={setSelectedCanvasComponent}
+                onCanvasComponents={onCanvasComponents} setOnConvasComponents={setOnConvasComponents}
+                />
               }
               if (onCanvasComponents[CompKey].componenttype == "experience") {
-                return <ExperienceComponent CompKey={CompKey} onCanvasComponents={onCanvasComponents} setOnConvasComponents={setOnConvasComponents}/>
+                return <ExperienceComponent CompKey={CompKey} 
+                isSelected={selectedCanvasComponent === CompKey} setSelectedCanvasComponent={setSelectedCanvasComponent}
+                onCanvasComponents={onCanvasComponents} setOnConvasComponents={setOnConvasComponents}
+                />
               }
             })}
           </Layer>
         </Stage>
+        </div>
+
       </section>
       </div>
     </>

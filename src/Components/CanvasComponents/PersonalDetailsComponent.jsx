@@ -1,5 +1,7 @@
 import { Group, Rect, Text } from "react-konva";
-export default function PersonalDetailsComponent({ CompKey, onCanvasComponents, setOnConvasComponents }) {
+export default function PersonalDetailsComponent({ CompKey, isSelected, setSelectedCanvasComponent, onCanvasComponents, setOnConvasComponents }) {
+  
+  
   const onCanvasName = (onCanvasComponents[CompKey].firstname + " " + 
     (onCanvasComponents[CompKey].preferredname != "" ? "(" + onCanvasComponents[CompKey].preferredname + ") " : "") +
     (onCanvasComponents[CompKey].middlename != "" ? onCanvasComponents[CompKey].middlename + " ": "") +
@@ -9,14 +11,20 @@ export default function PersonalDetailsComponent({ CompKey, onCanvasComponents, 
 
   const onCanvasPhoneNumber = ("(" + onCanvasComponents[CompKey].phonenumber.substring(0, 3) + ")" + "-" + onCanvasComponents[CompKey].phonenumber.substring(3, 6) + "-" + onCanvasComponents[CompKey].phonenumber.substring(6))
   
+  const selectCurrentComponent = () => {
+    console.log("this component is now selected")
+    setSelectedCanvasComponent(CompKey)
+  }
   return (
         <>
           <Group
-            width={60}
-            height={60}
+            onClick={selectCurrentComponent}
+            onTap={selectCurrentComponent}
+            // width={60} // group does not need width or height
+            // height={60}
             x={onCanvasComponents[CompKey].x} 
             y={onCanvasComponents[CompKey].y} 
-            onDragStart={(e) => {
+            onDragStart={() => {
               setOnConvasComponents((prevState) => ({
                 ...prevState,
                 [CompKey]: {
@@ -36,14 +44,23 @@ export default function PersonalDetailsComponent({ CompKey, onCanvasComponents, 
                 }
               }));
             }}
-            draggable
+            draggable={isSelected ? true : false}
+            // stroke={isSelected ? "green": ""} 
+            // group does not have border colors
           >
             <Rect 
+              // fill="gray"
+              // this is the select border
+              stroke={isSelected ? "green": ""} 
+              width={70} 
+              height={80} 
+            />
+            <Rect 
               fill="gray"
-              stroke={onCanvasComponents[CompKey].isDragging ? "green": ""} 
               width={50} 
               height={60} 
             />
+
             <Text 
               text={onCanvasName + onCanvasSuffix}
               fill={onCanvasComponents[CompKey].isDragging ? "green" : "black"}

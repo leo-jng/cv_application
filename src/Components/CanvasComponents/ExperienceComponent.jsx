@@ -1,13 +1,20 @@
 import { Group, Rect, Text } from "react-konva";
 
-export default function ExperienceComponent({CompKey, onCanvasComponents, setOnConvasComponents}) {
+export default function ExperienceComponent({CompKey, isSelected, setSelectedCanvasComponent, onCanvasComponents, setOnConvasComponents}) {
+    const selectCurrentComponent = () => {
+        console.log("this component is now selected")
+        setSelectedCanvasComponent(CompKey)
+    }
+    
     return (
         <>
             <Group
-                height={60}
+                onClick={selectCurrentComponent}
+                onTap={selectCurrentComponent}
+                // height={60}
                 x={onCanvasComponents[CompKey].x} 
                 y={onCanvasComponents[CompKey].y} 
-                onDragStart={(e) => {
+                onDragStart={() => {
                     setOnConvasComponents((prevState) => ({
                         ...prevState,
                         [CompKey]: {
@@ -27,11 +34,17 @@ export default function ExperienceComponent({CompKey, onCanvasComponents, setOnC
                         }
                     }));
                 }}
-                draggable
+                draggable={isSelected ? true :  false}
             >
             <Rect 
+              // fill="gray"
+              // this is the select border
+              stroke={isSelected ? "green": ""} 
+              width={70} 
+              height={80} 
+            />
+            <Rect 
               fill="gray"
-              stroke={onCanvasComponents[CompKey].isDragging ? "green": ""} 
               width={50} 
               height={60} 
             />
