@@ -120,6 +120,7 @@ const testOnCanvasComponents = {
     isDragging: false,
     x: 20,
     y: 20,
+    fontsize : 12,
     firstname: "John",
     middlename: "Smith",
     lastname: "Doe",
@@ -141,6 +142,7 @@ const testOnCanvasComponents = {
     isDragging: false,
     x: 20,
     y: 20,
+    fontsize : 12, //reactkonva text component takas number for fontsize attribute
     degree: "Bachelors",
     major: "Computer Science",
     institution: "Massechusetts Institute of Technology",
@@ -153,6 +155,7 @@ const testOnCanvasComponents = {
     isDragging: false,
     x: 20,
     y: 20,
+    fontsize : 12, //reactkonva text component takas number for fontsize attribute
     jobposition: "Software Engineer",
     companyname: "Apple",
     companylocation: "San Francisco",

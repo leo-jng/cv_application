@@ -50,16 +50,16 @@ export default function EducationComponent({CompKey, isSelected, setSelectedCanv
             />
             <Text 
               text={onCanvasComponents[CompKey].degree + " " + onCanvasComponents[CompKey].major}
-              fill={onCanvasComponents[CompKey].isDragging ? "green" : "black"}
+              fontSize={onCanvasComponents[CompKey].fontsize}
             />
             <Text 
               text={onCanvasComponents[CompKey].institution}
-              fill={onCanvasComponents[CompKey].isDragging ? "green" : "black"}
+              fontSize={onCanvasComponents[CompKey].fontsize}
               offsetY={-10}
             />
             <Text 
                 text={"Graduated in " + onCanvasComponents[CompKey].graduationmonth + " " + onCanvasComponents[CompKey].graduationyear}
-                fill={onCanvasComponents[CompKey].isDragging ? "green" : "black"}
+                fontSize={onCanvasComponents[CompKey].fontsize}
                 offsetY={-20}
             />
             </Group>

@@ -20,8 +20,33 @@ export default function CanvasUtility({isSelected, scaleToggle, setScaleToggle, 
       // selected onCanvsComponent will be able to use its onTransform attributes to update its sizing
       console.log("scaling toggled to ", !scaleToggle);
       setScaleToggle(!scaleToggle);
-
     }
+
+    const increaseFontSize = () => {
+      console.log("Increase font size clicked")
+      const uppedFontSize = onCanvasComponents[selectedCanvasComponent].fontsize + 1;
+      setOnConvasComponents((prevState) => ({
+        ...prevState,
+        [selectedCanvasComponent] : {
+          ...prevState[selectedCanvasComponent],
+          fontsize : uppedFontSize
+        }
+
+      }))
+    }
+
+    const decreaseFontSize = () => {
+      console.log("Decrease font size clicked!")
+      const downedFontSize = onCanvasComponents[selectedCanvasComponent].fontsize - 1;
+      setOnConvasComponents((prevState) => ({
+        ...prevState,
+        [selectedCanvasComponent] : {
+          ...prevState[selectedCanvasComponent],
+          fontsize : downedFontSize
+        }
+      }))
+    }
+
     const saveCanvasToPdf = () => {
         // reactKonva requires that the canvas be converted to an image first, then saved as a pdf via jsPDF library.
         // we can make the text selectable by creating hidden text underneath an image, such that 
@@ -40,10 +65,26 @@ export default function CanvasUtility({isSelected, scaleToggle, setScaleToggle, 
             onClick={toggleScaleSelectedComponent}
             className={isSelected ? (scaleToggle ? "bg-blue-400" : "bg-green-700") : "bg-slate-900  text-slate-500 hover:border-slate-900"}
             disabled={isSelected ? false : true}
-          >Scale</button>
-          {/* <button>Background1</button>
-          <button>Background2</button>
-          <button>Background3</button> */}
+          >Scale Text Window</button>
+          <button
+            onClick={increaseFontSize}
+            className={(isSelected && onCanvasComponents[selectedCanvasComponent].componenttype != "profileavatar") ? "bg-green-700" : "bg-slate-900  text-slate-500 hover:border-slate-900"}
+            // should be disabled if the selected component is an image
+            disabled={(isSelected && onCanvasComponents[selectedCanvasComponent].componenttype != "profileavatar") ? false : true}
+            >Increase Fontsize</button>
+          <button
+            onClick={decreaseFontSize}
+            className={(isSelected && onCanvasComponents[selectedCanvasComponent].componenttype != "profileavatar") ? "bg-green-700" : "bg-slate-900  text-slate-500 hover:border-slate-900"}
+            // should be disabled if the selected component is an image
+            disabled={(isSelected && onCanvasComponents[selectedCanvasComponent].componenttype != "profileavatar") ? false : true}
+          >Decrease Fontsize</button>
+          <select>
+            <option>Font Style</option>
+            <option>Garamond</option>
+            <option>Calibri</option>
+            <option>Times New Roman</option>
+            <option>Sans-serif</option>
+          </select>
           <button>Save as PDF</button>
         </div>
         </>

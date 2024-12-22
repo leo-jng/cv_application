@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 import { Group, Rect, Text, Transformer } from "react-konva";
 export default function PersonalDetailsComponent({ CompKey, scaleToggle, isSelected, setSelectedCanvasComponent, onCanvasComponents, setOnConvasComponents }) {
   
@@ -17,12 +17,13 @@ export default function PersonalDetailsComponent({ CompKey, scaleToggle, isSelec
 
   const enableTransform = isSelected == true && scaleToggle == true;
 
-  // const trRef = useRef();
-  // useEffect(() => {
-  //   if (scaleToggle) {
-  //     trRef.current;
-  //   }
-  // })
+  const trRef = useRef();
+  useEffect(() => {
+    if (scaleToggle) {
+      trRef.current;
+    }
+  })
+
   return (
         <>
           <Group
@@ -71,62 +72,62 @@ export default function PersonalDetailsComponent({ CompKey, scaleToggle, isSelec
 
             <Text 
               text={onCanvasName + onCanvasSuffix}
-              fill={onCanvasComponents[CompKey].isDragging ? "green" : "black"}
+              fontSize={onCanvasComponents[CompKey].fontsize}
             />
             <Text 
               text={onCanvasPhoneNumber}
-              fill={onCanvasComponents[CompKey].isDragging ? "green" : "black"}
+              fontSize={onCanvasComponents[CompKey].fontsize}
               offsetY={-10}
             />
             <Text 
               text={onCanvasComponents[CompKey].emailaddress}
-              fill={onCanvasComponents[CompKey].isDragging ? "green" : "black"}
+              fontSize={onCanvasComponents[CompKey].fontsize}
               offsetY={-20}
             />
             <Text 
               text={onCanvasComponents[CompKey].linkedin}
-              fill={onCanvasComponents[CompKey].isDragging ? "green" : "black"}
+              fontSize={onCanvasComponents[CompKey].fontsize}
               offsetY={-30}
             />
             <Text 
               text={onCanvasComponents[CompKey].personalwebsite}
-              fill={onCanvasComponents[CompKey].isDragging ? "green" : "black"}
+              fontSize={onCanvasComponents[CompKey].fontsize}
               offsetY={-40}
             />
             <Text
               text={onCanvasComponents[CompKey].github}
-              fill={onCanvasComponents[CompKey].isDragging ? "green" : "black"}
+              fontSize={onCanvasComponents[CompKey].fontsize}
               offsetY={-50}
             />
             <Text
               text={onCanvasComponents[CompKey].facebook}
-              fill={onCanvasComponents[CompKey].isDragging ? "green" : "black"}
+              fontSize={onCanvasComponents[CompKey].fontsize}
               offsetY={-60}
             />
             <Text
               text={onCanvasComponents[CompKey].instagram}
-              fill={onCanvasComponents[CompKey].isDragging ? "green" : "black"}
+              fontSize={onCanvasComponents[CompKey].fontsize}
               offsetY={-70}
             />
             <Text
               text={onCanvasComponents[CompKey].twitter}
-              fill={onCanvasComponents[CompKey].isDragging ? "green" : "black"}
+              fontSize={onCanvasComponents[CompKey].fontsize}
               offsetY={-80}
             />
             <Text
               text={onCanvasComponents[CompKey].bluesky}
-              fill={onCanvasComponents[CompKey].isDragging ? "green" : "black"}
+              fontSize={onCanvasComponents[CompKey].fontsize}
               offsetY={-90}
             />
             <Text
               text={onCanvasComponents[CompKey].other}
-              fill={onCanvasComponents[CompKey].isDragging ? "green" : "black"}
+              fontSize={onCanvasComponents[CompKey].fontsize}
               offsetY={-100}
             />
           </Group>
-          {/* {enableTransform && (
+          {enableTransform && (
             <Transformer />
-          )} */}
+          )}
         </>
     )
 }

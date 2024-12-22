@@ -75,6 +75,7 @@ export default function Experience({ ExpKey, ComponentEditStatus, experienceInfo
         isDragging: false,
         x: 20,
         y: 20,
+        fontsize : 12, //reactkonva text component takas number for fontsize attribute
         jobposition: CopyExperience["jobposition"],
         companyname: CopyExperience["companyname"],
         companylocation: CopyExperience["companylocation"],

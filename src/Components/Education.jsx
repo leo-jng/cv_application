@@ -78,6 +78,7 @@ export default function Education({ ComponentEditStatus, setEducationInfo, educa
         isDragging: false,
         x: 20,
         y: 20,
+        fontsize : 12, //reactkonva text component takas number for fontsize attribute
         degree: CopyEducation["degree"],
         major: CopyEducation["major"],
         institution: CopyEducation["institution"],

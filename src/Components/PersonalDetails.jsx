@@ -66,6 +66,7 @@ export default function PersonalDetails({ ComponentEditStatus, personalInfo, set
         isDragging: false,
         x: 20,
         y: 20,
+        fontsize : 12, //reactkonva text component takas number for fontsize attribute
         firstname: CopyPersonalInfo["firstname"],
         lastname: CopyPersonalInfo["lastname"],
         phonenumber: CopyPersonalInfo["phonenumber"],

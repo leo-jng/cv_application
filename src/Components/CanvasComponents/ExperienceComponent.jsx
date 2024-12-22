@@ -50,41 +50,41 @@ export default function ExperienceComponent({CompKey, isSelected, setSelectedCan
             />
             <Text 
               text={onCanvasComponents[CompKey].jobposition}
-              fill={onCanvasComponents[CompKey].isDragging ? "green" : "black"}
+              fontSize={onCanvasComponents[CompKey].fontsize}
             />
             <Text 
               text={onCanvasComponents[CompKey].companyname + ", " + onCanvasComponents[CompKey].companylocation}
-              fill={onCanvasComponents[CompKey].isDragging ? "green" : "black"}
+              fontSize={onCanvasComponents[CompKey].fontsize}
               offsetY={-10}
             />
             <Text 
                 text={ onCanvasComponents[CompKey].employmenttype}
-                fill={onCanvasComponents[CompKey].isDragging ? "green" : "black"}
+                fontSize={onCanvasComponents[CompKey].fontsize}
                 offsetY={-20}
             />
             <Text 
                 text={onCanvasComponents[CompKey].startdate + " to " + onCanvasComponents[CompKey].enddate}
-                fill={onCanvasComponents[CompKey].isDragging ? "green" : "black"}
+                fontSize={onCanvasComponents[CompKey].fontsize}
                 offsetY={-30}
             />
             <Text 
                 text={onCanvasComponents[CompKey].jobachievement_no1}
-                fill={onCanvasComponents[CompKey].isDragging ? "green" : "black"}
+                fontSize={onCanvasComponents[CompKey].fontsize}
                 offsetY={-40}
             />
             <Text 
                 text={onCanvasComponents[CompKey].jobachievement_no2}
-                fill={onCanvasComponents[CompKey].isDragging ? "green" : "black"}
+                fontSize={onCanvasComponents[CompKey].fontsize}
                 offsetY={-50}
             />
             <Text 
                 text={onCanvasComponents[CompKey].jobachievement_no3}
-                fill={onCanvasComponents[CompKey].isDragging ? "green" : "black"}
+                fontSize={onCanvasComponents[CompKey].fontsize}
                 offsetY={-60}
             />
             <Text 
                 text={onCanvasComponents[CompKey].jobachievement_no4}
-                fill={onCanvasComponents[CompKey].isDragging ? "green" : "black"}
+                fontSize={onCanvasComponents[CompKey].fontsize}
                 offsetY={-70}
             />
             </Group>
