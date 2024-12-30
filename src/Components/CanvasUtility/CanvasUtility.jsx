@@ -177,6 +177,7 @@ const FontStyleOptions = ({
       : onCanvasComponents[selectedCanvasComponent].fontfamily;
   return (
     <>
+      <div> Current Font: {currentSelectedFont} </div>
       <label> Change Font Style: </label>
       <select
         defaultValue={""}
