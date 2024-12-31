@@ -3,6 +3,7 @@ import { Group, Rect, Text } from "react-konva";
 export default function EducationComponent({
   CompKey,
   isSelected,
+  isTransformable,
   setSelectedCanvasComponent,
   onCanvasComponents,
   setOnConvasComponents,

@@ -4,10 +4,46 @@ export default function PersonalDetailsComponent({
   CompKey,
   scaleToggle,
   isSelected,
+  isTransformable,
   setSelectedCanvasComponent,
   onCanvasComponents,
   setOnConvasComponents,
 }) {
+  // based on https://stackoverflow.com/questions/66046417/how-to-set-the-initial-dimensions-of-a-transformer-when-applying-it-on-a-group-h
+  const shapeRef = useRef(null);
+  const transformerRef = useRef(null);
+  const groupRef = useRef(null);
+
+  function transformCurrentComponent(e) {
+    console.log("transform/scaling activated");
+    const transformingShape = e.target;
+    const transform = transformingShape.getTransform().copy();
+    const attrs = transform.decompose();
+    // check what the attributes are
+    console.log(attrs);
+    const newAttrs = {
+      width: Math.max(110 * attrs.scaleX, 110),
+      height: Math.max(110 * attrs.scaleY, 110),
+      scalex: 1,
+      scaley: 1,
+    };
+    // copy it to the other components/shapes within the group
+    groupRef.current.setAttrs(newAttrs);
+  }
+
+  useEffect(() => {
+    if (isTransformable) {
+      const transformerNode = transformerRef.current;
+      transformerNode.enabledAnchors([
+        "top-center",
+        "middle-right",
+        "middle-left",
+        "bottom-center",
+      ]);
+      transformerNode.nodes([shapeRef.current]); // updates the transform nodes to the entire group
+    }
+  }, [isTransformable]);
+
   const onCanvasName =
     onCanvasComponents[CompKey].firstname +
     " " +
@@ -32,26 +68,16 @@ export default function PersonalDetailsComponent({
     onCanvasComponents[CompKey].phonenumber.substring(6);
 
   const selectCurrentComponent = () => {
+    // this is basically the onSelect function
     console.log("this component is now selected");
     setSelectedCanvasComponent(CompKey);
   };
-
-  const enableTransform = isSelected == true && scaleToggle == true;
-
-  const trRef = useRef();
-  useEffect(() => {
-    if (scaleToggle) {
-      trRef.current;
-    }
-  });
 
   return (
     <>
       <Group
         onClick={selectCurrentComponent}
         onTap={selectCurrentComponent}
-        // width={60} // group does not need width or height
-        // height={60}
         x={onCanvasComponents[CompKey].x}
         y={onCanvasComponents[CompKey].y}
         onDragStart={() => {
@@ -81,79 +107,90 @@ export default function PersonalDetailsComponent({
         <Rect
           // fill="gray"
           // this is the select border
+          ref={shapeRef}
           stroke={isSelected ? "green" : ""}
-          width={70}
-          height={80}
+          // transform border follows width and height of this rectangle
+          width={110}
+          height={110}
         />
-        <Rect fill="gray" width={50} height={60} />
 
-        <Text
-          text={onCanvasName + onCanvasSuffix}
-          fontFamily={onCanvasComponents[CompKey].fontfamily}
-          fontSize={onCanvasComponents[CompKey].fontsize}
-        />
-        <Text
-          text={onCanvasPhoneNumber}
-          fontFamily={onCanvasComponents[CompKey].fontfamily}
-          fontSize={onCanvasComponents[CompKey].fontsize}
-          offsetY={-10}
-        />
-        <Text
-          text={onCanvasComponents[CompKey].emailaddress}
-          fontFamily={onCanvasComponents[CompKey].fontfamily}
-          fontSize={onCanvasComponents[CompKey].fontsize}
-          offsetY={-20}
-        />
-        <Text
-          text={onCanvasComponents[CompKey].linkedin}
-          fontFamily={onCanvasComponents[CompKey].fontfamily}
-          fontSize={onCanvasComponents[CompKey].fontsize}
-          offsetY={-30}
-        />
-        <Text
-          text={onCanvasComponents[CompKey].personalwebsite}
-          fontFamily={onCanvasComponents[CompKey].fontfamily}
-          fontSize={onCanvasComponents[CompKey].fontsize}
-          offsetY={-40}
-        />
-        <Text
-          text={onCanvasComponents[CompKey].github}
-          fontFamily={onCanvasComponents[CompKey].fontfamily}
-          fontSize={onCanvasComponents[CompKey].fontsize}
-          offsetY={-50}
-        />
-        <Text
-          text={onCanvasComponents[CompKey].facebook}
-          fontFamily={onCanvasComponents[CompKey].fontfamily}
-          fontSize={onCanvasComponents[CompKey].fontsize}
-          offsetY={-60}
-        />
-        <Text
-          text={onCanvasComponents[CompKey].instagram}
-          fontFamily={onCanvasComponents[CompKey].fontfamily}
-          fontSize={onCanvasComponents[CompKey].fontsize}
-          offsetY={-70}
-        />
-        <Text
-          text={onCanvasComponents[CompKey].twitter}
-          fontFamily={onCanvasComponents[CompKey].fontfamily}
-          fontSize={onCanvasComponents[CompKey].fontsize}
-          offsetY={-80}
-        />
-        <Text
-          text={onCanvasComponents[CompKey].bluesky}
-          fontFamily={onCanvasComponents[CompKey].fontfamily}
-          fontSize={onCanvasComponents[CompKey].fontsize}
-          offsetY={-90}
-        />
-        <Text
-          text={onCanvasComponents[CompKey].other}
-          fontFamily={onCanvasComponents[CompKey].fontfamily}
-          fontSize={onCanvasComponents[CompKey].fontsize}
-          offsetY={-100}
-        />
+        <Group ref={groupRef}>
+          <Rect fill="gray" width={90} height={90} />
+
+          <Text
+            text={onCanvasName + onCanvasSuffix}
+            fontFamily={onCanvasComponents[CompKey].fontfamily}
+            fontSize={onCanvasComponents[CompKey].fontsize}
+          />
+          <Text
+            text={onCanvasPhoneNumber}
+            fontFamily={onCanvasComponents[CompKey].fontfamily}
+            fontSize={onCanvasComponents[CompKey].fontsize}
+            offsetY={-10}
+          />
+          <Text
+            text={onCanvasComponents[CompKey].emailaddress}
+            fontFamily={onCanvasComponents[CompKey].fontfamily}
+            fontSize={onCanvasComponents[CompKey].fontsize}
+            offsetY={-20}
+          />
+          <Text
+            text={onCanvasComponents[CompKey].linkedin}
+            fontFamily={onCanvasComponents[CompKey].fontfamily}
+            fontSize={onCanvasComponents[CompKey].fontsize}
+            offsetY={-30}
+          />
+          <Text
+            text={onCanvasComponents[CompKey].personalwebsite}
+            fontFamily={onCanvasComponents[CompKey].fontfamily}
+            fontSize={onCanvasComponents[CompKey].fontsize}
+            offsetY={-40}
+          />
+          <Text
+            text={onCanvasComponents[CompKey].github}
+            fontFamily={onCanvasComponents[CompKey].fontfamily}
+            fontSize={onCanvasComponents[CompKey].fontsize}
+            offsetY={-50}
+          />
+          <Text
+            text={onCanvasComponents[CompKey].facebook}
+            fontFamily={onCanvasComponents[CompKey].fontfamily}
+            fontSize={onCanvasComponents[CompKey].fontsize}
+            offsetY={-60}
+          />
+          <Text
+            text={onCanvasComponents[CompKey].instagram}
+            fontFamily={onCanvasComponents[CompKey].fontfamily}
+            fontSize={onCanvasComponents[CompKey].fontsize}
+            offsetY={-70}
+          />
+          <Text
+            text={onCanvasComponents[CompKey].twitter}
+            fontFamily={onCanvasComponents[CompKey].fontfamily}
+            fontSize={onCanvasComponents[CompKey].fontsize}
+            offsetY={-80}
+          />
+          <Text
+            text={onCanvasComponents[CompKey].bluesky}
+            fontFamily={onCanvasComponents[CompKey].fontfamily}
+            fontSize={onCanvasComponents[CompKey].fontsize}
+            offsetY={-90}
+          />
+          <Text
+            text={onCanvasComponents[CompKey].other}
+            fontFamily={onCanvasComponents[CompKey].fontfamily}
+            fontSize={onCanvasComponents[CompKey].fontsize}
+            offsetY={-100}
+          />
+        </Group>
       </Group>
-      {enableTransform && <Transformer />}
+      {isTransformable && (
+        <Transformer
+          rotateEnabled={false}
+          ref={transformerRef}
+          onTransform={transformCurrentComponent}
+        />
+      )}
     </>
   );
 }

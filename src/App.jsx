@@ -377,6 +377,10 @@ function App() {
                         CompKey={CompKey}
                         scaleToggle={scaleToggle}
                         isSelected={selectedCanvasComponent === CompKey}
+                        isTransformable={
+                          selectedCanvasComponent === CompKey &&
+                          scaleToggle === true
+                        }
                         setSelectedCanvasComponent={setSelectedCanvasComponent}
                         onCanvasComponents={onCanvasComponents}
                         setOnConvasComponents={setOnConvasComponents}
@@ -390,6 +394,10 @@ function App() {
                       <EducationComponent
                         CompKey={CompKey}
                         isSelected={selectedCanvasComponent === CompKey}
+                        isTransformable={
+                          selectedCanvasComponent === CompKey &&
+                          scaleToggle === true
+                        }
                         setSelectedCanvasComponent={setSelectedCanvasComponent}
                         onCanvasComponents={onCanvasComponents}
                         setOnConvasComponents={setOnConvasComponents}
@@ -403,6 +411,10 @@ function App() {
                       <ExperienceComponent
                         CompKey={CompKey}
                         isSelected={selectedCanvasComponent === CompKey}
+                        isTransformable={
+                          selectedCanvasComponent === CompKey &&
+                          scaleToggle === true
+                        }
                         setSelectedCanvasComponent={setSelectedCanvasComponent}
                         onCanvasComponents={onCanvasComponents}
                         setOnConvasComponents={setOnConvasComponents}
