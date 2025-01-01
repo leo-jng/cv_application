@@ -1,3 +1,9 @@
+import deleteIcon from "../../assets/deleteIcon.svg";
+import scaleIcon from "../../assets/scaleIcon.svg";
+import textIncreaseIcon from "../../assets/textIncreaseIcon.svg";
+import textDecreaseIcon from "../../assets/textDecreaseIcon.svg";
+import { useEffect, useRef } from "react";
+
 export default function CanvasUtility({
   isSelected,
   scaleToggle,
@@ -7,6 +13,43 @@ export default function CanvasUtility({
   onCanvasComponents,
   setOnConvasComponents,
 }) {
+  const fontInputRef = useRef(null);
+
+  useEffect(() => {
+    // listens for key presses on the fontsize input element
+    console.log("useEffect for enter key listening triggered");
+    const handleEnter = (event) => {
+      if (event.keyCode === 13) {
+        console.log("enter pressed", event.target);
+        // check if input value is valid number, nonvalid inputs are returned by event as empty strings
+        if (event.target.value != "") {
+          setOnConvasComponents((prevState) => ({
+            ...prevState,
+            [selectedCanvasComponent]: {
+              ...prevState[selectedCanvasComponent],
+              fontsize: event.target.valueAsNumber,
+            },
+          }));
+        } else {
+          console.log("please enter a valid number!");
+        }
+      } else {
+        console.log("a key has been pressed");
+      }
+    };
+    if (fontInputRef.current) {
+      console.log("mount listening for enter key press");
+      fontInputRef.current.addEventListener("keypress", handleEnter);
+    }
+    return () => {
+      console.log("clean up enter key press listener");
+      if (fontInputRef.current) {
+        fontInputRef.current.removeEventListener("keypress", handleEnter);
+      }
+    };
+    // set dependency to selectedCanvasComponent to set eventlistener to most up to date selectedCanvasComponent
+  }, [selectedCanvasComponent]);
+
   const deleteSelectedComponent = () => {
     // when delete is pressed, the currently selected onCanvasComponent will be removed from the onCanvasComponents state object
     console.log(
@@ -91,7 +134,7 @@ export default function CanvasUtility({
           }
           disabled={isSelected ? false : true}
         >
-          Erase
+          <img src={deleteIcon} alt="delete component" />
         </button>
         <button
           onClick={toggleScaleSelectedComponent}
@@ -104,8 +147,24 @@ export default function CanvasUtility({
           }
           disabled={isSelected ? false : true}
         >
-          Scale Text Window
+          <img src={scaleIcon} alt="scale component" />
         </button>
+
+        <input
+          type="number"
+          step="1"
+          className="w-[125px]"
+          ref={fontInputRef}
+          placeholder={
+            isSelected &&
+            onCanvasComponents[selectedCanvasComponent].componenttype !=
+              "profileavatar"
+              ? onCanvasComponents[selectedCanvasComponent].fontsize
+              : "Not Applicable"
+          }
+          disabled={isSelected ? false : true}
+        />
+        <label>px</label>
         <button
           onClick={increaseFontSize}
           className={
@@ -124,7 +183,7 @@ export default function CanvasUtility({
               : true
           }
         >
-          Increase Fontsize
+          <img src={textIncreaseIcon} alt="increase component font size" />
         </button>
         <button
           onClick={decreaseFontSize}
@@ -144,7 +203,7 @@ export default function CanvasUtility({
               : true
           }
         >
-          Decrease Fontsize
+          <img src={textDecreaseIcon} alt="decrease component font size" />
         </button>
         <FontStyleOptions
           disableSelection={
@@ -177,22 +236,29 @@ const FontStyleOptions = ({
       : onCanvasComponents[selectedCanvasComponent].fontfamily;
   return (
     <>
-      <div> Current Font: {currentSelectedFont} </div>
-      <label> Change Font Style: </label>
-      <select
-        defaultValue={""}
-        onChange={(event) => changeFontStyle(event)}
-        disabled={disableSelection}
-      >
-        <option value="" disabled>
-          {currentSelectedFont}
-        </option>
-        <option value="Arial">Arial</option>
-        <option value="Verdana">Verdana</option>
-        <option value="Tahoma">Tahoma</option>
-        <option value="Times New Roman">Times New Roman</option>
-        <option value="Georgia">Georgia</option>
-      </select>
+      <div>
+        <label htmlFor="current_font"> Current Font: </label>
+        <div id="current_font" className={`font-[${currentSelectedFont}]`}>
+          {" "}
+          {currentSelectedFont}{" "}
+        </div>
+        <label htmlFor="font_selection"> Change Font Style: </label>
+        <select
+          id="font_selection"
+          defaultValue={""}
+          onChange={(event) => changeFontStyle(event)}
+          disabled={disableSelection}
+        >
+          <option value="" disabled>
+            {currentSelectedFont}
+          </option>
+          <option value="Arial">Arial</option>
+          <option value="Verdana">Verdana</option>
+          <option value="Tahoma">Tahoma</option>
+          <option value="Times New Roman">Times New Roman</option>
+          <option value="Georgia">Georgia</option>
+        </select>
+      </div>
     </>
   );
 };

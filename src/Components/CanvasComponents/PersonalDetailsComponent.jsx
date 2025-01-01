@@ -2,7 +2,6 @@ import { useEffect, useRef } from "react";
 import { Group, Rect, Text, Transformer } from "react-konva";
 export default function PersonalDetailsComponent({
   CompKey,
-  scaleToggle,
   isSelected,
   isTransformable,
   setSelectedCanvasComponent,

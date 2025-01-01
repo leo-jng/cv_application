@@ -4,6 +4,7 @@ import { Group, Rect, Text, Transformer } from "react-konva";
 export default function ExperienceComponent({
   CompKey,
   isSelected,
+  // selectCurrentComponent,
   isTransformable,
   setSelectedCanvasComponent,
   onCanvasComponents,
@@ -75,8 +76,9 @@ export default function ExperienceComponent({
     }
   }, [isTransformable]);
 
+  // keep selectCurrentComponent helper function within each component for ease of access to respective Compkey
   const selectCurrentComponent = () => {
-    console.log("this component is now selected");
+    console.log("this component is now selected: ", CompKey);
     setSelectedCanvasComponent(CompKey);
   };
 

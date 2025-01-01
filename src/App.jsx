@@ -59,7 +59,7 @@ const defaultExperienceInfoList = {
   Exp_base1: { ...defaultEducationInfo },
 };
 
-// not used; mainly added for visual purposes
+// not used; mainly added for documentation purposes
 const defaultPersonalDetailsComponent = {
   componenttype: "personaldetails",
   isDragging: false,
@@ -82,7 +82,7 @@ const defaultPersonalDetailsComponent = {
   other: "",
 };
 
-// not used; mainly added for visual purposes
+// not used; mainly added for documentation purposes
 const defaultEducationComponent = {
   componenttype: "education",
   isDragging: false,
@@ -96,7 +96,7 @@ const defaultEducationComponent = {
   gpa: "",
 };
 
-// not used; mainly added for visual purposes
+// not used; mainly added for documentation purposes
 const defaultExperienceComponent = {
   componenttype: "experience",
   isDragging: false,
@@ -375,7 +375,6 @@ function App() {
                     return (
                       <PersonalDetailsComponent
                         CompKey={CompKey}
-                        scaleToggle={scaleToggle}
                         isSelected={selectedCanvasComponent === CompKey}
                         isTransformable={
                           selectedCanvasComponent === CompKey &&
