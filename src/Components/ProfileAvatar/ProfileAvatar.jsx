@@ -5,157 +5,189 @@ import { Box, Stack, Slider } from "@mui/material";
 import getCroppedImg from "./cropimage";
 import Cropper from "react-easy-crop";
 
-export default function ProfileAvatar({ testSourceImageState, 
-    imgSrc, setImgSrc,
-    error, setError,
-    crop, setCrop,
-    rotation, setRotation,
-    zoom, setZoom,
-    croppedAreaPixels, setCroppedAreaPixels,
-    croppedImage, setCroppedImage,
-    avatarModalOpen, setAvatarModalOpen, 
-    onCanvasComponents,
-    setOnConvasComponents, generateRandomKey
+export default function ProfileAvatar({
+  imgSrc,
+  setImgSrc,
+  error,
+  setError,
+  crop,
+  setCrop,
+  rotation,
+  setRotation,
+  zoom,
+  setZoom,
+  croppedAreaPixels,
+  setCroppedAreaPixels,
+  croppedImage,
+  setCroppedImage,
+  avatarModalOpen,
+  setAvatarModalOpen,
+  onCanvasComponents,
+  setOnConvasComponents,
+  generateRandomKey,
 }) {
-
-    
-    // adds the image to onCanvasComponentState
-    const addImageToCanvas = () => {
-        if (croppedImage == null ) {
-            console.log("No Profile Image Added")
-            return;
-        }
-        const CompKey = generateRandomKey(onCanvasComponents);
-        const imageData = new window.Image();
-        imageData.src = croppedImage;
-        console.log("current image", croppedImage)
-        setOnConvasComponents((prevState) => ({
-            ...prevState,
-            [CompKey]: {
-                componenttype: "profileavatar",
-                isDragging: false,
-                x: 20,
-                y: 20,
-                // image: (croppedImage == null ? imgSrc : croppedImage)
-                image: imageData
-            }
-        }))
+  // adds the image to onCanvasComponentState
+  const addImageToCanvas = () => {
+    if (croppedImage == null) {
+      console.log("No Profile Image Added");
+      return;
     }
-    
-    return (
-        <>
-        {/* profile image displayed */}
-        <div className="relative">
-            <div className="font-bold">Profile Image</div>
-            <img
-                // src={avatarUrl.current}
-                src={croppedImage == null ? imgSrc : croppedImage}
-                alt="Profile Avatar"
-                // the current classname styles how the image will show up
-                className="w-[150px] h-[150px] rounded-full border-2 border-red-400"
-                // once onclick is clicked, the modal state will update
-                onClick={() => setAvatarModalOpen(true)}
-            />
-            <button
-                onClick={addImageToCanvas}
-            >Render on Canvas</button>
-        </div>
+    const CompKey = generateRandomKey(onCanvasComponents);
+    const imageData = new window.Image();
+    imageData.src = croppedImage;
+    console.log("current image", croppedImage);
+    setOnConvasComponents((prevState) => ({
+      ...prevState,
+      [CompKey]: {
+        componenttype: "profileavatar",
+        isDragging: false,
+        x: 20,
+        y: 20,
+        // image: (croppedImage == null ? imgSrc : croppedImage)
+        image: imageData,
+      },
+    }));
+  };
 
-        {/* opens profile picture modal when image is clicked */}
-        {avatarModalOpen && (
+  return (
+    <>
+      {/* profile image displayed */}
+      <div className="relative">
+        <div className="font-bold">Profile Image</div>
+        <img
+          // src={avatarUrl.current}
+          src={croppedImage == null ? imgSrc : croppedImage}
+          alt="Profile Avatar"
+          // the current classname styles how the image will show up
+          className="w-[150px] h-[150px] rounded-full border-2 border-red-400"
+          // once onclick is clicked, the modal state will update
+          onClick={() => setAvatarModalOpen(true)}
+        />
+        <button onClick={addImageToCanvas}>Render on Canvas</button>
+      </div>
+
+      {/* opens profile picture modal when image is clicked */}
+      {avatarModalOpen && (
         // UpdateAvatarModal -> ImageCropper -> CropImage
-            <UpdateAvatarModal
-                imgSrc={imgSrc} setImgSrc={setImgSrc}
-                error={error} setError={setError}
-                crop={crop} setCrop={setCrop}
-                rotation={rotation} setRotation={setRotation}
-                zoom={zoom} setZoom={setZoom}
-                croppedAreaPixels={croppedAreaPixels} setCroppedAreaPixels={setCroppedAreaPixels}
-                croppedImage={croppedImage} setCroppedImage={setCroppedImage}
-                // updateAvatar={updateAvatar}
-                closeModal={() => setAvatarModalOpen(false)}
-            />
+        <UpdateAvatarModal
+          imgSrc={imgSrc}
+          setImgSrc={setImgSrc}
+          error={error}
+          setError={setError}
+          crop={crop}
+          setCrop={setCrop}
+          rotation={rotation}
+          setRotation={setRotation}
+          zoom={zoom}
+          setZoom={setZoom}
+          croppedAreaPixels={croppedAreaPixels}
+          setCroppedAreaPixels={setCroppedAreaPixels}
+          croppedImage={croppedImage}
+          setCroppedImage={setCroppedImage}
+          // updateAvatar={updateAvatar}
+          closeModal={() => setAvatarModalOpen(false)}
+        />
         // console.log("MODAL OPENS")
-        )}
-        </>
-    )
+      )}
+    </>
+  );
 }
 
-const UpdateAvatarModal = ({  
-    imgSrc, setImgSrc,
-    error, setError,
-    crop, setCrop,
-    rotation, setRotation,
-    zoom, setZoom,
-    croppedAreaPixels, setCroppedAreaPixels,
-    croppedImage, setCroppedImage,
-    updateAvatar, closeModal, 
-    // avatarUrl,
-    // avatarModalOpen, setAvatarModalOpen
+const UpdateAvatarModal = ({
+  imgSrc,
+  setImgSrc,
+  error,
+  setError,
+  crop,
+  setCrop,
+  rotation,
+  setRotation,
+  zoom,
+  setZoom,
+  croppedAreaPixels,
+  setCroppedAreaPixels,
+  croppedImage,
+  setCroppedImage,
+  updateAvatar,
+  closeModal,
+  // avatarUrl,
+  // avatarModalOpen, setAvatarModalOpen
 }) => {
-    return (
-      <div
-        className="relative z-10"
-        aria-labelledby="crop-image-dialog"
-        role="dialog"
-        area-modal="true"
-      >
-        {/* backdrop color */}
-        <div className="fixed inset-0 bg-red-900 bg-opacity-75 transition-all backdrop-blur-sm"></div>
-  
-        <div className="fixed inset-0 z-10 w-screen overflow-y-auto">
-          <div className="flex min-h-full justify-center px-2 py-12 text-center ">
-            {/* modal color */}
-            <div
-              className="relative w-[95%] sm:w-[80%] min-h-[60vh] rounted-2x1 bg-slate-100
+  return (
+    <div
+      className="relative z-10"
+      aria-labelledby="crop-image-dialog"
+      role="dialog"
+      area-modal="true"
+    >
+      {/* backdrop color */}
+      <div className="fixed inset-0 bg-red-900 bg-opacity-75 transition-all backdrop-blur-sm"></div>
+
+      <div className="fixed inset-0 z-10 w-screen overflow-y-auto">
+        <div className="flex min-h-full justify-center px-2 py-12 text-center ">
+          {/* modal color */}
+          <div
+            className="relative w-[95%] sm:w-[80%] min-h-[60vh] rounted-2x1 bg-slate-100
                       text-state-100 text-left shadow-xl transition-all"
-            >
-              {/* internal feature container */}
-              <div className="px-5 py-4 bg-red-500">
-                {/* exit button */}
-                <button
-                  type="button"
-                  className="rounded-md p-1 inline-flex items-center justify-center
+          >
+            {/* internal feature container */}
+            <div className="px-5 py-4 bg-red-500">
+              {/* exit button */}
+              <button
+                type="button"
+                className="rounded-md p-1 inline-flex items-center justify-center
                                   text-gray-400 hover:bg-gray-700 focus: outline-none absolute top-2 right-2"
-                  onClick={closeModal}
-                >
-                  <span className="sr-only">Close menu</span>
-                  x
-                </button>
-  
-                <ImageCropper
-                    imgSrc={imgSrc} setImgSrc={setImgSrc}
-                    error={error} setError={setError}
-                    crop={crop} setCrop={setCrop}
-                    rotation={rotation} setRotation={setRotation}
-                    zoom={zoom} setZoom={setZoom}
-                    croppedAreaPixels={croppedAreaPixels} setCroppedAreaPixels={setCroppedAreaPixels}
-                    croppedImage={croppedImage} setCroppedImage={setCroppedImage}
+                onClick={closeModal}
+              >
+                <span className="sr-only">Close menu</span>x
+              </button>
+
+              <ImageCropper
+                imgSrc={imgSrc}
+                setImgSrc={setImgSrc}
+                error={error}
+                setError={setError}
+                crop={crop}
+                setCrop={setCrop}
+                rotation={rotation}
+                setRotation={setRotation}
+                zoom={zoom}
+                setZoom={setZoom}
+                croppedAreaPixels={croppedAreaPixels}
+                setCroppedAreaPixels={setCroppedAreaPixels}
+                croppedImage={croppedImage}
+                setCroppedImage={setCroppedImage}
                 //   updateAvatar={updateAvatar}
-                    closeModal={closeModal}
-                />
-              </div>
+                closeModal={closeModal}
+              />
             </div>
           </div>
         </div>
       </div>
-    );
-  };
+    </div>
+  );
+};
 
-  
-
-const ImageCropper = ({ 
-    imgSrc, setImgSrc,
-    error, setError,
-    crop, setCrop,
-    rotation, setRotation,
-    zoom, setZoom,
-    croppedAreaPixels, setCroppedAreaPixels,
-    croppedImage, setCroppedImage,
-    closeModal }) => {
+const ImageCropper = ({
+  imgSrc,
+  setImgSrc,
+  error,
+  setError,
+  crop,
+  setCrop,
+  rotation,
+  setRotation,
+  zoom,
+  setZoom,
+  croppedAreaPixels,
+  setCroppedAreaPixels,
+  croppedImage,
+  setCroppedImage,
+  closeModal,
+}) => {
   // const imgRef = useRef(null);
   // const previewCanvasRef = useRef(null);
-    const MIN_DIMENSION = 150;
+  const MIN_DIMENSION = 150;
 
   const onCropComplete = (croppedArea, croppedAreaPixels) => {
     // can switch between croppedArea and croppedAreaPixel for testing purposes
@@ -178,10 +210,10 @@ const ImageCropper = ({
         const { naturalWidth, naturalHeight } = e.currentTarget;
         if (naturalWidth < MIN_DIMENSION || naturalHeight < MIN_DIMENSION) {
           setError("Image must be at least 150 x 150 pixels.");
-        //   return setImgSrc(""); //this is no longer necessary bc I want the image editor to be opend all the time
-                                // if error, then the editor will simply stay with the old picture, be it the default
-                                // image or a previously selected picture.
-            return; //the function will return so nothing else is triggered.
+          //   return setImgSrc(""); //this is no longer necessary bc I want the image editor to be opend all the time
+          // if error, then the editor will simply stay with the old picture, be it the default
+          // image or a previously selected picture.
+          return; //the function will return so nothing else is triggered.
         }
       });
       setImgSrc(imageUrl);
@@ -226,7 +258,7 @@ const ImageCropper = ({
       {error && <p className="text-red-400 text-xs">{error}</p>}
       {/* if image is successfully selected, open cropper */}
       {/* {imgSrc && ( // we no longer have to consider if imgSrc is empty so we can remove this conditional // no, I can use it if I don't want the default image
-      // the user has to provide a image of their own! */} 
+      // the user has to provide a image of their own! */}
       {imgSrc != "src/assets/default_pfpv2.jpg" && (
         <div className="flex flex-col items-center">
           <div className="relative w-full h-[500px] bg-black">

@@ -50,7 +50,10 @@ export default function ExperienceComponent({
         // height: Math.max(20 * transformAttrs.scaleY, 10),
         scaleX: 1,
         scaleY: 1,
-        offsetY: -10 * totalLines * transformAttrs.scaleY,
+        offsetY:
+          -10 * totalLines * transformAttrs.scaleY +
+          Math.max(-1 * transformAttrs.y, 0),
+        offsetX: Math.max(-1 * transformAttrs.x, 0),
       });
 
       const currentLinesCount = node.textArr.length;

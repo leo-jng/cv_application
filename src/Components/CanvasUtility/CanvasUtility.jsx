@@ -70,7 +70,9 @@ export default function CanvasUtility({
     // this also means that the scaling values have to persist, so they have to be saved into the component attribute
 
     // therefore, when scale is pressed, the scale feature will be toggled (need a state for that), and the currently
-    // selected onCanvsComponent will be able to use its onTransform attributes to update its sizing
+    // selected onCanvasComponent will be able to use its transformer componenet attributes to update its sizing.
+    // the way the transformer behaves will be different internally depending on whether the component is
+    // an image (ie profile image) or if it is text (ie personal details, education, and experience).
     console.log("scaling toggled to ", !scaleToggle);
     setScaleToggle(!scaleToggle);
   };
@@ -162,7 +164,14 @@ export default function CanvasUtility({
               ? onCanvasComponents[selectedCanvasComponent].fontsize
               : "Not Applicable"
           }
-          disabled={isSelected ? false : true}
+          // should be disabled if the selected component is an image
+          disabled={
+            isSelected &&
+            onCanvasComponents[selectedCanvasComponent].componenttype !=
+              "profileavatar"
+              ? false
+              : true
+          }
         />
         <label>px</label>
         <button

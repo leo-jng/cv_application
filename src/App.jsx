@@ -362,6 +362,10 @@ function App() {
                       <ProfileAvatarComponent
                         CompKey={CompKey}
                         isSelected={selectedCanvasComponent === CompKey}
+                        isTransformable={
+                          selectedCanvasComponent === CompKey &&
+                          scaleToggle === true
+                        }
                         setSelectedCanvasComponent={setSelectedCanvasComponent}
                         onCanvasComponents={onCanvasComponents}
                         setOnConvasComponents={setOnConvasComponents}
