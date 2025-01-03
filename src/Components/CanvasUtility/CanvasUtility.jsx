@@ -3,8 +3,10 @@ import scaleIcon from "../../assets/scaleIcon.svg";
 import textIncreaseIcon from "../../assets/textIncreaseIcon.svg";
 import textDecreaseIcon from "../../assets/textDecreaseIcon.svg";
 import { useEffect, useRef } from "react";
+import { jsPDF } from "jspdf";
 
 export default function CanvasUtility({
+  canvasNode,
   isSelected,
   scaleToggle,
   setScaleToggle,
@@ -14,6 +16,7 @@ export default function CanvasUtility({
   setOnConvasComponents,
 }) {
   const fontInputRef = useRef(null);
+  const saveToPdfButtonRef = useRef(null);
 
   useEffect(() => {
     // listens for key presses on the fontsize input element
@@ -118,11 +121,61 @@ export default function CanvasUtility({
     }));
   };
 
-  // const saveCanvasToPdf = () => {
-  // reactKonva requires that the canvas be converted to an image first, then saved as a pdf via jsPDF library.
-  // we can make the text selectable by creating hidden text underneath an image, such that
-  // while it is not visible, it is still selectable
-  // };
+  const checkCanvasSaveable =
+    // checks if the canvas can be saved to pdf with the 2 conditions:
+    // 1) there are components placed on the canvas
+    // 2) the canvasNode reference has updated reference the Stage Node
+    //    (CanvasUtility acknolwedges this on the render after the initial render
+    //    bc the update takes place in a component below the Canvas Utility component)
+    Object.keys(onCanvasComponents).length != 0 && canvasNode != null
+      ? true
+      : false;
+
+  useEffect(() => {
+    // the Node.toImage is an async function, so it is safer to wrap it into a useEffect
+    console.log("canvas stage reference useEffect triggered");
+    const saveCanvasToPdf = () => {
+      console.log("saveCanvasToPdf clicked");
+      canvasNode.toImage({
+        callback: function (image) {
+          // console.log("canvas ref", canvasNode);
+          console.log("Image Retrieved", image, image.src);
+          const pdfDoc = new jsPDF();
+          pdfDoc.addImage(
+            image.src,
+            "PNG",
+            0,
+            0
+            // 50,
+            // 50
+            // canvasNode.attrs.width,
+            // canvasNode.attrs.height
+          );
+          pdfDoc.save("testsave.pdf");
+        },
+        // x: 0,
+        // y: 0,
+        // width: canvasNode.attrs.width,
+        // height: canvasNode.attrs.height,
+      });
+    };
+
+    if (canvasNode != null && saveToPdfButtonRef.current != null) {
+      console.log("mounted saveCanvasToPdf to button");
+      saveToPdfButtonRef.current.addEventListener("click", saveCanvasToPdf);
+    }
+    console.log("----------------------------");
+    return () => {
+      if (canvasNode != null && saveToPdfButtonRef.current != null) {
+        console.log("unmounted saveCanvasToPdf button");
+        saveToPdfButtonRef.current.removeEventListener(
+          "click",
+          saveCanvasToPdf
+        );
+      }
+    };
+  }, [canvasNode, saveToPdfButtonRef]);
+
   return (
     <>
       <div id="utilitybar">
@@ -226,7 +279,18 @@ export default function CanvasUtility({
           onCanvasComponents={onCanvasComponents}
           selectedCanvasComponent={selectedCanvasComponent}
         />
-        <button>Save as PDF</button>
+        <button
+          ref={saveToPdfButtonRef}
+          // disable the button if canvasNode Ref (Stage Element) is null and there are elements on canvas
+          disabled={checkCanvasSaveable == false ? true : false}
+          className={
+            checkCanvasSaveable == true
+              ? "bg-green-700"
+              : "bg-slate-900  text-slate-500 hover:border-slate-900"
+          }
+        >
+          Save as PDF
+        </button>
       </div>
     </>
   );

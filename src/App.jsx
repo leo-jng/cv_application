@@ -207,6 +207,9 @@ function App() {
   //when a onCanvasComponent is clicked, and the scale button is clicked, toggle scale switch state
   const [scaleToggle, setScaleToggle] = useState(false); // set to false by default
 
+  // initialize a reference for canvas stage for save-to-pdf feature
+  const canvasStageRef = useRef(null);
+
   // generates a random key for state objects in experience and oncanvascomponents
   const generateRandomKey = (currentStateObject) => {
     console.log("currentStateObject", currentStateObject);
@@ -335,6 +338,7 @@ function App() {
         <section className="float-right ">
           <h1>Canvas Panel</h1>
           <CanvasUtility
+            canvasNode={canvasStageRef.current}
             isSelected={selectedCanvasComponent !== null}
             scaleToggle={scaleToggle}
             setScaleToggle={setScaleToggle}
@@ -346,6 +350,8 @@ function App() {
 
           <div id="canvas" className="bg-white h-[1024px] w-[768px]">
             <Stage
+              // this ref is used to save canvas into image, and then into pdf
+              ref={canvasStageRef}
               width={768}
               height={1024}
               // deselecting onCanvasComponent function based on react konva documentation
