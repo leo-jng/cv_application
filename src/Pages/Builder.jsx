@@ -13,6 +13,8 @@ import EducationComponent from "../Components/CanvasComponents/EducationComponen
 import ExperienceComponent from "../Components/CanvasComponents/ExperienceComponent";
 import ProfileAvatar from "../Components/ProfileAvatar/ProfileAvatar";
 import CanvasUtility from "../Components/CanvasUtility/CanvasUtility";
+import menuIcon from "../assets/menuIcon.svg";
+import { NavLink } from "react-router";
 
 const defaultPersonalInfo = {
   firstname: "",
@@ -183,7 +185,7 @@ function Builder() {
   const [avatarModalOpen, setAvatarModalOpen] = useState(false);
 
   // const [testSourceImageState, setTestSourceImageState] = useState("src/assets/default_pfpv2.jpg")
-  const [imgSrc, setImgSrc] = useState("src/assets/default_pfpv2.jpg");
+  const [imgSrc, setImgSrc] = useState("src/assets/default_pfp.jpg");
   const [error, setError] = useState("");
   // stores image edit data, it is required that they be in separate states bc of the attributes that cropper component takes
   const [crop, setCrop] = useState({ x: 0, y: 0 });
@@ -211,6 +213,9 @@ function Builder() {
 
   // initialize a reference for canvas stage for save-to-pdf feature
   const canvasStageRef = useRef(null);
+
+  // set a bool state for dropdown menus
+  const [menuDropDownToggle, setMenuDropDownToggle] = useState(false);
 
   // generates a random key for state objects in experience and oncanvascomponents
   const generateRandomKey = (currentStateObject) => {
@@ -250,9 +255,30 @@ function Builder() {
     }
   };
 
+  const toggleMenu = () => {
+    setMenuDropDownToggle(!menuDropDownToggle);
+  };
   return (
     <>
-      <div className="flow-root">
+      <div className="w-screen flow-root">
+        <button onClick={toggleMenu} className="bg-black float-right">
+          <img src={menuIcon} alt="Menu" />
+        </button>
+        {menuDropDownToggle && (
+          // this is the dropdown menu, it should change to include signout, account settings, and account db on signing in
+          <nav className="absolute right-0 top-12 z-10 bg-white" role="menu">
+            <NavLink className="block px-4" role="menuitem" to="/signup">
+              {" "}
+              Signup{" "}
+            </NavLink>
+            <NavLink className="block px-4" role="menuitem" to="/signin">
+              {" "}
+              Signin{" "}
+            </NavLink>
+          </nav>
+        )}
+      </div>
+      <div className="flow-root h-[1500px]">
         <section
           className={
             "float-left w-[650px] max-h-screen overflow-y-auto " +
@@ -304,7 +330,9 @@ function Builder() {
       Every new component generated will generate a new key-value pair of key: defaultExperienceInfo.
       Deleting the Component will delete it from the key and the value object from the state Object. */}
 
-          <button onClick={() => addNewExperience()}>Add New Experience</button>
+          <button className="bg-black" onClick={() => addNewExperience()}>
+            Add New Experience
+          </button>
           {Object.keys(experienceInfoList).map((ExpKey) => {
             return (
               <Experience
@@ -337,7 +365,7 @@ function Builder() {
           )}
         </section>
 
-        <section className="float-right ">
+        <section className="float-right mr-[20px]">
           <h1>Canvas Panel</h1>
           <CanvasUtility
             canvasNode={canvasStageRef.current}

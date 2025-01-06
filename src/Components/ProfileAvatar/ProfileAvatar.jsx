@@ -63,7 +63,9 @@ export default function ProfileAvatar({
           // once onclick is clicked, the modal state will update
           onClick={() => setAvatarModalOpen(true)}
         />
-        <button onClick={addImageToCanvas}>Render on Canvas</button>
+        <button className="bg-black" onClick={addImageToCanvas}>
+          Render on Canvas
+        </button>
       </div>
 
       {/* opens profile picture modal when image is clicked */}

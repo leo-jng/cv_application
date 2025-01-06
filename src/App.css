@@ -1,5 +1,15 @@
 body {
   width: 100vw;
+  /* height: 100vh; */
+  background-color: rgb(18, 24, 33);
+  color: white;
+}
+
+input,
+select,
+textarea {
+  color: white;
+  background-color: rgb(37, 47, 57);
 }
 
 form {
@@ -16,14 +26,13 @@ form {
   width: 100px;
 }
 
-
 /* Source: https://stackoverflow.com/questions/66416614/how-to-create-scrollable-element-in-tailwind-without-a-scrollbar */
-  /* Chrome, Safari and Opera */
+/* Chrome, Safari and Opera */
 .no-scrollbar::-webkit-scrollbar {
-    display: none;
+  display: none;
 }
 
 .no-scrollbar {
-    -ms-overflow-style: none; /* IE and Edge */
-    scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
 }
