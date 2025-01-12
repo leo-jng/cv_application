@@ -389,6 +389,10 @@ function Builder() {
               onTouchStart={deselectOnCanvasComponent}
             >
               <Layer>
+                {/* This is the backgound color layer and shape component */}
+                <Rect width={768} height={1024} fill="white" />
+              </Layer>
+              <Layer>
                 {/* Renders components based on what is stored in the onCanvasComponenet state object, including their positions */}
                 {Object.keys(onCanvasComponents).map((CompKey) => {
                   if (

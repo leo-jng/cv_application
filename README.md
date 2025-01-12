@@ -33,7 +33,6 @@ Or
 
 ## Features to Be Implemented
 
-1. Text-Selectable PDFs
-2. User Account Signup and Login
-3. User Account-Specific Resume Storage
-4. User Account Deletion
+1. User Account Signup and Login
+2. User Account-Specific Resume Storage
+3. User Account Deletion

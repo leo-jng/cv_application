@@ -141,6 +141,25 @@ export default function CanvasUtility({
           // console.log("canvas ref", canvasNode);
           console.log("Image Retrieved", image, image.src);
           const pdfDoc = new jsPDF();
+
+          // add the texts from canvas over here
+          // the texts can be grabbed from canvas ref held by canvasNode variable
+          // code is based on konva documentation: https://konvajs.org/docs/sandbox/Canvas_to_PDF.html#Do-you-want-to-save-Konva-stage-into-a-PDF-file
+          canvasNode.find("Text").forEach((text) => {
+            console.log(
+              "current text component",
+              text,
+              text.text(),
+              text.x(), // x and y is 0 bc the text object does not hold these key-value attributes
+              text.y()
+            );
+            // pdfDoc.setFontSize(text.fontSize() / 0.75);
+            pdfDoc.text(text.text(), text.x(), text.y(), {
+              baseline: "top",
+              angle: -text.getAbsoluteRotation(),
+            });
+          });
+          // add image after text to cover it
           pdfDoc.addImage(
             image.src,
             "PNG",
@@ -151,6 +170,7 @@ export default function CanvasUtility({
             // canvasNode.attrs.width,
             // canvasNode.attrs.height
           );
+          // saves the pdf as "testsave.pdf"
           pdfDoc.save("testsave.pdf");
         },
         // x: 0,
