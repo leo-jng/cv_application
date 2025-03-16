@@ -37,8 +37,8 @@ Or
 2. User Account-Specific Resume Storage
 3. User Account Deletion
 
-### Libraries Used
+## Libraries Used
 
-KonvaJS by Anton Lavrenov: https://github.com/konvajs/react-konva
-React-Easy-Crop by Valentin Herview: https://github.com/ValentinH/react-easy-crop
-jsPDF : https://github.com/parallax/jsPDF
+1. KonvaJS by Anton Lavrenov: https://github.com/konvajs/react-konva
+2. React-Easy-Crop by Valentin Herview: https://github.com/ValentinH/react-easy-crop
+3. jsPDF : https://github.com/parallax/jsPDF
